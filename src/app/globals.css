@@ -1,26 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Newsreader", ui-serif, Georgia, serif;
+
+  /* Dark Ethnobotanical Modernism Palette */
+  --color-brand-primary: #fbf9f8;
+  --color-brand-secondary: #d35f30;
+  --color-brand-stone-50: #041209;
+  --color-brand-stone-100: #061b0e;
+  --color-brand-stone-200: #0a2413;
+  --color-brand-stone-300: #0f301a;
+  --color-brand-emerald-50: #0b321a;
+  --color-brand-emerald-900: #88cfa2;
+
+  
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-brand-stone-50 text-brand-primary font-sans antialiased overflow-x-hidden;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .newsreader-display {
+    @apply font-serif italic tracking-tight;
+  }
+  
+  .clinical-label {
+    @apply font-sans uppercase tracking-[0.2em] text-[10px] font-bold opacity-60;
+  }
+
+  .rail-text {
+    @apply hidden lg:[writing-mode:vertical-rl] lg:rotate-180 lg:uppercase lg:tracking-[0.4em] lg:text-[10px] lg:whitespace-nowrap lg:block;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Premium Glassmorphism (Dark Theme Default) */
+  .glass {
+    background: rgba(6, 27, 14, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(251, 249, 248, 0.05);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(211, 95, 48, 0.3);
+  }
+
+  .mask-fade-bottom {
+    mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
+  }
+
+  .mask-fade-right {
+    mask-image: linear-gradient(to right, black 0%, black 80%, transparent 100%);
+  }
+
+  .hover-card-border {
+    @apply transition-all duration-300 border-brand-primary/10 hover:border-brand-secondary/40;
+  }
 }
