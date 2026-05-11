@@ -120,7 +120,7 @@ export default function InteractiveTerpeneMapper() {
                   <div>
                     <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-secondary mb-3 block">Also Found In</span>
                     <div className="flex flex-wrap gap-2">
-                      {selected.foundIn?.map(source => (
+                      {(selected as any).foundIn?.map((source: string) => (
                         <span key={source} className="text-sm font-medium px-3 py-1 bg-brand-primary/5 rounded-lg border border-brand-primary/10 text-brand-primary/80">
                           {source}
                         </span>

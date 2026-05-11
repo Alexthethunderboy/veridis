@@ -250,7 +250,7 @@ export default function StrainGrid() {
                         return (
                           <button 
                             key={i} 
-                            onClick={() => setSelectedTerpene(t)}
+                            onClick={() => setSelectedTerpene(t as any)}
                             className="flex items-center gap-4 p-4 rounded-2xl border border-brand-primary/5 bg-brand-primary/[0.02] hover:bg-brand-primary/[0.04] transition-colors text-left w-full group/terp"
                           >
                             <div 
