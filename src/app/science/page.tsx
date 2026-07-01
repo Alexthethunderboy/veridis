@@ -44,7 +44,7 @@ export default function SciencePage() {
                 If flavonoids are the plant&apos;s color and immune system, <strong className="text-brand-secondary">terpenes are the steering wheel</strong>. 
                 They dictate exactly how a cannabinoid profile will affect your mind and body.
               </p>
-              <Card className="bg-brand-secondary/5 border-brand-secondary/20 p-10">
+              <Card className="bg-brand-secondary/5 border-brand-secondary/20 p-6 md:p-10">
                 <h4 className="clinical-label text-brand-secondary mb-4">The Steering Effect</h4>
                 <div className="space-y-6">
                   <div className="flex gap-4">
@@ -68,19 +68,19 @@ export default function SciencePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-             <Card className="p-10 border-brand-primary/10">
+             <Card className="p-6 md:p-10 border-brand-primary/10">
                 <h4 className="clinical-label text-brand-primary/40 mb-6 uppercase tracking-widest">01. Biological Shield</h4>
                 <p className="text-sm font-medium text-brand-primary/70 leading-relaxed italic italic">
                   Produced in the trichomes, terpenes act as the plant&apos;s defense system—repelling herbivores, protecting against disease, and attracting pollinators.
                 </p>
              </Card>
-             <Card className="p-10 border-brand-primary/10">
+             <Card className="p-6 md:p-10 border-brand-primary/10">
                 <h4 className="clinical-label text-brand-primary/40 mb-6 uppercase tracking-widest">02. Volatility Control</h4>
                 <p className="text-sm font-medium text-brand-primary/70 leading-relaxed italic italic">
                   Terpenes are highly volatile. That skunky scent when you open a jar is the &quot;medicine&quot; escaping into the air. Preservation is critical.
                 </p>
              </Card>
-             <Card className="p-10 bg-brand-primary border-transparent text-brand-stone-50">
+             <Card className="p-6 md:p-10 bg-brand-primary border-transparent text-brand-stone-50">
                 <h4 className="clinical-label text-brand-stone-50/40 mb-6 uppercase tracking-widest">03. Thermal Preservation</h4>
                 <p className="text-sm font-bold leading-relaxed italic italic">
                   Standard lighters destroy delicate terpenes. Dry herb vaporizers at 160°C–190°C are the gold standard for experiencing true therapeutic benefits.

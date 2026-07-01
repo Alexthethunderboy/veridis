@@ -58,7 +58,7 @@ export default function TerpeneLegend() {
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className="fixed inset-2 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[600px] z-[70] pointer-events-none"
             >
-              <Card className="pointer-events-auto border-brand-primary/10 shadow-3xl overflow-hidden relative">
+              <Card className="pointer-events-auto border-brand-primary/10 shadow-3xl max-h-[90vh] overflow-y-auto relative p-0 md:p-0">
                 {/* Unique color identity stripe */}
                 <div className="h-1 w-full" style={{ backgroundColor: selected.color }} />
 
@@ -69,7 +69,7 @@ export default function TerpeneLegend() {
                   <X size={20} />
                 </button>
 
-                <div className="flex flex-col items-center text-center p-4">
+                <div className="flex flex-col items-center text-center p-4 md:p-8">
                   <div 
                     className="w-20 h-20 mb-6 drop-shadow-xl"
                     style={{ color: selected.color }}

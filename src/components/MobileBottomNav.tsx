@@ -34,7 +34,7 @@ export default function MobileBottomNav() {
   ];
 
   return (
-    <div className="lg:hidden fixed bottom-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+    <div className="lg:hidden fixed bottom-6 left-0 right-0 z-50 flex justify-center px-6 pointer-events-none">
       <motion.nav
         animate={{ 
           y: isMinimized ? 40 : 0,
@@ -42,7 +42,7 @@ export default function MobileBottomNav() {
           scale: isMinimized ? 0.9 : 1,
           width: isMinimized ? 'auto' : '100%'
         }}
-        className={`pointer-events-auto glass border border-brand-primary/10 rounded-full shadow-2xl overflow-hidden flex items-center transition-all duration-500 max-w-md w-full`}
+        className={`pointer-events-auto glass-panel rounded-full shadow-[0_20px_40px_rgba(0,0,0,0.8)] overflow-hidden flex items-center transition-all duration-500 max-w-md w-full`}
       >
         <AnimatePresence mode="wait">
           {!isMinimized ? (
@@ -51,7 +51,7 @@ export default function MobileBottomNav() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="flex w-full items-center justify-around py-3 px-6"
+              className="flex w-full items-center justify-around py-4 px-6"
             >
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
@@ -59,22 +59,22 @@ export default function MobileBottomNav() {
                   <Link 
                     key={item.href} 
                     href={item.href}
-                    className={`flex flex-col items-center gap-1 transition-colors ${
-                      isActive ? 'text-brand-secondary' : 'text-brand-primary/40'
+                    className={`flex flex-col items-center gap-1.5 transition-all duration-300 ${
+                      isActive ? 'text-brand-emerald-900 drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]' : 'text-brand-primary/40 hover:text-brand-primary/80'
                     }`}
                   >
                     <div className={`${isActive ? 'scale-110' : 'scale-100'} transition-transform`}>
                       {item.icon}
                     </div>
-                    <span className="text-[10px] font-black uppercase tracking-widest">{item.name}</span>
+                    <span className="text-[9px] font-black uppercase tracking-[0.2em]">{item.name}</span>
                   </Link>
                 );
               })}
               <button 
                 onClick={() => setIsMinimized(true)}
-                className="p-2 text-brand-primary/20 hover:text-brand-secondary transition-colors"
+                className="p-2 ml-2 bg-brand-primary/5 rounded-full text-brand-primary/40 hover:text-brand-emerald-900 hover:bg-brand-emerald-900/10 transition-colors"
               >
-                <ChevronDown size={18} />
+                <ChevronDown size={16} />
               </button>
             </motion.div>
           ) : (
@@ -84,9 +84,9 @@ export default function MobileBottomNav() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
               onClick={() => setIsMinimized(false)}
-              className="px-6 py-3 flex items-center gap-3 text-brand-secondary"
+              className="px-6 py-3 flex items-center gap-3 text-brand-emerald-900 hover:text-brand-primary transition-colors"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-brand-secondary animate-pulse" />
+              <div className="w-2 h-2 rounded-full bg-brand-emerald-900 shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse" />
               <span className="text-[10px] font-black uppercase tracking-[0.4em]">Navigator</span>
               <ChevronUp size={14} />
             </motion.button>

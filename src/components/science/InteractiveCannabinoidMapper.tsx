@@ -62,7 +62,7 @@ export default function InteractiveCannabinoidMapper() {
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
-            <Card className="p-12 border-brand-primary/10 shadow-2xl relative overflow-hidden bg-white/40 backdrop-blur-sm">
+            <Card className="p-6 md:p-12 border-brand-primary/10 shadow-2xl relative overflow-hidden bg-white/40 backdrop-blur-sm">
               <div className="absolute top-0 right-0 w-64 h-64 opacity-10 pointer-events-none" style={{ color: selected.color }}>
                 {CannabinoidIconMapper[selected.name] && React.createElement(CannabinoidIconMapper[selected.name])}
               </div>

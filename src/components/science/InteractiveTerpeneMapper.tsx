@@ -15,7 +15,7 @@ export default function InteractiveTerpeneMapper() {
   return (
     <div className="space-y-12">
       {/* Selection Grid */}
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
         {terpeneList.map((t) => {
           const Icon = TerpeneIconMapper[t.name];
           const isActive = selected.name === t.name;

@@ -179,10 +179,10 @@ export default function StrainGrid() {
               initial={{ opacity: 0, scale: 0.95, y: 40 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 40 }}
-              className="fixed inset-2 md:inset-20 glass z-50 rounded-3xl overflow-hidden flex flex-col md:flex-row border-brand-primary/10 shadow-2xl"
+              className="fixed inset-2 md:inset-20 glass z-50 rounded-3xl overflow-y-auto md:overflow-hidden flex flex-col md:flex-row border-brand-primary/10 shadow-2xl"
             >
-              <div className="w-full md:w-1/3 bg-brand-stone-100 p-8 md:p-12 flex flex-col justify-between border-b md:border-b-0 md:border-r border-brand-primary/5">
-                <div className="overflow-y-auto">
+              <div className="w-full md:w-1/3 bg-brand-stone-100 p-6 md:p-12 flex flex-col justify-between shrink-0 border-b md:border-b-0 md:border-r border-brand-primary/5 h-auto md:h-full md:overflow-y-auto">
+                <div className="overflow-y-visible md:overflow-y-auto">
                   <div className="flex justify-between items-start mb-8">
                     <Badge variant="clinical">{selectedStrain.type}</Badge>
                     <Link 
@@ -212,7 +212,7 @@ export default function StrainGrid() {
                 </button>
               </div>
 
-              <div className="flex-1 p-8 md:p-12 overflow-y-auto custom-scrollbar">
+              <div className="flex-1 p-6 md:p-12 h-auto md:h-full overflow-y-visible md:overflow-y-auto custom-scrollbar">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
                   {/* Cannabinoid Profile */}
                   <div>
@@ -328,7 +328,7 @@ export default function StrainGrid() {
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg px-4 z-[110]"
             >
-              <Card className="border-brand-primary/10 shadow-3xl overflow-hidden relative p-12 text-center bg-brand-stone-50">
+              <Card className="border-brand-primary/10 shadow-3xl max-h-[90vh] overflow-y-auto relative p-6 md:p-12 text-center bg-brand-stone-50">
                 <button 
                   onClick={() => setSelectedTerpene(null)}
                   className="absolute top-6 right-6 text-brand-primary/20 hover:text-brand-secondary transition-colors"

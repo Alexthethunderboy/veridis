@@ -77,7 +77,7 @@ export default function UnlearnPage() {
           </div>
         </section>
 
-        <section className="p-12 glass rounded-3xl border border-brand-primary/10 text-center relative overflow-hidden">
+        <section className="p-6 md:p-12 glass rounded-3xl border border-brand-primary/10 text-center relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-brand-secondary"></div>
           <h2 className="newsreader-display text-4xl text-brand-primary mb-4">The Substack Feed</h2>
           <p className="text-brand-primary/70 mb-8 max-w-xl mx-auto">

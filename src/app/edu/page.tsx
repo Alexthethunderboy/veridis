@@ -52,7 +52,7 @@ export default function EducationHub() {
 
         {/* The Colorado Danger */}
         <section className="mb-32">
-          <Card className="bg-red-950/30 border-red-500/30 p-12 relative overflow-hidden">
+          <Card className="bg-red-950/30 border-red-500/30 p-6 md:p-12 relative overflow-hidden">
              <div className="absolute top-0 right-0 p-8 opacity-10 text-9xl font-black text-red-500 select-none">DANGER</div>
              <div className="max-w-2xl relative z-10">
                 <Badge variant="warning">Critical Safety Warning</Badge>

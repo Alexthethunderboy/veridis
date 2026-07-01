@@ -6,19 +6,20 @@
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Newsreader", ui-serif, Georgia, serif;
 
-  /* Dark Ethnobotanical Modernism Palette */
-  --color-brand-primary: #fbf9f8;
-  --color-brand-secondary: #d35f30;
-  --color-brand-stone-50: #041209;
-  --color-brand-stone-100: #061b0e;
-  --color-brand-stone-200: #0a2413;
-  --color-brand-stone-300: #0f301a;
-  --color-brand-emerald-50: #0b321a;
-  --color-brand-emerald-900: #88cfa2;
+  /* High-end Dark Ethnobotanical Modernism Palette */
+  --color-brand-primary: #ffffff; /* Brighter white for maximum contrast */
+  --color-brand-secondary: #eab308; /* Neon Gold (Yellow-500) */
+  --color-brand-stone-50: #020804; /* Rich black with a hint of green */
+  --color-brand-stone-100: #041209; /* Deepest green-black */
+  --color-brand-stone-200: #061f0f;
+  --color-brand-stone-300: #0a2e17;
+  --color-brand-emerald-50: #0f3f22;
+  --color-brand-emerald-900: #10b981; /* Vibrant neon emerald (Emerald-500) */
 
   
   --radius-xl: 0.75rem;
   --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
 }
 
 @layer base {
@@ -50,14 +51,27 @@
 
   /* Premium Glassmorphism (Dark Theme Default) */
   .glass {
-    background: rgba(6, 27, 14, 0.4);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(251, 249, 248, 0.05);
+    background: rgba(6, 31, 15, 0.4);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-panel {
+    background: linear-gradient(145deg, rgba(16, 185, 129, 0.05) 0%, rgba(6, 31, 15, 0.4) 100%);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
   .text-glow {
-    text-shadow: 0 0 20px rgba(211, 95, 48, 0.3);
+    text-shadow: 0 0 25px rgba(234, 179, 8, 0.4);
+  }
+  
+  .text-glow-emerald {
+    text-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
   }
 
   .mask-fade-bottom {
@@ -69,6 +83,6 @@
   }
 
   .hover-card-border {
-    @apply transition-all duration-300 border-brand-primary/10 hover:border-brand-secondary/40;
+    @apply transition-all duration-500 border-brand-primary/5 hover:border-brand-emerald-900/40;
   }
 }
