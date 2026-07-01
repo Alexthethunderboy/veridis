@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { SectionHeader } from '@/components/UI';
 import StrainGrid from '@/components/strains/StrainGrid';
 import TerpeneLegend from '@/components/strains/TerpeneLegend';
@@ -47,7 +47,9 @@ export default function StrainsPage() {
         </div>
       </div>
 
-      <StrainGrid />
+      <Suspense fallback={<div className="flex justify-center p-20"><div className="animate-spin text-brand-secondary h-8 w-8 border-4 border-current border-t-transparent rounded-full" /></div>}>
+        <StrainGrid />
+      </Suspense>
     </main>
   );
 }

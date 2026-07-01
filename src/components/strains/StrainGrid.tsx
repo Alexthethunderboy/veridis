@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useSearchParams } from 'next/navigation';
 import { Card, Badge, Input } from '@/components/UI';
 import { fetchAllStrains, RichStrain } from '@/services/api/strains';
 import { Leaf, FlaskConical, MapPin, Zap, Search, Loader2, ArrowUpRight } from 'lucide-react';
@@ -12,9 +13,12 @@ import { FlavonoidIconMapper } from '@/components/icons/FlavonoidIcons';
 import StrainAura from './StrainAura';
 
 export default function StrainGrid() {
+  const searchParams = useSearchParams();
+  const q = searchParams.get('q') || '';
+
   const [strains, setStrains] = useState<RichStrain[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(q);
   const [displayCount, setDisplayCount] = useState(12);
   const [selectedStrain, setSelectedStrain] = useState<RichStrain | null>(null);
   const [selectedTerpene, setSelectedTerpene] = useState<typeof TERPENES.myrcene | null>(null);

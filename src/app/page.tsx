@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Card, Badge, SectionHeader } from '@/components/UI';
 import { Search, BookOpen, Leaf, Scale, ShieldAlert, ChevronRight, Activity } from 'lucide-react';
 import { motion, Variants } from 'motion/react';
+import { useRouter } from 'next/navigation';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -20,6 +21,9 @@ const itemVariants: Variants = {
 };
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const router = useRouter();
+
   return (
     <main className="min-h-screen bg-transparent selection:bg-brand-emerald-900 selection:text-brand-stone-50 overflow-x-hidden">
       {/* Background Ambience */}
@@ -51,19 +55,31 @@ export default function Home() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="max-w-3xl mx-auto glass-panel rounded-3xl p-2 md:p-3 border border-brand-primary/10 mb-20 md:mb-40 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
         >
-          <div className="flex flex-col md:flex-row items-center">
+          <form 
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (searchQuery.trim()) {
+                router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+              } else {
+                router.push('/search');
+              }
+            }}
+            className="flex flex-col md:flex-row items-center"
+          >
             <div className="flex items-center w-full md:w-auto">
               <Search className="ml-4 md:ml-6 text-brand-primary/30" size={24} />
               <input 
                 type="text" 
                 placeholder="Search strains..." 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="flex-1 p-4 md:p-5 bg-transparent outline-none text-brand-primary placeholder:text-brand-primary/30 font-bold text-base md:text-lg focus:ring-0"
               />
             </div>
-            <button className="w-full md:w-auto bg-brand-emerald-900 text-brand-stone-50 px-8 md:px-12 py-4 md:py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] md:text-xs hover:bg-brand-primary hover:text-brand-stone-100 transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
+            <button type="submit" className="w-full md:w-auto bg-brand-emerald-900 text-brand-stone-50 px-8 md:px-12 py-4 md:py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] md:text-xs hover:bg-brand-primary hover:text-brand-stone-100 transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
               Query
             </button>
-          </div>
+          </form>
         </motion.div>
       </section>
 
