@@ -5,7 +5,7 @@ import { CANNABINOIDS } from '@/lib/data/cannabisData';
 import { CannabinoidIconMapper } from '@/components/icons/CannabinoidIcons';
 import { motion, AnimatePresence } from 'motion/react';
 import { Card, Badge } from '@/components/UI';
-import { Activity, Brain, Heart, Wind } from 'lucide-react';
+import { Activity, Brain, Heart } from 'lucide-react';
 
 export default function InteractiveCannabinoidMapper() {
   const [selected, setSelected] = useState(Object.values(CANNABINOIDS)[0]);

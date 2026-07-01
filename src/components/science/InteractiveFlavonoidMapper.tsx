@@ -5,7 +5,7 @@ import { FLAVONOIDS } from '@/lib/data/cannabisData';
 import { FlavonoidIconMapper } from '@/components/icons/FlavonoidIcons';
 import { motion, AnimatePresence } from 'motion/react';
 import { Card, Badge } from '@/components/UI';
-import { Beaker, ShieldAlert, Sparkles, Zap } from 'lucide-react';
+import { ShieldAlert, Sparkles, Zap } from 'lucide-react';
 
 export default function InteractiveFlavonoidMapper() {
   const [selected, setSelected] = useState(Object.values(FLAVONOIDS)[0]);

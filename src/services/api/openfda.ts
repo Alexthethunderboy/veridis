@@ -27,7 +27,7 @@ export async function checkDrugInteractions(medication: string): Promise<Interac
 }
 
 // Logic to cross-reference with Cannabis (General warning)
-export function getCannabisInteractionWarning(medication: string) {
+export function getCannabisInteractionWarning() {
   const generalWarnings = [
     "Cannabis may increase the effects of medications that cause sleepiness (CNS depressants).",
     "It can potentially interact with blood thinners (Warfarin) or anti-malarials commonly used in Nigeria.",

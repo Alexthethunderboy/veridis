@@ -1,5 +1,5 @@
 // Sanity schema for Unlearn Hub research docs
-export default {
+const researchDoc = {
   name: 'researchDoc',
   title: 'Research Document',
   type: 'document',
@@ -44,3 +44,5 @@ export default {
     },
   ],
 };
+
+export default researchDoc;

@@ -6,10 +6,10 @@ import { Card, Badge, Input } from '@/components/UI';
 import { fetchAllStrains, RichStrain } from '@/services/api/strains';
 import { Leaf, FlaskConical, MapPin, Zap, Search, Loader2, ArrowUpRight } from 'lucide-react';
 import { TerpeneIconMapper } from '@/components/icons/TerpeneIcons';
-import { CannabinoidIconMapper } from '@/components/icons/CannabinoidIcons';
 import Link from 'next/link';
 import { TERPENES, CANNABINOIDS } from '@/lib/data/cannabisData';
 import { FlavonoidIconMapper } from '@/components/icons/FlavonoidIcons';
+import StrainAura from './StrainAura';
 
 export default function StrainGrid() {
   const [strains, setStrains] = useState<RichStrain[]>([]);
@@ -85,6 +85,11 @@ export default function StrainGrid() {
               </div>
             </div>
 
+            <div className="w-full h-32 rounded-xl mb-6 overflow-hidden relative border border-brand-primary/5">
+              {/* If we have an image_url, render Next/Image here. Else fallback to Aura */}
+              <StrainAura strain={strain} className="w-full h-full opacity-80" />
+            </div>
+
             <h3 className="newsreader-display text-4xl text-brand-primary mb-4 group-hover:text-brand-secondary transition-colors">
               {strain.name}
             </h3>
@@ -117,7 +122,7 @@ export default function StrainGrid() {
               <div className="flex items-center gap-4">
                 <span className="text-[8px] font-black uppercase tracking-[0.2em] text-brand-primary/20 w-12">Flavors</span>
                 <div className="flex gap-2 flex-wrap">
-                  {strain.flavonoids.slice(0, 3).map((f: any, i: number) => {
+                  {strain.flavonoids.slice(0, 3).map((f: { name: string; color: string }, i: number) => {
                     const Icon = FlavonoidIconMapper[f.name];
                     return (
                       <div 
@@ -250,7 +255,7 @@ export default function StrainGrid() {
                         return (
                           <button 
                             key={i} 
-                            onClick={() => setSelectedTerpene(t as any)}
+                            onClick={() => setSelectedTerpene(t as typeof TERPENES.myrcene)}
                             className="flex items-center gap-4 p-4 rounded-2xl border border-brand-primary/5 bg-brand-primary/[0.02] hover:bg-brand-primary/[0.04] transition-colors text-left w-full group/terp"
                           >
                             <div 

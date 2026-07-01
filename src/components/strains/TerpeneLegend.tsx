@@ -20,7 +20,7 @@ export default function TerpeneLegend() {
               key={i}
               whileHover={{ y: -4, backgroundColor: `${t.color}12`, borderColor: `${t.color}40` }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setSelected(t as any)}
+              onClick={() => setSelected(t as typeof TERPENES.myrcene)}
               className="p-4 rounded-2xl border border-brand-primary/5 bg-brand-stone-100/50 flex flex-col items-center text-center transition-all hover:shadow-xl group"
               style={{ '--hover-shadow': t.color } as React.CSSProperties}
             >

@@ -14,7 +14,7 @@ export interface ApiStrain {
   Description: string;
 }
 
-export type RichStrain = typeof STRAIN_CATALOGUE[0];
+export type RichStrain = typeof STRAIN_CATALOGUE[0] & { image_url?: string | null };
 
 function mapApiToRich(apiStrain: ApiStrain): RichStrain {
   const effects = (apiStrain.Effects || '').split(',').map(e => e.trim()).filter(Boolean);
@@ -38,7 +38,7 @@ function mapApiToRich(apiStrain: ApiStrain): RichStrain {
   return {
     id: apiStrain._id,
     name: (apiStrain.Strain || 'Unknown Strain').replace(/-/g, ' '),
-    type: (formattedType === 'Sativa' || formattedType === 'Indica' || formattedType === 'Hybrid' ? formattedType : 'Hybrid') as any,
+    type: (formattedType === 'Sativa' || formattedType === 'Indica' || formattedType === 'Hybrid' ? formattedType : 'Hybrid') as RichStrain['type'],
     dominant: 'THC',
     thc: `${thcVal}%`,
     secondary: '0.1% CBD',
@@ -54,7 +54,8 @@ function mapApiToRich(apiStrain: ApiStrain): RichStrain {
     effects: effects,
     medical: ['Stress', 'Pain', 'Anxiety'], // Generic medical apps as API doesn't provide
     origin: 'Global Repository',
-    description: apiStrain.Description || 'No description available for this variety.'
+    description: apiStrain.Description || 'No description available for this variety.',
+    image_url: null, // Scraped or manually curated image URL goes here
   };
 }
 
@@ -121,7 +122,7 @@ export async function getStrainLineage(strainName: string) {
   return lineageMap[strainName] || ["Lineage information pending verification"];
 }
 
-export async function fetchGlobalStrainData(strainName: string): Promise<any | null> {
+export async function fetchGlobalStrainData(strainName: string): Promise<RichStrain | null> {
   const all = await fetchAllStrains();
   const match = all.find(s => s.name.toLowerCase().includes(strainName.toLowerCase()));
   return match || null;

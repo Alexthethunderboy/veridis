@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 export function useQuickExit(targetUrl: string = 'https://www.google.com') {
-  const [escCount, setEscCount] = useState(0);
+  const [, setEscCount] = useState(0);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {

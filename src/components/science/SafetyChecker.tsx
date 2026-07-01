@@ -17,7 +17,7 @@ export default function SafetyChecker() {
     setLoading(false);
   };
 
-  const generalWarnings = getCannabisInteractionWarning(medication);
+  const generalWarnings = getCannabisInteractionWarning();
 
   return (
     <Card className="max-w-2xl mx-auto border-red-900/30 mt-8 bg-[#1a0f0f]">

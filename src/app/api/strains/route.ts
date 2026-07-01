@@ -17,8 +17,9 @@ export async function GET(request: Request) {
     }
     const data = await response.json();
     return NextResponse.json(data);
-  } catch (error: any) {
-    console.error(`Proxy error for type ${type}:`, error.message);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error(`Proxy error for type ${type}:`, errorMessage);
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

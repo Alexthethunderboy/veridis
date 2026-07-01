@@ -15,6 +15,7 @@
     "@supabase/supabase-js": "^2.105.1",
     "@tailwindcss/typography": "^0.5.19",
     "algoliasearch": "^5.52.0",
+    "dotenv": "^17.4.2",
     "lucide-react": "^1.14.0",
     "motion": "^12.38.0",
     "next": "16.2.4",
@@ -24,13 +25,15 @@
     "react-instantsearch": "^7.31.0",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
-    "sanity": "^5.23.0"
+    "sanity": "^5.23.0",
+    "sharp": "^0.35.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/sharp": "^0.31.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "supabase": "^2.98.1",

@@ -8,7 +8,7 @@ import { Microscope, Wind, Droplets, Zap, ShieldCheck, Loader2 } from 'lucide-re
 import { motion } from 'motion/react';
 import { TerpeneIconMapper } from '@/components/icons/TerpeneIcons';
 import { FlavonoidIconMapper } from '@/components/icons/FlavonoidIcons';
-import { CANNABINOIDS } from '@/lib/data/cannabisData';
+import StrainAura from '@/components/strains/StrainAura';
 
 export default function StrainDeepDive() {
   const params = useParams();
@@ -57,19 +57,18 @@ export default function StrainDeepDive() {
             </p>
           </div>
           
-          {/* Leafly-style Shape Branding */}
-          <div className="relative group">
-            {strain.dominant === 'THC' || strain.dominant === 'THCV' ? (
-              <div className="w-48 h-48 bg-brand-secondary rotate-45 rounded-xl flex items-center justify-center transition-transform hover:rotate-[135deg] duration-1000 shadow-2xl">
-                <span className="text-4xl font-black text-brand-stone-50 -rotate-45">{strain.dominant}</span>
-              </div>
+          {/* Leafly-style Shape Branding -> Aura Migration */}
+          <div className="relative group w-64 h-64 rounded-full overflow-hidden border-4 border-brand-primary/10 shadow-2xl flex-shrink-0">
+            {strain.image_url ? (
+              <img src={strain.image_url} alt={strain.name} className="w-full h-full object-cover" />
             ) : (
-              <div className="w-48 h-48 bg-brand-emerald-900 rounded-full flex items-center justify-center border-4 border-brand-primary/20 shadow-2xl">
-                <span className="text-4xl font-black text-brand-stone-50">{strain.dominant}</span>
-              </div>
+              <StrainAura strain={strain} className="w-full h-full" />
             )}
-            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-8 text-center">
-               <p className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-primary/30">Chemical Dominance</p>
+            <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
+              <span className="text-4xl font-black text-brand-stone-50 drop-shadow-lg">{strain.dominant}</span>
+            </div>
+            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-8 text-center opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+               <p className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-primary/60">Molecular Aura / {strain.dominant}</p>
             </div>
           </div>
         </header>
@@ -142,7 +141,7 @@ export default function StrainDeepDive() {
                 </p>
                 <div className="space-y-4">
                    {strain.flavonoids && Array.isArray(strain.flavonoids) && strain.flavonoids.length > 0 ? (
-                     strain.flavonoids.map((f: any, i: number) => {
+                     strain.flavonoids.map((f: { name: string; role: string; color: string }, i: number) => {
                        const Icon = FlavonoidIconMapper[f.name];
                        return (
                         <div key={i} className="flex items-center gap-4 p-4 bg-brand-primary/5 rounded-2xl border border-brand-primary/5 group/flav transition-all hover:bg-brand-primary/10">

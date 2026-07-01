@@ -28,7 +28,7 @@ export async function fetchPubMedData(query: string, maxResults: number = 5): Pr
         id,
         title: result.title,
         abstract: "Abstract available at NCBI PubMed", // E-summary doesn't give full abstract, E-fetch is needed for that but complex to parse (XML)
-        authors: result.authors.map((a: any) => a.name),
+        authors: result.authors.map((a: { name: string }) => a.name),
         date: result.pubdate,
         url: `https://pubmed.ncbi.nlm.nih.gov/${id}/`
       };
