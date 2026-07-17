@@ -9,6 +9,7 @@ import { motion } from 'motion/react';
 import { TerpeneIconMapper } from '@/components/icons/TerpeneIcons';
 import { FlavonoidIconMapper } from '@/components/icons/FlavonoidIcons';
 import StrainAura from '@/components/strains/StrainAura';
+import Image from 'next/image';
 
 export default function StrainDeepDive() {
   const params = useParams();
@@ -60,7 +61,7 @@ export default function StrainDeepDive() {
           {/* Leafly-style Shape Branding -> Aura Migration */}
           <div className="relative group w-64 h-64 rounded-full overflow-hidden border-4 border-brand-primary/10 shadow-2xl flex-shrink-0">
             {strain.image_url ? (
-              <img src={strain.image_url} alt={strain.name} className="w-full h-full object-cover" />
+              <Image src={strain.image_url} alt={`${strain.name} strain`} fill sizes="256px" className="object-cover" />
             ) : (
               <StrainAura strain={strain} className="w-full h-full" />
             )}

@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import React from 'react';
+import { motion } from 'motion/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -10,32 +10,20 @@ interface SidebarItemProps {
   name: string;
   href: string;
   icon?: React.ReactNode;
+  compact?: boolean;
 }
 
-export function SidebarItem({ name, href, icon }: SidebarItemProps) {
+export function SidebarItem({ name, href, icon, compact = false }: SidebarItemProps) {
   const pathname = usePathname();
   const isActive = pathname === href;
 
   return (
-    <Link href={href} className="block w-full">
-      <motion.div
-        whileHover={{ x: 5, backgroundColor: 'rgba(16, 185, 129, 0.05)' }}
-        whileTap={{ scale: 0.98 }}
-        className={`flex items-center px-4 py-3 my-1 rounded-xl transition-all duration-300 ${
+    <Link href={href} title={compact ? name : undefined} className={`flex w-full items-center rounded-xl px-3 py-3 text-sm transition-colors ${compact ? 'justify-center' : ''} ${
           isActive 
-            ? 'bg-brand-primary/5 text-brand-emerald-900 font-bold border border-brand-emerald-900/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]' 
-            : 'text-brand-primary/70 hover:text-brand-primary border border-transparent'
-        }`}
-      >
-        {icon && <span className={`mr-3 transition-colors ${isActive ? 'text-brand-emerald-900' : 'text-brand-secondary/70'}`}>{icon}</span>}
-        <span className="text-xs uppercase tracking-[0.2em]">{name}</span>
-        {isActive && (
-          <motion.div 
-            layoutId="activeIndicator"
-            className="ml-auto w-1.5 h-1.5 rounded-full bg-brand-emerald-900 shadow-[0_0_8px_rgba(16,185,129,0.8)]"
-          />
-        )}
-      </motion.div>
+            ? 'border border-brand-emerald-900/25 bg-brand-emerald-900/10 font-semibold text-brand-emerald-900'
+            : 'border border-transparent text-brand-primary/65 hover:bg-brand-primary/5 hover:text-brand-primary'
+        }`} aria-current={isActive ? 'page' : undefined}>
+        {icon && <span className={compact ? '' : 'mr-3'}>{icon}</span>}<span className={compact ? 'sr-only' : ''}>{name}</span>
     </Link>
   );
 }
@@ -50,55 +38,16 @@ interface CardProps {
 }
 
 export const Card = ({ children, className = '', interactive = false, hoverZoom = false, onClick }: CardProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-  
-  // 3D Tilt Effect Values
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!interactive && !hoverZoom) return;
-    if (!ref.current) return;
-    
-    const rect = ref.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
   const shouldAnimate = interactive || hoverZoom;
   
   return (
     <motion.div 
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      style={shouldAnimate ? { rotateX, rotateY, transformPerspective: 1000 } : {}}
-      whileHover={shouldAnimate ? { scale: hoverZoom ? 1.02 : 1, transition: { duration: 0.3, ease: 'easeOut' } } : {}}
+      whileHover={shouldAnimate ? { y: -3, transition: { duration: 0.2 } } : {}}
       onClick={onClick}
-      className={`${shouldAnimate ? 'glass-panel cursor-pointer hover-card-border hover:shadow-brand-emerald-900/10' : 'glass'} rounded-3xl p-6 md:p-8 transition-all duration-500 overflow-hidden ${className}`}
+      className={`${shouldAnimate ? 'glass-panel hover-card-border' : 'glass'} rounded-2xl p-6 md:p-8 transition-colors duration-200 overflow-hidden ${className}`}
     >
       {children}
     </motion.div>
@@ -124,11 +73,10 @@ export function Badge({ children, variant = 'neutral', className = '', pulse = f
   return (
     <motion.span 
       whileHover={{ scale: 1.05 }}
-      animate={pulse ? { boxShadow: ['0 0 15px rgba(16,185,129,0.1)', '0 0 25px rgba(16,185,129,0.4)', '0 0 15px rgba(16,185,129,0.1)'] } : {}}
-      transition={pulse ? { repeat: Infinity, duration: 2 } : {}}
+      animate={{}}
       className={`inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.25em] border ${variants[variant]} ${className}`}
     >
-      {pulse && <span className="w-1.5 h-1.5 rounded-full bg-current mr-2 animate-pulse" />}
+      {pulse && <span className="w-1.5 h-1.5 rounded-full bg-current mr-2" />}
       {children}
     </motion.span>
   );

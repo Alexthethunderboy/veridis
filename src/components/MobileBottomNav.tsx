@@ -1,98 +1,54 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Leaf, Microscope, Scale, ChevronUp, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { BookOpen, FileText, Leaf, LogOut, Menu, Microscope, Scale, X } from 'lucide-react';
+import { EfifyaLogo, EfifyaMark } from './BrandLogo';
+import { useQuickExit } from '@/hooks/useQuickExit';
+
+const mainItems = [
+  { name: 'Home', href: '/', icon: EfifyaMark },
+  { name: 'Learn', href: '/edu', icon: BookOpen },
+  { name: 'Strains', href: '/strains', icon: Leaf },
+  { name: 'Science', href: '/science', icon: Microscope },
+];
 
 export default function MobileBottomNav() {
   const pathname = usePathname();
-  const [isMinimized, setIsMinimized] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [open, setOpen] = useState(false);
+  const { triggerQuickExit } = useQuickExit();
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsMinimized(true);
-      } else if (currentScrollY < lastScrollY) {
-        setIsMinimized(false);
-      }
-      setLastScrollY(currentScrollY);
-    };
+    if (!open) return;
+    const close = (event: KeyboardEvent) => { if (event.key === 'Escape') setOpen(false); };
+    window.addEventListener('keydown', close);
+    return () => window.removeEventListener('keydown', close);
+  }, [open]);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  return <>
+    <header className="fixed inset-x-0 top-0 z-40 flex h-16 items-center justify-between border-b border-brand-primary/10 bg-brand-stone-100/95 px-5 backdrop-blur-xl lg:hidden">
+      <Link href="/" aria-label="Efifya home"><EfifyaLogo className="[&>svg]:h-8 [&>svg]:w-8 [&>span]:text-2xl"/></Link>
+      <button onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center rounded-xl border border-brand-primary/10 text-brand-primary/70" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open}>{open ? <X size={20}/> : <Menu size={20}/>}</button>
+    </header>
 
-  const navItems = [
-    { name: 'Home', href: '/', icon: <Home size={20} /> },
-    { name: 'Strains', href: '/strains', icon: <Leaf size={20} /> },
-    { name: 'Science', href: '/science', icon: <Microscope size={20} /> },
-    { name: 'Law', href: '/law', icon: <Scale size={20} /> },
-  ];
+    {open && <div className="fixed inset-0 z-40 bg-brand-stone-50/75 backdrop-blur-sm lg:hidden" onClick={() => setOpen(false)} aria-hidden="true"/>}
+    <section className={`fixed inset-x-3 bottom-24 z-50 origin-bottom rounded-3xl border border-brand-primary/15 bg-brand-stone-100 p-4 shadow-2xl transition duration-200 lg:hidden ${open ? 'scale-100 opacity-100' : 'pointer-events-none scale-95 opacity-0'}`} aria-label="More navigation" aria-hidden={!open}>
+      <div className="mb-3 px-2"><p className="clinical-label text-brand-primary/35">More from Efifya</p><p className="mt-1 text-xs text-brand-primary/45">Explore policy, sources and safety tools.</p></div>
+      <div className="grid grid-cols-2 gap-2">
+        <MobileMenuLink href="/law" icon={<Scale size={19}/>} label="Policy & law" onNavigate={() => setOpen(false)}/>
+        <MobileMenuLink href="/docs" icon={<FileText size={19}/>} label="Resources" onNavigate={() => setOpen(false)}/>
+      </div>
+      <button onClick={triggerQuickExit} className="mt-3 flex w-full items-center gap-3 rounded-xl border border-brand-secondary/20 bg-brand-secondary/[.05] px-4 py-3 text-left text-xs font-bold text-brand-secondary"><LogOut size={17}/> Quick exit <span className="ml-auto text-[10px] font-medium opacity-60">Leave discreetly</span></button>
+    </section>
 
-  return (
-    <div className="lg:hidden fixed bottom-6 left-0 right-0 z-50 flex justify-center px-6 pointer-events-none">
-      <motion.nav
-        animate={{ 
-          y: isMinimized ? 40 : 0,
-          opacity: 1,
-          scale: isMinimized ? 0.9 : 1,
-          width: isMinimized ? 'auto' : '100%'
-        }}
-        className={`pointer-events-auto glass-panel rounded-full shadow-[0_20px_40px_rgba(0,0,0,0.8)] overflow-hidden flex items-center transition-all duration-500 max-w-md w-full`}
-      >
-        <AnimatePresence mode="wait">
-          {!isMinimized ? (
-            <motion.div 
-              key="full"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="flex w-full items-center justify-around py-4 px-6"
-            >
-              {navItems.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <Link 
-                    key={item.href} 
-                    href={item.href}
-                    className={`flex flex-col items-center gap-1.5 transition-all duration-300 ${
-                      isActive ? 'text-brand-emerald-900 drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]' : 'text-brand-primary/40 hover:text-brand-primary/80'
-                    }`}
-                  >
-                    <div className={`${isActive ? 'scale-110' : 'scale-100'} transition-transform`}>
-                      {item.icon}
-                    </div>
-                    <span className="text-[9px] font-black uppercase tracking-[0.2em]">{item.name}</span>
-                  </Link>
-                );
-              })}
-              <button 
-                onClick={() => setIsMinimized(true)}
-                className="p-2 ml-2 bg-brand-primary/5 rounded-full text-brand-primary/40 hover:text-brand-emerald-900 hover:bg-brand-emerald-900/10 transition-colors"
-              >
-                <ChevronDown size={16} />
-              </button>
-            </motion.div>
-          ) : (
-            <motion.button
-              key="minimized"
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}
-              onClick={() => setIsMinimized(false)}
-              className="px-6 py-3 flex items-center gap-3 text-brand-emerald-900 hover:text-brand-primary transition-colors"
-            >
-              <div className="w-2 h-2 rounded-full bg-brand-emerald-900 shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse" />
-              <span className="text-[10px] font-black uppercase tracking-[0.4em]">Navigator</span>
-              <ChevronUp size={14} />
-            </motion.button>
-          )}
-        </AnimatePresence>
-      </motion.nav>
-    </div>
-  );
+    <nav aria-label="Primary navigation" className="fixed inset-x-3 bottom-3 z-50 grid grid-cols-5 rounded-2xl border border-brand-primary/15 bg-brand-stone-100/95 p-2 shadow-2xl backdrop-blur-xl lg:hidden">
+      {mainItems.map(({ name, href, icon: Icon }) => { const active = pathname === href || (href !== '/' && pathname.startsWith(href)); return <Link onClick={() => setOpen(false)} key={href} href={href} aria-current={active ? 'page' : undefined} className={`flex min-h-14 flex-col items-center justify-center gap-1 rounded-xl text-[10px] font-bold ${active ? 'bg-brand-emerald-900/12 text-brand-emerald-900' : 'text-brand-primary/55'}`}><Icon size={19}/><span>{name}</span></Link>; })}
+      <button onClick={() => setOpen(!open)} className={`flex min-h-14 flex-col items-center justify-center gap-1 rounded-xl text-[10px] font-bold ${open ? 'bg-brand-secondary/10 text-brand-secondary' : 'text-brand-primary/55'}`} aria-expanded={open}><Menu size={19}/><span>More</span></button>
+    </nav>
+  </>;
+}
+
+function MobileMenuLink({href, icon, label, onNavigate}:{href:string;icon:React.ReactNode;label:string;onNavigate:()=>void}) {
+  return <Link href={href} onClick={onNavigate} className="flex items-center gap-3 rounded-xl border border-brand-primary/10 bg-brand-primary/[.025] px-4 py-4 text-sm font-bold text-brand-primary/70">{icon}{label}</Link>;
 }

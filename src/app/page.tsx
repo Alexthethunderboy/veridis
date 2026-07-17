@@ -2,207 +2,39 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Card, Badge, SectionHeader } from '@/components/UI';
-import { Search, BookOpen, Leaf, Scale, ShieldAlert, ChevronRight, Activity } from 'lucide-react';
-import { motion, Variants } from 'motion/react';
 import { useRouter } from 'next/navigation';
+import { ArrowRight, BookOpen, FlaskConical, HeartPulse, Library, MapPin, Search, ShieldCheck, Sparkles } from 'lucide-react';
+import { BotanicalSpecimen, EvidenceLadder, MoleculeField, PolicyTimeline } from '@/components/KnowledgeVisuals';
+import { COURSES } from '@/lib/data/education';
+import { EfifyaLogo } from '@/components/BrandLogo';
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 }
-  }
-};
+export default function Home(){
+  const [query,setQuery]=React.useState(''); const router=useRouter();
+  const submit=(event:React.FormEvent)=>{event.preventDefault();router.push(query.trim()?`/search?q=${encodeURIComponent(query.trim())}`:'/search')};
+  return <main className="overflow-hidden">
+    <section className="relative min-h-[760px] border-b border-brand-primary/10 px-5 pb-20 pt-28 sm:px-8 lg:px-12 lg:pt-20"><div className="mx-auto grid max-w-[1400px] gap-10 lg:grid-cols-[minmax(0,1fr)_520px] lg:items-center">
+      <div className="relative z-10 max-w-4xl"><p className="clinical-label mb-6 flex items-center gap-2 text-brand-emerald-900"><Sparkles size={14}/> Cannabis knowledge for Nigeria</p><h1 className="newsreader-display text-6xl leading-[.86] sm:text-8xl lg:text-[7.6rem]">Understand cannabis.<br/><span className="text-brand-emerald-900">Without the hype.</span></h1><p className="mt-8 max-w-2xl text-lg leading-8 text-brand-primary/60">Evidence-aware education across science, health, safety, culture, cultivation and Nigerian policy—designed for better questions and informed decisions.</p><div className="mt-9 flex flex-col gap-3 sm:flex-row"><Link href="/edu/courses/cannabis-foundations/what-is-cannabis" className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-emerald-900 px-6 py-4 text-sm font-bold text-brand-stone-50">Start learning <ArrowRight size={17}/></Link><Link href="#explore" className="inline-flex items-center justify-center gap-2 rounded-xl border border-brand-primary/15 px-6 py-4 text-sm font-bold text-brand-primary/70">Explore Efifya</Link></div>
+        <form onSubmit={submit} className="mt-12 flex max-w-2xl items-center rounded-xl border border-brand-primary/12 bg-brand-stone-100 p-2"><Search className="ml-3 shrink-0 text-brand-primary/25" size={19}/><input value={query} onChange={(e)=>setQuery(e.target.value)} aria-label="Search Efifya" placeholder="Try “medical evidence” or “Nigerian law”" className="min-w-0 flex-1 bg-transparent px-3 py-3 text-sm outline-none placeholder:text-brand-primary/30"/><button className="rounded-lg bg-brand-primary px-5 py-3 text-xs font-bold text-brand-stone-50">Search</button></form>
+      </div><div className="relative hidden min-h-[570px] lg:block"><div className="absolute inset-0 rounded-full bg-brand-emerald-900/[.06] blur-3xl"/><BotanicalSpecimen className="absolute inset-0 h-full w-full text-brand-emerald-900"/><div className="absolute bottom-6 left-0 rounded-xl border border-brand-primary/10 bg-brand-stone-100/90 p-4 backdrop-blur"><p className="clinical-label text-brand-primary/30">Editorial principle</p><p className="mt-2 max-w-52 text-sm font-bold">Name the substance. Scope the claim. Show the source.</p></div></div>
+    </div></section>
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } }
-};
+    <section className="mx-auto max-w-[1400px] px-5 py-20 sm:px-8 lg:px-12" aria-labelledby="start-title"><div className="mb-9 grid gap-4 lg:grid-cols-2 lg:items-end"><div><p className="clinical-label mb-3 text-brand-secondary">Choose your starting point</p><h2 id="start-title" className="newsreader-display text-4xl sm:text-6xl">Begin with your question</h2></div><p className="max-w-lg text-sm leading-6 text-brand-primary/50 lg:justify-self-end">You do not need to know the terminology. Choose the context closest to yours and we’ll guide the sequence.</p></div><div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">{[
+      {icon:<BookOpen/>,title:'I’m completely new',body:'Start with precise language, the plant, products and effects.',href:'/edu/courses/cannabis-foundations/what-is-cannabis'},
+      {icon:<HeartPulse/>,title:'I’m researching health',body:'Examine benefits, adverse effects and evidence limits.',href:'/edu/courses/safety-and-health/medical-evidence'},
+      {icon:<FlaskConical/>,title:'I want the science',body:'Explore chemistry, the ECS, dose, route and uncertainty.',href:'/edu/courses/chemistry-and-the-body'},
+      {icon:<MapPin/>,title:'I need Nigerian context',body:'Understand the legal history, public health and policy debate.',href:'/law'},
+    ].map((item)=><Link key={item.title} href={item.href} className="group rounded-2xl border border-brand-primary/10 bg-brand-stone-100 p-6 hover:-translate-y-1 hover:border-brand-emerald-900/35"><div className="mb-10 text-brand-emerald-900">{item.icon}</div><h3 className="newsreader-display text-2xl">{item.title}</h3><p className="mt-2 min-h-16 text-sm leading-6 text-brand-primary/45">{item.body}</p><ArrowRight className="mt-4 text-brand-primary/25 group-hover:translate-x-1 group-hover:text-brand-emerald-900" size={17}/></Link>)}</div></section>
 
-export default function Home() {
-  const [searchQuery, setSearchQuery] = React.useState('');
-  const router = useRouter();
+    <section className="border-y border-brand-primary/10 bg-brand-stone-100/45"><div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[.9fr_1.1fr] lg:px-12 lg:py-24"><div><p className="clinical-label mb-3 text-brand-emerald-900">Featured curriculum</p><h2 className="newsreader-display text-4xl sm:text-6xl">Learn in layers,<br/>not fragments.</h2><p className="mt-5 max-w-md text-sm leading-7 text-brand-primary/50">Courses move from foundational literacy to chemistry and health decisions. Every consequential claim can show its evidence strength and references.</p><Link href="/edu" className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-brand-emerald-900">Explore the curriculum <ArrowRight size={16}/></Link></div><div className="space-y-3">{COURSES.map((course)=><Link key={course.slug} href={`/edu/courses/${course.slug}`} className="group grid grid-cols-[50px_1fr_auto] items-center gap-4 rounded-xl border border-brand-primary/10 bg-brand-stone-100 p-5 hover:border-brand-primary/25"><span className="newsreader-display text-3xl" style={{color:course.accent}}>{course.number}</span><div><h3 className="font-bold">{course.title}</h3><p className="mt-1 hidden text-xs text-brand-primary/40 sm:block">{course.level} · {course.modules.reduce((n,m)=>n+m.lessons.length,0)} reviewed lessons</p></div><ArrowRight className="text-brand-primary/25 group-hover:text-brand-emerald-900" size={17}/></Link>)}</div></div></section>
 
-  return (
-    <main className="min-h-screen bg-transparent selection:bg-brand-emerald-900 selection:text-brand-stone-50 overflow-x-hidden">
-      {/* Background Ambience */}
-      <div className="fixed inset-0 -z-20">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-emerald-900/10 blur-[120px] rounded-full animate-pulse"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-secondary/5 blur-[120px] rounded-full"></div>
-      </div>
+    <section className="mx-auto max-w-[1400px] px-5 py-20 sm:px-8 lg:px-12 lg:py-24"><div className="grid gap-4 lg:grid-cols-12"><article className="relative overflow-hidden rounded-2xl border border-brand-primary/10 bg-brand-stone-100 p-7 lg:col-span-7 lg:min-h-[410px]"><p className="clinical-label text-brand-secondary">Evidence, made visible</p><h2 className="newsreader-display mt-4 max-w-lg text-4xl sm:text-5xl">Not every cannabis claim deserves equal confidence.</h2><p className="mt-4 max-w-lg text-sm leading-7 text-brand-primary/50">We separate consensus, clinical studies, observational findings and preclinical promise—then name uncertainty instead of hiding it.</p><EvidenceLadder className="mt-10 max-w-xl text-brand-emerald-900"/><Link href="/edu/courses/cannabis-foundations/how-to-read-cannabis-research" className="mt-9 inline-flex items-center gap-2 text-sm font-bold text-brand-secondary">Learn to read the evidence <ArrowRight size={15}/></Link></article><article className="relative min-h-[410px] overflow-hidden rounded-2xl border border-brand-emerald-900/20 bg-brand-emerald-900/[.05] p-7 lg:col-span-5"><p className="clinical-label text-brand-emerald-900">Chemistry explorer</p><h2 className="newsreader-display mt-4 text-4xl">From plant compounds<br/>to human systems.</h2><MoleculeField className="absolute bottom-2 left-0 w-full text-brand-emerald-900 opacity-80"/><Link href="/science" className="absolute bottom-7 left-7 z-10 inline-flex items-center gap-2 rounded-lg bg-brand-emerald-900 px-4 py-3 text-xs font-bold text-brand-stone-50">Explore the science <ArrowRight size={14}/></Link></article></div></section>
 
-      {/* Hero Section */}
-      <section className="pt-32 md:pt-48 pb-20 md:pb-32 px-6 md:px-8 max-w-7xl mx-auto text-center relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <Badge variant="clinical" pulse>Intelligence-Driven Advocacy</Badge>
-          <h1 className="newsreader-display text-6xl md:text-8xl lg:text-[10rem] text-brand-primary mt-8 md:mt-12 mb-8 md:mb-10 leading-[0.85] md:leading-[0.8] tracking-tight">
-            Stigma to <span className="text-brand-emerald-900 text-glow-emerald">Science.</span>
-          </h1>
-          <p className="text-lg md:text-xl lg:text-2xl text-brand-primary/60 font-medium leading-relaxed max-w-3xl mx-auto mb-12 md:mb-20">
-            The definitive platform for global botanical intelligence, clinical protocols, and evidence-based policy.
-          </p>
-        </motion.div>
-        
-        {/* Search Bar */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="max-w-3xl mx-auto glass-panel rounded-3xl p-2 md:p-3 border border-brand-primary/10 mb-20 md:mb-40 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-        >
-          <form 
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (searchQuery.trim()) {
-                router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-              } else {
-                router.push('/search');
-              }
-            }}
-            className="flex flex-col md:flex-row items-center"
-          >
-            <div className="flex items-center w-full md:w-auto">
-              <Search className="ml-4 md:ml-6 text-brand-primary/30" size={24} />
-              <input 
-                type="text" 
-                placeholder="Search strains..." 
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 p-4 md:p-5 bg-transparent outline-none text-brand-primary placeholder:text-brand-primary/30 font-bold text-base md:text-lg focus:ring-0"
-              />
-            </div>
-            <button type="submit" className="w-full md:w-auto bg-brand-emerald-900 text-brand-stone-50 px-8 md:px-12 py-4 md:py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] md:text-xs hover:bg-brand-primary hover:text-brand-stone-100 transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
-              Query
-            </button>
-          </form>
-        </motion.div>
-      </section>
+    <section id="explore" className="mx-auto max-w-[1400px] px-5 pb-24 sm:px-8 lg:px-12"><div className="mb-8"><p className="clinical-label mb-3 text-brand-secondary">Nigeria, in context</p><h2 className="newsreader-display text-4xl sm:text-6xl">Global evidence. Nigerian reality.</h2></div><div className="grid gap-4 lg:grid-cols-[1.15fr_.85fr]"><article className="rounded-2xl border border-brand-primary/10 bg-brand-stone-100 p-7 sm:p-9"><PolicyTimeline className="mt-3"/><div className="mt-10 border-t border-brand-primary/10 pt-7"><h3 className="newsreader-display text-3xl">Law, proposals and advocacy are not the same thing.</h3><p className="mt-3 max-w-2xl text-sm leading-7 text-brand-primary/50">Efifya separates enacted law from political statements, pilot programmes and reform arguments—and dates time-sensitive claims.</p><Link href="/law" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand-secondary">Explore policy and law <ArrowRight size={15}/></Link></div></article><article className="rounded-2xl border border-orange-300/20 bg-orange-300/[.05] p-7 sm:p-9"><ShieldCheck className="text-orange-300" size={28}/><p className="clinical-label mt-8 text-orange-300">Safety gateway</p><h3 className="newsreader-display mt-3 text-4xl">Unknown product?<br/>Start with safety.</h3><p className="mt-4 text-sm leading-7 text-brand-primary/55">Street names cannot confirm chemical composition. Learn warning signs, medicine interactions, impairment risks and when to seek urgent help.</p><Link href="/edu/courses/safety-and-health/synthetic-cannabinoids" className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-orange-300">Open harm-reduction guide <ArrowRight size={15}/></Link></article></div></section>
 
-      {/* Bento Grid Navigation */}
-      <section className="max-w-7xl mx-auto px-6 md:px-8 pb-40">
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-12 gap-8 h-auto md:h-[700px]"
-        >
-          {/* Main Feature: Strain Directory */}
-          <Link href="/strains" className="md:col-span-8 group block h-full">
-            <motion.div variants={itemVariants} className="h-full">
-              <Card interactive hoverZoom className="h-full bg-brand-stone-100 p-10 md:p-16 flex flex-col justify-end relative">
-                <div className="absolute top-[-5%] right-[-5%] p-4 md:p-8 opacity-[0.02] text-[8rem] md:text-[15rem] font-black group-hover:scale-105 transition-transform newsreader-display italic text-brand-primary">Botany</div>
-                <Leaf className="mb-6 md:mb-10 text-brand-emerald-900 group-hover:text-brand-secondary transition-colors drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]" size={64} />
-                <div className="relative z-10">
-                  <h2 className="newsreader-display text-5xl md:text-7xl text-brand-primary mb-4 md:mb-6">Strain Directory</h2>
-                  <p className="text-lg md:text-xl text-brand-primary/50 font-medium max-w-md leading-relaxed">
-                    Deep intelligence on chemical profiles, terpene maps, and the genetic lineage of global and landrace varieties.
-                  </p>
-                </div>
-              </Card>
-            </motion.div>
-          </Link>
+    <section className="border-t border-brand-primary/10"><div className="mx-auto grid max-w-[1400px] gap-8 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_auto] lg:items-center lg:px-12"><div><p className="clinical-label text-brand-emerald-900">Efifya research library</p><h2 className="newsreader-display mt-4 text-4xl sm:text-5xl">Trace the source. Read the limitation.</h2><p className="mt-4 max-w-2xl text-sm leading-7 text-brand-primary/50">Books help map the subject. Current independent research, official documents and transparent editorial review verify consequential claims.</p></div><Link href="/docs" className="inline-flex items-center justify-center gap-2 rounded-xl border border-brand-primary/15 px-6 py-4 text-sm font-bold">Open research library <Library size={16}/></Link></div></section>
 
-          <div className="md:col-span-4 grid grid-rows-2 gap-8 h-full">
-            {/* Education */}
-            <Link href="/edu" className="group block h-full">
-              <motion.div variants={itemVariants} className="h-full">
-                <Card interactive hoverZoom className="h-full p-10 flex flex-col justify-between">
-                  <BookOpen className="text-brand-primary/40 group-hover:text-brand-secondary drop-shadow-md transition-colors" size={40} />
-                  <div>
-                    <h3 className="newsreader-display text-4xl text-brand-primary mb-4">Learn Hub</h3>
-                    <p className="text-sm text-brand-primary/40 font-bold uppercase tracking-widest leading-relaxed">Botanical Foundations & Cultivation</p>
-                  </div>
-                </Card>
-              </motion.div>
-            </Link>
-
-            {/* Advocacy */}
-            <Link href="/law" className="group block h-full">
-              <motion.div variants={itemVariants} className="h-full">
-                <Card interactive hoverZoom className="h-full p-10 flex flex-col justify-between bg-brand-emerald-900/5 border-brand-emerald-900/10">
-                  <Scale className="text-brand-primary/40 group-hover:text-brand-emerald-900 drop-shadow-md transition-colors" size={40} />
-                  <div>
-                    <h3 className="newsreader-display text-4xl text-brand-primary mb-4">Policy Intel</h3>
-                    <p className="text-sm text-brand-primary/40 font-bold uppercase tracking-widest leading-relaxed">Global Legalization Tracking</p>
-                  </div>
-                </Card>
-              </motion.div>
-            </Link>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Intelligence Summary */}
-      <section className="max-w-7xl mx-auto px-6 md:px-8 pb-40">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-          <SectionHeader 
-            badge="Current Intelligence"
-            title="Policy Frameworks"
-            subtitle="Real-time updates on legislative shifts and clinical breakthroughs."
-          />
-          <Link href="/law" className="group flex items-center gap-3 text-xs font-black uppercase tracking-[0.3em] text-brand-secondary pb-4 hover:text-brand-primary transition-colors">
-            Full Archive <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
-
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
-        >
-            <motion.div variants={itemVariants} className="h-full">
-              <Card interactive className="p-10 border-brand-emerald-900/20 h-full bg-brand-emerald-900/5">
-                <Activity className="text-brand-emerald-900 mb-8 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]" size={32} />
-                <h4 className="clinical-label mb-4 text-brand-emerald-900/80">Pilot Success</h4>
-                <p className="text-xl font-bold leading-snug text-brand-primary/90">
-                  Ondo State reports 40% reduction in illicit trade since Alternative Development launch.
-                </p>
-              </Card>
-            </motion.div>
-
-            <motion.div variants={itemVariants} className="h-full">
-              <Card interactive className="p-10 border-brand-secondary/20 h-full bg-brand-secondary/5">
-                <Scale className="text-brand-secondary mb-8 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]" size={32} />
-                <h4 className="clinical-label mb-4 text-brand-secondary/80">Legislative Milestone</h4>
-                <p className="text-xl font-bold leading-snug text-brand-primary/90">
-                  Medical Cannabis Framework successfully passed 3rd Reading at National Assembly.
-                </p>
-              </Card>
-            </motion.div>
-
-            <motion.div variants={itemVariants} className="h-full">
-              <Card interactive className="p-10 border-red-500/20 bg-red-500/10 h-full">
-                <ShieldAlert className="text-red-500 mb-8 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]" size={32} />
-                <h4 className="clinical-label mb-4 text-red-500/80">Public Health</h4>
-                <p className="text-xl font-bold leading-snug text-brand-primary/90">
-                  Surge in &quot;Colorado&quot; synthetic poisoning cases requires immediate educational intervention.
-                </p>
-              </Card>
-            </motion.div>
-        </motion.div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-20 md:py-32 border-t border-brand-primary/5 text-center px-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-emerald-900/5 to-transparent pointer-events-none" />
-        <motion.div 
-          whileHover={{ scale: 1.02 }}
-          className="newsreader-display text-4xl md:text-6xl text-brand-primary mb-8 md:mb-12 cursor-default relative z-10"
-        >
-          Veridis<span className="text-brand-emerald-900 text-5xl md:text-7xl leading-none">.</span>
-        </motion.div>
-        <p className="text-[10px] font-black uppercase tracking-[1em] md:tracking-[1.5em] text-brand-primary/30 max-w-lg mx-auto leading-relaxed relative z-10">
-          SCIENCE-BASED ADVOCACY FOR A BOTANICAL FUTURE
-        </p>
-      </footer>
-    </main>
-  );
+    <footer className="border-t border-brand-primary/10 px-5 py-14 sm:px-8 lg:px-12"><div className="mx-auto grid max-w-[1400px] gap-8 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto]"><div><EfifyaLogo/><p className="mt-3 max-w-sm text-xs leading-6 text-brand-primary/35">Independent cannabis education shaped by evidence, Nigerian context and public-health responsibility.</p></div><FooterLinks title="Explore" links={[['Learn','/edu'],['Science','/science'],['Strains','/strains']]}/><FooterLinks title="Trust" links={[['Resources','/docs'],['Policy & law','/law'],['Safety','/edu/courses/safety-and-health']]}/></div></footer>
+  </main>;
 }
+
+function FooterLinks({title,links}:{title:string;links:string[][]}){return <div><p className="clinical-label mb-3 text-brand-primary/30">{title}</p><div className="space-y-2">{links.map(([label,href])=><Link key={label} href={href} className="block text-sm text-brand-primary/50 hover:text-brand-primary">{label}</Link>)}</div></div>}

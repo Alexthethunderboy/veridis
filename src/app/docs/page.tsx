@@ -1,88 +1,37 @@
+'use client';
+
 import React from 'react';
-import { Card, Badge } from '@/components/UI';
-import { DOCS_RESOURCES } from '@/lib/data/cannabisData';
-import { FileText, Scale, Microscope, Download } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight, BookOpen, ExternalLink, FileSearch, Library, Search, ShieldCheck } from 'lucide-react';
+import { LIBRARY_COLLECTIONS, LIBRARY_RESOURCES, RESOURCE_FILTERS } from '@/lib/data/resources';
+import { EvidenceLadder } from '@/components/KnowledgeVisuals';
 
 export default function ResourcesPage() {
-  return (
-    <main className="min-h-screen bg-transparent p-8 md:p-16">
-      <div className="max-w-7xl mx-auto">
-        <header className="mb-20">
-          <h1 className="newsreader-display text-7xl text-brand-primary mb-4">Technical Resources</h1>
-          <p className="text-xl text-brand-primary/60 max-w-2xl font-medium leading-relaxed">
-            Formal documentation, legal frameworks, and scientific research regarding the global cannabis policy landscape.
-          </p>
-        </header>
+  const [query, setQuery] = React.useState('');
+  const [filter, setFilter] = React.useState<(typeof RESOURCE_FILTERS)[number]>('All');
+  const visible = LIBRARY_RESOURCES.filter((resource) => {
+    const matchesFilter = filter === 'All' || resource.kind === filter;
+    const haystack = `${resource.title} ${resource.creators} ${resource.summary} ${resource.topics.join(' ')}`.toLowerCase();
+    return matchesFilter && haystack.includes(query.trim().toLowerCase());
+  });
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Legal Framework */}
-          <section className="lg:col-span-2">
-            <div className="flex items-center gap-4 mb-10">
-              <Scale className="text-brand-secondary" size={32} />
-              <h2 className="newsreader-display text-4xl text-brand-primary">Legislative Timeline</h2>
-            </div>
-            <div className="space-y-4">
-              {DOCS_RESOURCES.legal.map((item, i) => (
-                <Card key={i} className="flex gap-8 items-center bg-brand-stone-100 border-brand-primary/10">
-                  <div className="newsreader-display text-4xl text-brand-secondary opacity-40 font-serif italic w-24">
-                    {item.year}
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-brand-primary mb-1">{item.title}</h3>
-                    <p className="text-sm text-brand-primary/60 font-medium">{item.summary}</p>
-                  </div>
-                </Card>
-              ))}
-            </div>
+  return <main className="page-shell">
+    <header className="relative overflow-hidden rounded-[2rem] border border-brand-primary/10 bg-[radial-gradient(circle_at_85%_15%,rgba(214,168,75,.13),transparent_30%),linear-gradient(145deg,#14241c,#0c1913)] px-6 py-12 sm:px-10 lg:px-14 lg:py-16">
+      <div className="max-w-3xl"><p className="clinical-label mb-5 flex items-center gap-2 text-brand-secondary"><Library size={14}/> Efifya research library</p><h1 className="newsreader-display text-5xl leading-[.94] sm:text-7xl">Trace every claim<br/><span className="text-brand-secondary">back to its source.</span></h1><p className="mt-7 max-w-2xl text-base leading-7 text-brand-primary/60 sm:text-lg">Books, peer-reviewed research, consensus reports and Nigerian legal material—organized with visible dates, limitations and source quality.</p></div>
+      <div className="relative mt-10 max-w-3xl"><Search className="absolute left-5 top-1/2 -translate-y-1/2 text-brand-primary/30" size={20}/><input value={query} onChange={(event)=>setQuery(event.target.value)} placeholder="Search titles, scientists, essays, books or topics" aria-label="Search research library" className="w-full rounded-xl border border-brand-primary/15 bg-brand-stone-50/70 py-4 pl-14 pr-5 text-sm outline-none placeholder:text-brand-primary/30 focus:border-brand-secondary/50"/></div>
+      <div className="mt-6 grid max-w-2xl grid-cols-3 gap-3 border-t border-brand-primary/10 pt-6"><Stat value={String(LIBRARY_RESOURCES.length)} label="Canonical sources"/><Stat value="3" label="Verification states"/><Stat value="2026" label="Latest review"/></div>
+    </header>
 
-            <div className="mt-20 flex items-center gap-4 mb-10">
-              <Microscope className="text-brand-secondary" size={32} />
-              <h2 className="newsreader-display text-4xl text-brand-primary">Scientific Standards</h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {DOCS_RESOURCES.technical.map((item, i) => (
-                <Card key={i} className="border-brand-primary/10">
-                  <h3 className="font-bold text-lg text-brand-primary mb-2">{item.title}</h3>
-                  <p className="text-sm text-brand-primary/60 font-medium leading-relaxed">{item.summary}</p>
-                </Card>
-              ))}
-            </div>
-          </section>
+    <section className="mt-20" aria-labelledby="collections-title"><div className="mb-8"><p className="clinical-label mb-3 text-brand-emerald-900">Curated collections</p><h2 id="collections-title" className="newsreader-display text-4xl sm:text-5xl">Start with a research question</h2></div><div className="grid gap-4 lg:grid-cols-3">{LIBRARY_COLLECTIONS.map((collection)=><button key={collection.title} onClick={()=>setFilter(collection.filter as (typeof RESOURCE_FILTERS)[number])} className="group rounded-2xl border border-brand-primary/10 bg-brand-stone-100 p-6 text-left hover:border-brand-emerald-900/35"><FileSearch className="mb-8 text-brand-emerald-900"/><h3 className="newsreader-display text-2xl">{collection.title}</h3><p className="mt-2 min-h-12 text-sm leading-6 text-brand-primary/50">{collection.description}</p><span className="mt-5 flex items-center gap-2 border-t border-brand-primary/10 pt-4 text-xs font-bold text-brand-primary/45 group-hover:text-brand-emerald-900">Explore {collection.count} sources <ArrowRight size={14}/></span></button>)}</div></section>
 
-          {/* PDF & MD Library */}
-          <aside>
-            <div className="flex items-center gap-4 mb-10">
-              <FileText className="text-brand-secondary" size={32} />
-              <h2 className="newsreader-display text-4xl text-brand-primary">Document Library</h2>
-            </div>
-            <div className="space-y-4">
-              {DOCS_RESOURCES.files.map((file, i) => (
-                <div 
-                  key={i} 
-                  className="p-6 bg-brand-primary/5 rounded-2xl border border-brand-primary/10 hover:border-brand-secondary/30 transition-all cursor-pointer group"
-                >
-                  <div className="flex justify-between items-start mb-4">
-                    <Badge variant={file.type === 'PDF' ? 'clinical' : 'neutral'}>{file.type}</Badge>
-                    <Download size={16} className="text-brand-primary/20 group-hover:text-brand-secondary transition-colors" />
-                  </div>
-                  <h3 className="font-bold text-brand-primary group-hover:text-brand-secondary transition-colors mb-1">{file.name}</h3>
-                  <p className="text-[10px] uppercase font-black tracking-widest text-brand-primary/40">{file.size}</p>
-                </div>
-              ))}
-            </div>
-            
-            <Card className="mt-12 bg-brand-secondary/5 border-brand-secondary/20 p-8">
-               <h4 className="newsreader-display text-2xl text-brand-secondary mb-4">Request Access</h4>
-               <p className="text-xs text-brand-primary/70 font-medium leading-relaxed mb-6">
-                 Full technical whitepapers and extraction lab blueprints are available for registered medical researchers.
-               </p>
-               <button className="w-full py-3 bg-brand-secondary text-brand-stone-50 rounded-xl font-bold uppercase tracking-widest text-[10px]">
-                 Contact NDLEA Liaison
-               </button>
-            </Card>
-          </aside>
-        </div>
-      </div>
-    </main>
-  );
+    <section className="mt-24" aria-labelledby="catalogue-title"><div className="mb-7 flex flex-col justify-between gap-5 lg:flex-row lg:items-end"><div><p className="clinical-label mb-3 text-brand-secondary">Source catalogue</p><h2 id="catalogue-title" className="newsreader-display text-4xl sm:text-5xl">Research, with context</h2></div><div className="flex max-w-full gap-2 overflow-x-auto pb-2">{RESOURCE_FILTERS.map((item)=><button key={item} onClick={()=>setFilter(item)} className={`shrink-0 rounded-full border px-4 py-2 text-xs font-bold ${filter===item?'border-brand-emerald-900 bg-brand-emerald-900 text-brand-stone-50':'border-brand-primary/10 text-brand-primary/45 hover:text-brand-primary'}`}>{item}</button>)}</div></div>
+      <p className="mb-5 text-xs text-brand-primary/35">Showing {visible.length} of {LIBRARY_RESOURCES.length} sources</p>
+      <div className="overflow-hidden rounded-2xl border border-brand-primary/10">{visible.map((resource)=><article id={resource.id} key={resource.id} className="grid scroll-mt-8 gap-5 border-b border-brand-primary/10 bg-brand-stone-100 p-6 last:border-0 md:grid-cols-[minmax(0,1fr)_170px] md:p-8"><div><div className="mb-4 flex flex-wrap gap-2"><Pill>{resource.kind}</Pill><Pill accent={resource.quality==='Peer reviewed'||resource.quality==='Authoritative'}>{resource.quality}</Pill><Pill accent={resource.verification==='primary source verified'}>{resource.verification}</Pill><Pill>{resource.year}</Pill></div><h3 className="newsreader-display text-2xl leading-tight sm:text-3xl">{resource.title}</h3><p className="mt-2 text-xs font-bold text-brand-primary/40">{resource.creators}</p><p className="mt-4 max-w-3xl text-sm leading-6 text-brand-primary/55">{resource.summary}</p>{resource.notice&&<div className="mt-5 flex gap-2 rounded-lg border border-brand-secondary/15 bg-brand-secondary/[.05] p-3 text-xs leading-5 text-brand-primary/50"><ShieldCheck className="mt-0.5 shrink-0 text-brand-secondary" size={14}/><span><strong>Known limit:</strong> {resource.notice}</span></div>}<div className="mt-5 flex flex-wrap gap-2">{resource.topics.map((topic)=><span key={topic} className="text-[10px] font-bold uppercase tracking-wider text-brand-primary/30">#{topic.replaceAll(' ','-')}</span>)}</div></div><div className="flex items-end gap-2 md:flex-col md:items-stretch md:justify-end"><a href={resource.href} target={resource.external?'_blank':undefined} rel="noreferrer" className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-brand-primary px-4 py-3 text-xs font-bold text-brand-stone-50">Open source {resource.external&&<ExternalLink size={13}/>}</a><Link href={resource.relatedCourse} className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-brand-primary/10 px-4 py-3 text-xs font-bold text-brand-primary/55 hover:text-brand-primary">Related learning <ArrowRight size={13}/></Link></div></article>)}{visible.length===0&&<div className="bg-brand-stone-100 p-14 text-center"><BookOpen className="mx-auto mb-4 text-brand-primary/20"/><h3 className="newsreader-display text-2xl">No matching sources</h3><p className="mt-2 text-sm text-brand-primary/40">Try another search or reset the filter.</p></div>}</div>
+    </section>
+
+    <section className="mt-20 grid gap-4 lg:grid-cols-[1.2fr_.8fr]"><div className="rounded-2xl border border-brand-emerald-900/20 bg-brand-emerald-900/[.06] p-7 sm:p-10"><p className="clinical-label text-brand-emerald-900">How Efifya uses sources</p><h2 className="newsreader-display mt-4 text-3xl sm:text-4xl">Books map the subject. Current evidence verifies the claims.</h2><p className="mt-4 max-w-2xl text-sm leading-7 text-brand-primary/55">A source can be useful without being definitive. We distinguish systematic reviews, official documents, historical references and working reports, then scope conclusions to the material actually studied.</p><EvidenceLadder className="mt-8 max-w-xl text-brand-emerald-900"/></div><div className="rounded-2xl border border-brand-primary/10 bg-brand-stone-100 p-7 sm:p-10"><p className="clinical-label text-brand-secondary">Editorial promise</p><ul className="mt-5 space-y-3 text-sm text-brand-primary/55"><li>• Claims linked to sources</li><li>• Limitations shown openly</li><li>• Medical evidence separated from promotion</li><li>• Nigerian law checked for status and date</li></ul></div></section>
+  </main>;
 }
+
+function Stat({value,label}:{value:string;label:string}){return <div><strong className="newsreader-display block text-2xl sm:text-3xl">{value}</strong><span className="text-[9px] font-bold uppercase tracking-wider text-brand-primary/35">{label}</span></div>}
+function Pill({children,accent=false}:{children:React.ReactNode;accent?:boolean}){return <span className={`rounded-full border px-3 py-1 text-[9px] font-bold uppercase tracking-wider ${accent?'border-brand-emerald-900/25 bg-brand-emerald-900/[.07] text-brand-emerald-900':'border-brand-primary/10 text-brand-primary/40'}`}>{children}</span>}

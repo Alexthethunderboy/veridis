@@ -123,7 +123,7 @@ export default function SearchContent() {
       ) : !hasResults ? (
         <div className="text-center py-40 border border-dashed border-red-500/20 rounded-3xl bg-red-500/5">
           <p className="text-lg font-bold text-red-500/60 mb-2">No matching intelligence found.</p>
-          <p className="text-sm text-brand-primary/40">Try broader terms like "Sativa", "Policy", or "Education".</p>
+          <p className="text-sm text-brand-primary/40">Try broader terms like &quot;Sativa&quot;, &quot;Policy&quot;, or &quot;Education&quot;.</p>
         </div>
       ) : (
         <motion.div 

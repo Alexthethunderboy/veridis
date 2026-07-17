@@ -22,7 +22,7 @@ export default function CompendiumViewer({ content }: CompendiumViewerProps) {
       
       <footer className="mt-20 py-12 border-t border-brand-primary/10 text-center">
         <p className="clinical-label text-brand-primary/30">
-          PROJECT VERIDIS — OFFICIAL COMPENDIUM
+          EFIFYA — OFFICIAL COMPENDIUM
         </p>
       </footer>
     </div>

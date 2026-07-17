@@ -131,7 +131,7 @@ export default function InteractiveTerpeneMapper() {
 
                 <div className="mt-12 pt-8 border-t border-brand-primary/5">
                   <p className="text-xs italic text-brand-primary/40 font-medium">
-                    * Scientific data sourced from the Veridis Laboratory. Terpene concentration varies by cultivar and local environmental factors like soil pH and UV intensity.
+                    * Scientific data sourced from the Efifya Laboratory. Terpene concentration varies by cultivar and local environmental factors like soil pH and UV intensity.
                   </p>
                 </div>
               </div>

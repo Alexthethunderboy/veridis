@@ -1,72 +1,44 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { Home, Microscope, Leaf, BookOpen, Scale, FileText, ChevronRight } from 'lucide-react';
-import { SidebarItem } from './UI';
+import { BookOpen, ChevronLeft, ChevronRight, FileText, Home, Leaf, LogOut, Microscope, Scale } from 'lucide-react';
 import { useQuickExit } from '@/hooks/useQuickExit';
-import { motion } from 'motion/react';
+import { SidebarItem } from './UI';
+import { EfifyaLogo, EfifyaMark } from './BrandLogo';
 
 export default function Sidebar() {
   const { triggerQuickExit } = useQuickExit();
-  const [isHovered, setIsHovered] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
+
+  const toggle = () => {
+    const next = !collapsed;
+    setCollapsed(next);
+    document.documentElement.dataset.sidebar = next ? 'collapsed' : 'expanded';
+  };
 
   return (
-    <motion.aside 
-      initial={false}
-      animate={{ width: isHovered ? 256 : 80 }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="h-screen fixed top-0 left-0 border-r border-brand-primary/5 bg-brand-stone-100/80 backdrop-blur-3xl hidden lg:flex flex-col z-50 overflow-hidden transition-all duration-300 shadow-[20px_0_40px_rgba(0,0,0,0.5)]"
-    >
-      <div className="p-6 flex items-center h-24 whitespace-nowrap">
-        {isHovered ? (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col">
-            <Link href="/" className="newsreader-display text-3xl text-brand-primary flex items-end">
-              Veridis<span className="text-brand-emerald-900 text-4xl leading-none">.</span>
-            </Link>
-            <p className="mt-1 text-[9px] font-bold uppercase tracking-widest text-brand-primary/40">
-              Veridis Framework
-            </p>
-          </motion.div>
-        ) : (
-          <div className="newsreader-display text-3xl text-brand-emerald-900 mx-auto">
-            V.
-          </div>
-        )}
+    <aside className="fixed inset-y-0 left-0 z-50 hidden w-[var(--sidebar-width)] flex-col border-r border-brand-primary/10 bg-brand-stone-100 transition-[width] duration-300 ease-out lg:flex">
+      <div className={`relative border-b border-brand-primary/10 ${collapsed ? 'px-4 py-6' : 'px-7 py-7'}`}>
+        <Link href="/" aria-label="Efifya home" className="block overflow-hidden">{collapsed ? <EfifyaMark className="mx-auto h-10 w-10 text-brand-emerald-900"/> : <EfifyaLogo />}</Link>
+        {!collapsed && <p className="mt-3 text-[10px] font-bold uppercase tracking-[.18em] text-brand-primary/45">Rooted here. Backed by science.</p>}
+        <button onClick={toggle} className="absolute -right-3 bottom-5 grid h-7 w-7 place-items-center rounded-full border border-brand-primary/15 bg-brand-stone-200 text-brand-primary/60 shadow-lg hover:border-brand-emerald-900/40 hover:text-brand-emerald-900" aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}>{collapsed ? <ChevronRight size={14}/> : <ChevronLeft size={14}/>}</button>
       </div>
-
-      <nav className="flex-1 px-3 py-4 space-y-2 overflow-y-auto scrollbar-hide flex flex-col items-center">
-        <SidebarItem name={isHovered ? "Dashboard" : ""} href="/" icon={<Home size={20} />} />
-        <SidebarItem name={isHovered ? "Directory" : ""} href="/strains" icon={<Leaf size={20} />} />
-        <SidebarItem name={isHovered ? "Protocols" : ""} href="/science" icon={<Microscope size={20} />} />
-        <SidebarItem name={isHovered ? "Advocacy" : ""} href="/law" icon={<Scale size={20} />} />
-        
-        {isHovered && (
-          <div className="pt-6 pb-2 px-4 w-full text-[10px] uppercase tracking-widest font-bold text-brand-primary/40">
-            Intelligence
-          </div>
-        )}
-        
-        <SidebarItem name={isHovered ? "Education" : ""} href="/edu" icon={<BookOpen size={20} />} />
-        <SidebarItem name={isHovered ? "Resources" : ""} href="/docs" icon={<FileText size={20} />} />
+      <nav aria-label="Primary navigation" className={`flex-1 space-y-1 py-6 ${collapsed ? 'px-3' : 'px-4'}`}>
+        <SidebarItem compact={collapsed} name="Overview" href="/" icon={<Home size={18} />} />
+        <SidebarItem compact={collapsed} name="Strain directory" href="/strains" icon={<Leaf size={18} />} />
+        <SidebarItem compact={collapsed} name="Botanical science" href="/science" icon={<Microscope size={18} />} />
+        <SidebarItem compact={collapsed} name="Policy & law" href="/law" icon={<Scale size={18} />} />
+        {!collapsed && <div className="px-3 pb-2 pt-7 text-[10px] font-bold uppercase tracking-[.18em] text-brand-primary/35">Library</div>}
+        {collapsed && <div className="mx-auto my-4 h-px w-7 bg-brand-primary/10"/>}
+        <SidebarItem compact={collapsed} name="Learn" href="/edu" icon={<BookOpen size={18} />} />
+        <SidebarItem compact={collapsed} name="Resources" href="/docs" icon={<FileText size={18} />} />
       </nav>
-
-      <div className="p-4 border-t border-brand-primary/5">
-        <button 
-          onClick={triggerQuickExit}
-          className={`w-full py-3 ${isHovered ? 'px-4' : 'px-0 flex justify-center'} bg-brand-primary/5 text-brand-stone-50 border border-brand-emerald-900/30 text-xs uppercase tracking-widest font-bold rounded-xl hover:bg-brand-emerald-900/20 hover:text-brand-primary hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all flex items-center justify-center group overflow-hidden`}
-        >
-          {isHovered ? (
-            <>
-              <span className="text-brand-primary">Quick Exit</span>
-              <span className="ml-2 text-[10px] opacity-50 group-hover:opacity-100 transition-opacity text-brand-emerald-900">Esc × 3</span>
-            </>
-          ) : (
-            <span className="text-brand-emerald-900 group-hover:text-brand-primary transition-colors font-serif italic text-lg">E</span>
-          )}
+      <div className={`border-t border-brand-primary/10 ${collapsed ? 'p-3' : 'p-4'}`}>
+        <button onClick={triggerQuickExit} title={collapsed ? 'Quick exit' : undefined} className={`flex w-full items-center rounded-xl border border-brand-primary/10 py-3 text-left text-xs font-bold text-brand-primary/60 transition-colors hover:border-brand-secondary/40 hover:text-brand-secondary ${collapsed ? 'justify-center px-2' : 'gap-3 px-4'}`} aria-label="Quick exit; press Escape three times">
+          <LogOut size={17} /> {!collapsed && <>Quick exit <kbd className="ml-auto text-[9px] opacity-60">ESC ×3</kbd></>}
         </button>
       </div>
-    </motion.aside>
+    </aside>
   );
 }

@@ -1,132 +1,103 @@
-import React from 'react';
-import { Card, Badge } from '@/components/UI';
-import { EDUCATIONAL_CONTENT } from '@/lib/data/cannabisData';
+import Link from 'next/link';
+import { ArrowRight, BookOpen, Clock3, FlaskConical, Library, Search, ShieldCheck, Sparkles } from 'lucide-react';
+import { COURSES, LEARNING_PATHS } from '@/lib/data/education';
+import { BotanicalSpecimen, MoleculeField, PolicyTimeline } from '@/components/KnowledgeVisuals';
+import { FEATURED_VOICES, MEDGRIOT_ESSAYS } from '@/lib/data/featuredVoices';
+import { EXTRACTED_IDEAS, KNOWLEDGE_CONTRIBUTORS, KNOWLEDGE_SOURCES, SOURCE_MIX } from '@/lib/data/knowledgeSources';
+import { CURRICULUM_ENRICHMENTS, getCurriculumCoverage } from '@/lib/data/curriculumEnrichment';
+
+export const metadata = { title: 'Learn | Efifya', description: 'A structured, evidence-aware cannabis education portal.' };
 
 export default function EducationHub() {
+  const lessonCount = COURSES.reduce((sum, course) => sum + course.modules.reduce((n, module) => n + module.lessons.length, 0), 0);
+  const lessonSlugs = COURSES.flatMap((course) => course.modules.flatMap((module) => module.lessons.map((lesson) => lesson.slug)));
+  const enrichmentCount = Object.values(CURRICULUM_ENRICHMENTS).reduce((sum, units) => sum + units.length, 0);
+  const coverage = getCurriculumCoverage(lessonSlugs);
   return (
-    <main className="min-h-screen bg-transparent p-8 md:p-16">
-      <div className="max-w-7xl mx-auto">
-        <header className="mb-20">
-          <h1 className="newsreader-display text-7xl text-brand-primary mb-4">Learn Hub</h1>
-          <p className="text-xl text-brand-primary/60 max-w-2xl font-medium leading-relaxed">
-            Your source of truth for cannabis science, safety, and cultivation in the Nigerian context.
-          </p>
-        </header>
+    <main className="page-shell">
+      <header className="relative overflow-hidden rounded-[2rem] border border-brand-primary/10 bg-[radial-gradient(circle_at_78%_20%,rgba(98,198,139,.16),transparent_32%),linear-gradient(145deg,#14241c,#0c1913)] px-6 py-10 sm:px-10 lg:px-14 lg:py-16">
+        <div className="relative z-10 max-w-3xl">
+          <div className="clinical-label mb-6 flex items-center gap-2 text-brand-emerald-900"><Sparkles size={14}/> Efifya learning commons</div>
+          <h1 className="newsreader-display text-5xl leading-[.92] sm:text-7xl lg:text-[5.7rem]">Understand cannabis.<br/><span className="text-brand-emerald-900">Follow the evidence.</span></h1>
+          <p className="mt-7 max-w-2xl text-base leading-7 text-brand-primary/65 sm:text-lg">A guided curriculum across botany, chemistry, health, safety, culture and Nigerian policy—built to show what we know, how we know it, and where uncertainty remains.</p>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <Link href="/edu/courses/cannabis-foundations/what-is-cannabis" className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-emerald-900 px-6 py-4 text-sm font-bold text-brand-stone-50">Start with the foundations <ArrowRight size={17}/></Link>
+            <Link href="/search" className="inline-flex items-center justify-center gap-2 rounded-xl border border-brand-primary/15 bg-brand-primary/5 px-6 py-4 text-sm font-bold"><Search size={17}/> Search the knowledge base</Link>
+          </div>
+        </div>
+        <div className="relative z-10 mt-12 grid max-w-2xl grid-cols-3 gap-3 border-t border-brand-primary/10 pt-7">
+          <Stat value={String(COURSES.length)} label="Core courses"/><Stat value={String(lessonCount)} label="Reviewed lessons"/><Stat value={String(enrichmentCount)} label="Source-derived units"/>
+        </div>
+      </header>
 
-        {/* Cannabis 101 */}
-        <section className="mb-32">
-          <div className="flex items-center gap-6 mb-12">
-            <h2 className="newsreader-display text-5xl text-brand-primary">Cannabis 101</h2>
-            <div className="h-px flex-1 bg-brand-primary/10"></div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {EDUCATIONAL_CONTENT.basics.map((topic, i) => (
-              <Card key={i} className="bg-brand-stone-100 border-brand-primary/10">
-                <h3 className="newsreader-display text-3xl text-brand-secondary mb-4">{topic.title}</h3>
-                <p className="text-brand-primary/80 leading-relaxed mb-6 font-medium">{topic.content}</p>
-                {topic.pidgin && (
-                  <div className="p-4 bg-brand-secondary/5 rounded-xl border border-brand-secondary/10 italic text-brand-secondary font-medium">
-                    &quot;{topic.pidgin}&quot;
-                  </div>
-                )}
-              </Card>
-            ))}
-          </div>
-        </section>
+      <section className="mt-20" aria-labelledby="paths-heading">
+        <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div><p className="clinical-label mb-3 text-brand-secondary">Choose your route</p><h2 id="paths-heading" className="newsreader-display text-4xl sm:text-5xl">Learning paths for real questions</h2></div>
+          <p className="max-w-md text-sm leading-6 text-brand-primary/50">Not sure where to begin? Pick the context closest to yours. Every path uses the same reviewed, canonical lessons.</p>
+        </div>
+        <div className="grid gap-4 lg:grid-cols-3">{LEARNING_PATHS.map((path, index) => (
+          <Link key={path.title} href={`/edu/courses/${path.courseSlug}/${path.lessonSlug}`} className="group rounded-2xl border border-brand-primary/10 bg-brand-stone-100 p-6 transition hover:-translate-y-1 hover:border-brand-emerald-900/40">
+            <div className="mb-8 flex items-start justify-between"><span className="rounded-full bg-brand-primary/5 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-primary/50">{path.audience}</span><span className="newsreader-display text-3xl text-brand-primary/15">0{index + 1}</span></div>
+            <h3 className="newsreader-display text-3xl group-hover:text-brand-emerald-900">{path.title}</h3><p className="mt-3 min-h-16 text-sm leading-6 text-brand-primary/55">{path.description}</p>
+            <div className="mt-6 flex items-center gap-4 border-t border-brand-primary/10 pt-4 text-xs text-brand-primary/45"><span>{path.lessons} lessons</span><span className="flex items-center gap-1"><Clock3 size={13}/>{path.time}</span><ArrowRight className="ml-auto transition-transform group-hover:translate-x-1" size={16}/></div>
+          </Link>
+        ))}</div>
+      </section>
 
-        {/* Science & Terpenes */}
-        <section className="mb-32">
-          <div className="flex items-center gap-6 mb-12">
-            <h2 className="newsreader-display text-5xl text-brand-primary">The Science</h2>
-            <div className="h-px flex-1 bg-brand-primary/10"></div>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {EDUCATIONAL_CONTENT.science.map((topic, i) => (
-              <Card key={i} className="border-brand-primary/10">
-                <h3 className="newsreader-display text-2xl text-brand-primary mb-4">{topic.title}</h3>
-                <p className="text-sm text-brand-primary/70 leading-relaxed font-medium">{topic.content}</p>
-              </Card>
-            ))}
-          </div>
-        </section>
+      <section className="mt-24" aria-labelledby="atlas-heading">
+        <div className="mb-9"><p className="clinical-label mb-3 text-brand-emerald-900">Visual subject atlas</p><h2 id="atlas-heading" className="newsreader-display text-4xl sm:text-5xl">See how the fields connect</h2><p className="mt-4 max-w-2xl text-sm leading-6 text-brand-primary/50">Cannabis cannot be understood through chemistry alone. Plant biology, human exposure, product quality, culture and law continually shape one another.</p></div>
+        <div className="grid gap-4 lg:grid-cols-3">
+          <Link href="/edu/courses/cannabis-foundations/plant-anatomy" className="relative min-h-80 overflow-hidden rounded-2xl border border-brand-primary/10 bg-brand-stone-100 p-6 group"><p className="clinical-label text-brand-emerald-900">Plant</p><h3 className="newsreader-display mt-3 text-3xl">Botany & cultivation</h3><BotanicalSpecimen className="absolute -bottom-24 -right-20 h-80 w-80 text-brand-emerald-900 transition-transform group-hover:scale-105"/><span className="absolute bottom-6 left-6 flex items-center gap-2 text-xs font-bold text-brand-primary/55">Explore plant literacy <ArrowRight size={14}/></span></Link>
+          <Link href="/edu/courses/chemistry-and-the-body" className="relative min-h-80 overflow-hidden rounded-2xl border border-brand-secondary/15 bg-brand-secondary/[.04] p-6 group"><p className="clinical-label text-brand-secondary">Body</p><h3 className="newsreader-display mt-3 text-3xl">Chemistry & exposure</h3><MoleculeField className="absolute bottom-2 left-0 w-full text-brand-secondary opacity-70 transition-transform group-hover:scale-105"/><span className="absolute bottom-6 left-6 z-10 flex items-center gap-2 text-xs font-bold text-brand-primary/55">Explore pharmacology <ArrowRight size={14}/></span></Link>
+          <Link href="/edu/courses/nigeria-law-and-policy" className="relative min-h-80 overflow-hidden rounded-2xl border border-sky-300/15 bg-sky-300/[.03] p-6"><p className="clinical-label text-sky-300">Society</p><h3 className="newsreader-display mt-3 text-3xl">Nigeria, law & culture</h3><PolicyTimeline className="absolute bottom-20 left-6 right-6"/><span className="absolute bottom-6 left-6 flex items-center gap-2 text-xs font-bold text-brand-primary/55">Build policy literacy <ArrowRight size={14}/></span></Link>
+        </div>
+      </section>
 
-        {/* The Colorado Danger */}
-        <section className="mb-32">
-          <Card className="bg-red-950/30 border-red-500/30 p-6 md:p-12 relative overflow-hidden">
-             <div className="absolute top-0 right-0 p-8 opacity-10 text-9xl font-black text-red-500 select-none">DANGER</div>
-             <div className="max-w-2xl relative z-10">
-                <Badge variant="warning">Critical Safety Warning</Badge>
-                <h2 className="newsreader-display text-6xl text-red-500 mt-6 mb-6">The &quot;Colorado&quot; Reality</h2>
-                <p className="text-xl text-red-100/80 mb-8 font-medium leading-relaxed">
-                  {EDUCATIONAL_CONTENT.danger[0].content}
-                </p>
-                <div className="p-6 bg-red-500/10 rounded-2xl border border-red-500/20 italic text-red-400 font-bold text-lg">
-                  &quot;{EDUCATIONAL_CONTENT.danger[0].pidgin}&quot;
-                </div>
-             </div>
-          </Card>
-        </section>
+      <section className="mt-24" aria-labelledby="curriculum-heading">
+        <div className="mb-9"><p className="clinical-label mb-3 text-brand-secondary">The curriculum</p><h2 id="curriculum-heading" className="newsreader-display text-4xl sm:text-5xl">Learn in layers, not fragments</h2></div>
+        <div className="space-y-4">{COURSES.map((course) => {
+          const count = course.modules.reduce((n, module) => n + module.lessons.length, 0);
+          const teachingUnits = course.modules.reduce((total,module)=>total+module.lessons.reduce((sum,lesson)=>sum+lesson.sections.length+(CURRICULUM_ENRICHMENTS[lesson.slug]?.length??0),0),0);
+          const first = course.modules[0].lessons[0];
+          return <Link key={course.slug} href={`/edu/courses/${course.slug}`} className="group grid gap-6 rounded-2xl border border-brand-primary/10 bg-brand-stone-100 p-6 transition hover:border-brand-primary/25 md:grid-cols-[80px_1fr_auto] md:items-center md:p-8">
+            <span className="newsreader-display text-5xl" style={{color: course.accent}}>{course.number}</span>
+            <div><div className="mb-2 flex flex-wrap items-center gap-2"><span className="text-xs font-bold uppercase tracking-wider text-brand-primary/40">{course.level}</span><span className="text-brand-primary/20">•</span><span className="text-xs text-brand-primary/40">{course.modules.length} {course.modules.length===1?'module':'modules'} · {count} {count===1?'lesson':'lessons'} · {teachingUnits} teaching units</span></div><h3 className="newsreader-display text-3xl sm:text-4xl">{course.title}</h3><p className="mt-2 max-w-3xl text-sm leading-6 text-brand-primary/55">{course.description}</p></div>
+            <div className="flex items-center gap-2 text-sm font-bold text-brand-primary/70 group-hover:text-brand-emerald-900">Explore <ArrowRight size={17}/><span className="sr-only">First lesson: {first.title}</span></div>
+          </Link>;
+        })}</div>
+      </section>
 
-        {/* Consumption Methods */}
-        <section className="mb-32">
-          <div className="flex items-center gap-6 mb-12">
-            <h2 className="newsreader-display text-5xl text-brand-primary">Consumption & Preparation</h2>
-            <div className="h-px flex-1 bg-brand-primary/10"></div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {EDUCATIONAL_CONTENT.methods.map((topic, i) => (
-              <Card key={i} className="bg-brand-stone-100 border-brand-primary/10">
-                <h3 className="newsreader-display text-3xl text-brand-primary mb-4">{topic.title}</h3>
-                <p className="text-brand-primary/80 leading-relaxed mb-6 font-medium">{topic.content}</p>
-                {topic.pidgin && (
-                  <div className="p-4 bg-brand-primary/5 rounded-xl border border-brand-primary/10 italic text-brand-primary/60 font-medium text-sm">
-                    &quot;{topic.pidgin}&quot;
-                  </div>
-                )}
-              </Card>
-            ))}
-          </div>
-        </section>
+      <section className="mt-24 grid gap-4 md:grid-cols-3">
+        <Feature icon={<ShieldCheck/>} title="Evidence made visible" body="Every consequential claim can show its certainty, source, and review date."/>
+        <Feature icon={<FlaskConical/>} title="Science without hype" body="Clinical evidence is separated from laboratory promise, tradition, and marketing."/>
+        <Feature icon={<Library/>} title="Books in context" body="The Efifya library seeds topics, while newer independent research verifies claims."/>
+      </section>
 
-        {/* Growing Hub */}
-        <section className="mb-32">
-          <div className="flex items-center gap-6 mb-12">
-            <h2 className="newsreader-display text-5xl text-brand-primary">The Growing Hub</h2>
-            <div className="h-px flex-1 bg-brand-primary/10"></div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {EDUCATIONAL_CONTENT.growing.map((topic, i) => (
-              <Card key={i} className="bg-brand-stone-100 border-brand-primary/10">
-                <h3 className="newsreader-display text-3xl text-brand-primary mb-4">{topic.title}</h3>
-                <p className="text-brand-primary/80 leading-relaxed mb-6 font-medium">{topic.content}</p>
-                {topic.pidgin && (
-                  <div className="p-4 bg-brand-primary/5 rounded-xl border border-brand-primary/10 italic text-brand-primary/60 font-medium text-sm">
-                    &quot;{topic.pidgin}&quot;
-                  </div>
-                )}
-              </Card>
-            ))}
-          </div>
-        </section>
+      <section className="mt-24 overflow-hidden rounded-2xl border border-brand-primary/10 bg-brand-stone-100" aria-labelledby="knowledge-pipeline-heading">
+        <div className="grid gap-8 border-b border-brand-primary/10 p-6 sm:p-9 lg:grid-cols-[1fr_auto] lg:items-end"><div><p className="clinical-label text-sky-300">Canonical knowledge layer</p><h2 id="knowledge-pipeline-heading" className="newsreader-display mt-3 text-4xl sm:text-5xl">From source to teachable idea</h2><p className="mt-4 max-w-2xl text-sm leading-6 text-brand-primary/50">The Learn Hub now draws from one shared registry. Studies, experts, essays and books become explanations, case studies and applied exercises inside the lessons while retaining their authority, limitations and verification rules.</p></div><div className="text-left lg:text-right"><strong className="newsreader-display block text-3xl text-sky-300">{coverage.populated}/{coverage.total}</strong><span className="text-[9px] font-bold uppercase tracking-wider text-brand-primary/35">Lessons populated</span><Link href="/docs" className="mt-3 flex items-center gap-2 text-sm font-bold text-sky-300 lg:justify-end">Inspect all {KNOWLEDGE_SOURCES.length} sources <ArrowRight size={15}/></Link></div></div>
+        <div className="grid border-b border-brand-primary/10 sm:grid-cols-2 lg:grid-cols-4">{['Collect & classify','Extract one idea','Cross-check the claim','Map into lessons'].map((step,index)=><div key={step} className="relative border-b border-brand-primary/10 p-6 last:border-0 sm:odd:border-r lg:border-b-0 lg:border-r lg:last:border-r-0"><span className="newsreader-display text-3xl text-sky-300/35">0{index+1}</span><h3 className="mt-8 font-bold">{step}</h3><p className="mt-2 text-xs leading-5 text-brand-primary/40">{['Record author, year, type and verification status.','Separate a scoped insight from the source around it.','Prefer reviews and primary records for consequential claims.','Attach sources, limits and review dates to the lesson.'][index]}</p></div>)}</div>
+        <div className="grid lg:grid-cols-[.8fr_1.2fr]"><div className="border-b border-brand-primary/10 p-6 sm:p-9 lg:border-b-0 lg:border-r"><p className="clinical-label mb-6 text-brand-primary/30">Current source mix</p><div className="grid grid-cols-2 gap-3">{SOURCE_MIX.map((item)=><div key={item.label} className="rounded-xl border border-brand-primary/10 bg-brand-primary/[.025] p-4"><strong className="newsreader-display block text-3xl text-brand-emerald-900">{item.value}</strong><span className="mt-1 block text-[10px] font-bold uppercase leading-4 tracking-wider text-brand-primary/35">{item.label}</span></div>)}</div></div><div className="p-6 sm:p-9"><div className="mb-6 flex items-end justify-between gap-4"><div><p className="clinical-label text-brand-secondary">Extracted curriculum ideas</p><h3 className="newsreader-display mt-3 text-3xl">Reusable, traceable synthesis</h3></div><span className="text-xs text-brand-primary/30">{EXTRACTED_IDEAS.length} mapped ideas</span></div><div className="space-y-3">{EXTRACTED_IDEAS.slice(0,4).map((idea)=><article key={idea.id} className="rounded-xl border border-brand-primary/10 p-4"><div className="flex flex-wrap items-center justify-between gap-2"><h4 className="text-sm font-bold">{idea.title}</h4><span className="rounded-full border border-brand-primary/10 px-2 py-1 text-[9px] font-bold uppercase tracking-wider text-brand-primary/35">{idea.sourceIds.length} sources · {idea.evidence}</span></div><p className="mt-2 text-xs leading-5 text-brand-primary/45">{idea.synthesis}</p></article>)}</div></div></div>
+      </section>
 
-        {/* Science Protocols */}
-        <section className="mb-32">
-          <div className="flex items-center gap-6 mb-12">
-            <h2 className="newsreader-display text-5xl text-brand-primary">Clinical Protocols</h2>
-            <div className="h-px flex-1 bg-brand-primary/10"></div>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {EDUCATIONAL_CONTENT.medical_science.map((topic, i) => (
-              <Card key={i} className="border-brand-secondary/20 bg-brand-secondary/5">
-                <h3 className="newsreader-display text-3xl text-brand-secondary mb-4">{topic.title}</h3>
-                <p className="text-brand-primary/80 leading-relaxed font-medium">{topic.content}</p>
-              </Card>
-            ))}
-          </div>
-        </section>
+      <section className="mt-24" aria-labelledby="contributors-heading"><div className="mb-9"><p className="clinical-label mb-3 text-brand-emerald-900">Researcher lenses</p><h2 id="contributors-heading" className="newsreader-display text-4xl sm:text-5xl">Scientists inform the curriculum—sources decide the claim</h2><p className="mt-4 max-w-3xl text-sm leading-6 text-brand-primary/50">Researcher expertise helps identify important questions and interpret methods. It does not replace published evidence. Personal cannabis use is shown only when the scientist has publicly self-disclosed it in a linked source.</p></div><div className="grid gap-4 md:grid-cols-2">{KNOWLEDGE_CONTRIBUTORS.map((contributor)=><article key={contributor.id} className="rounded-2xl border border-brand-primary/10 bg-brand-stone-100 p-6"><div className="flex flex-wrap items-start justify-between gap-3"><div><p className="clinical-label text-brand-secondary">{contributor.credentials}</p><h3 className="newsreader-display mt-2 text-3xl">{contributor.name}</h3></div><a href={contributor.profileHref} target="_blank" rel="noreferrer" className="rounded-full border border-brand-primary/10 px-3 py-1.5 text-[10px] font-bold text-brand-primary/45 hover:text-brand-secondary">Source profile ↗</a></div><p className="mt-3 text-xs font-bold text-brand-primary/45">{contributor.role}</p><p className="mt-4 text-sm leading-6 text-brand-primary/55">{contributor.contribution}</p><div className="mt-5 flex flex-wrap gap-2">{contributor.expertise.map((item)=><span key={item} className="rounded-full bg-brand-primary/[.04] px-3 py-1.5 text-[10px] font-bold text-brand-primary/40">{item}</span>)}</div>{contributor.publicSelfDisclosure&&<a href={contributor.publicSelfDisclosure.sourceHref} target="_blank" rel="noreferrer" className="mt-5 block rounded-xl border border-sky-300/15 bg-sky-300/[.04] p-3 text-xs leading-5 text-brand-primary/50"><strong className="text-sky-300">Public self-disclosure:</strong> {contributor.publicSelfDisclosure.statement}</a>}</article>)}</div></section>
 
-      </div>
+      <section className="mt-24" aria-labelledby="voices-heading">
+        <div className="mb-9"><p className="clinical-label mb-3 text-brand-secondary">Research & field notes</p><h2 id="voices-heading" className="newsreader-display text-4xl sm:text-5xl">Laboratory, literature, community</h2><p className="mt-4 max-w-2xl text-sm leading-6 text-brand-primary/50">Peer-reviewed research, expert interpretation and authored Nigerian essays can inform one another without being treated as the same kind of evidence.</p></div>
+        <div className="grid gap-4 lg:grid-cols-3">{FEATURED_VOICES.map((voice)=><a key={voice.title} href={voice.href} target={voice.external?'_blank':undefined} rel="noreferrer" className="group flex min-h-72 flex-col rounded-2xl border border-brand-primary/10 bg-brand-stone-100 p-6 hover:border-brand-secondary/35"><div className="flex items-center justify-between"><span className="rounded-full border border-brand-primary/10 px-3 py-1.5 text-[9px] font-bold uppercase tracking-wider text-brand-primary/40">{voice.type}</span><ArrowRight className="text-brand-primary/25 group-hover:text-brand-secondary" size={16}/></div><p className="clinical-label mt-10 text-brand-primary/35">{voice.name}</p><h3 className="newsreader-display mt-3 text-2xl leading-tight">{voice.title}</h3><p className="mt-4 text-sm leading-6 text-brand-primary/45">{voice.summary}</p></a>)}</div>
+      </section>
+
+      <section className="mt-20 overflow-hidden rounded-2xl border border-brand-primary/10 bg-brand-stone-100" aria-labelledby="medgriot-heading">
+        <div className="grid gap-8 border-b border-brand-primary/10 p-6 sm:p-9 lg:grid-cols-[1fr_auto] lg:items-end"><div><p className="clinical-label text-brand-secondary">The MedGriot archive · 2025</p><h2 id="medgriot-heading" className="newsreader-display mt-3 text-4xl sm:text-5xl">Cannabis in Nigeria—ten field notes</h2><p className="mt-4 max-w-2xl text-sm leading-6 text-brand-primary/50">The essays preserve your authored Nigerian perspective. Each is mapped to the curriculum and treated as editorial interpretation, with health and legal claims checked in the linked lessons.</p></div><a href="https://themedgriot.substack.com/archive" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-bold text-brand-secondary">Open publication archive <ArrowRight size={15}/></a></div>
+        <div className="grid md:grid-cols-2">{MEDGRIOT_ESSAYS.map((essay)=><a key={essay.order} href={essay.href} target="_blank" rel="noreferrer" className="group grid grid-cols-[42px_1fr_auto] gap-3 border-b border-brand-primary/10 p-5 last:border-0 hover:bg-brand-primary/[.025] md:[&:nth-last-child(-n+2)]:border-b-0 md:odd:border-r"><span className="newsreader-display text-2xl text-brand-secondary/50">{String(essay.order).padStart(2,'0')}</span><div><div className="mb-2 flex flex-wrap items-center gap-2"><span className="text-[9px] font-bold uppercase tracking-wider text-brand-emerald-900">{essay.course}</span><span className="text-[10px] text-brand-primary/25">{essay.date}</span></div><h3 className="font-bold leading-6 group-hover:text-brand-secondary">{essay.title}</h3><p className="mt-2 text-xs leading-5 text-brand-primary/40">{essay.summary}</p></div><ArrowRight className="mt-1 text-brand-primary/20 group-hover:text-brand-secondary" size={15}/></a>)}</div>
+      </section>
+
+      <section className="mt-16 flex flex-col items-start justify-between gap-7 rounded-2xl border border-brand-secondary/20 bg-brand-secondary/[.06] p-7 sm:flex-row sm:items-center sm:p-10">
+        <div className="flex gap-5"><div className="hidden rounded-xl bg-brand-secondary/10 p-4 text-brand-secondary sm:block"><BookOpen/></div><div><p className="clinical-label mb-2 text-brand-secondary">Research library</p><h2 className="newsreader-display text-3xl">Go beyond the lesson</h2><p className="mt-2 max-w-2xl text-sm leading-6 text-brand-primary/55">Browse the books, technical reports, and source material that inform the curriculum—with clear dates and source-quality context.</p></div></div>
+        <Link href="/docs" className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-brand-secondary/30 px-5 py-3 text-sm font-bold text-brand-secondary">Open library <ArrowRight size={16}/></Link>
+      </section>
     </main>
   );
 }
 
+function Stat({value,label}:{value:string;label:string}) { return <div><strong className="newsreader-display block text-2xl sm:text-3xl">{value}</strong><span className="text-[10px] font-bold uppercase tracking-wider text-brand-primary/35">{label}</span></div>; }
+function Feature({icon,title,body}:{icon:React.ReactNode;title:string;body:string}) { return <article className="rounded-2xl border border-brand-primary/10 bg-brand-stone-100 p-6"><div className="mb-8 text-brand-emerald-900">{icon}</div><h3 className="newsreader-display text-2xl">{title}</h3><p className="mt-2 text-sm leading-6 text-brand-primary/50">{body}</p></article>; }

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useSearchParams } from 'next/navigation';
 import { Card, Badge, Input } from '@/components/UI';
@@ -12,6 +12,8 @@ import { TERPENES, CANNABINOIDS } from '@/lib/data/cannabisData';
 import { FlavonoidIconMapper } from '@/components/icons/FlavonoidIcons';
 import StrainAura from './StrainAura';
 
+const PAGE_SIZE = 12;
+
 export default function StrainGrid() {
   const searchParams = useSearchParams();
   const q = searchParams.get('q') || '';
@@ -19,9 +21,10 @@ export default function StrainGrid() {
   const [strains, setStrains] = useState<RichStrain[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState(q);
-  const [displayCount, setDisplayCount] = useState(12);
+  const [displayCount, setDisplayCount] = useState(PAGE_SIZE);
   const [selectedStrain, setSelectedStrain] = useState<RichStrain | null>(null);
   const [selectedTerpene, setSelectedTerpene] = useState<typeof TERPENES.myrcene | null>(null);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function loadData() {
@@ -41,6 +44,24 @@ export default function StrainGrid() {
   }, [strains, searchQuery]);
 
   const visibleStrains = filteredStrains.slice(0, displayCount);
+  const hasMore = displayCount < filteredStrains.length;
+
+  useEffect(() => {
+    const target = loadMoreRef.current;
+    if (!target || !hasMore) return;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0]?.isIntersecting) {
+          setDisplayCount(current => Math.min(current + PAGE_SIZE, filteredStrains.length));
+        }
+      },
+      { rootMargin: '500px 0px' }
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [hasMore, filteredStrains.length]);
 
   if (loading) {
     return (
@@ -64,10 +85,13 @@ export default function StrainGrid() {
             icon={<Search size={18} />}
             placeholder="Search variety, effect, or type..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setDisplayCount(PAGE_SIZE);
+            }}
           />
         </div>
-        <div className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary/30">
+        <div aria-live="polite" className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary/30">
           Showing {visibleStrains.length} of {filteredStrains.length} Varieties
         </div>
       </div>
@@ -157,15 +181,21 @@ export default function StrainGrid() {
         ))}
       </div>
 
-      {displayCount < filteredStrains.length && (
-        <div className="flex justify-center pt-12">
+      {hasMore && (
+        <div ref={loadMoreRef} className="flex min-h-32 flex-col items-center justify-center gap-4 pt-12">
+          <Loader2 className="animate-spin text-brand-emerald-900" size={22} aria-hidden="true" />
+          <p className="text-xs font-semibold text-brand-primary/40">Loading more varieties…</p>
           <button 
-            onClick={() => setDisplayCount(prev => prev + 12)}
-            className="newsreader-display text-2xl text-brand-primary/40 hover:text-brand-secondary transition-colors italic flex items-center gap-4"
+            onClick={() => setDisplayCount(current => Math.min(current + PAGE_SIZE, filteredStrains.length))}
+            className="rounded-full border border-brand-primary/10 px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-primary/45 hover:border-brand-secondary/40 hover:text-brand-secondary"
           >
-            [ Load More Intelligence ]
+            Load more manually
           </button>
         </div>
+      )}
+
+      {!hasMore && filteredStrains.length > PAGE_SIZE && (
+        <p className="py-8 text-center text-xs font-semibold text-brand-primary/30">You have reached the end of the catalogue.</p>
       )}
 
       {/* Detail Overlay */}

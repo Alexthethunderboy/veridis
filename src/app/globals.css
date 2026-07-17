@@ -1,88 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap');
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
 @theme {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Newsreader", ui-serif, Georgia, serif;
-
-  /* High-end Dark Ethnobotanical Modernism Palette */
-  --color-brand-primary: #ffffff; /* Brighter white for maximum contrast */
-  --color-brand-secondary: #eab308; /* Neon Gold (Yellow-500) */
-  --color-brand-stone-50: #020804; /* Rich black with a hint of green */
-  --color-brand-stone-100: #041209; /* Deepest green-black */
-  --color-brand-stone-200: #061f0f;
-  --color-brand-stone-300: #0a2e17;
-  --color-brand-emerald-50: #0f3f22;
-  --color-brand-emerald-900: #10b981; /* Vibrant neon emerald (Emerald-500) */
-
-  
+  --color-brand-primary: #f5f3ea;
+  --color-brand-secondary: #d6a84b;
+  --color-brand-stone-50: #07110d;
+  --color-brand-stone-100: #0c1913;
+  --color-brand-stone-200: #14241c;
+  --color-brand-stone-300: #20332a;
+  --color-brand-emerald-50: #183d2c;
+  --color-brand-emerald-900: #62c68b;
   --radius-xl: 0.75rem;
   --radius-2xl: 1rem;
   --radius-3xl: 1.5rem;
 }
 
 @layer base {
-  body {
-    @apply bg-brand-stone-50 text-brand-primary font-sans antialiased overflow-x-hidden;
-  }
+  * { border-color: rgb(245 243 234 / 0.1); }
+  html { scroll-behavior: smooth; background: #07110d; }
+  body { @apply bg-brand-stone-50 text-brand-primary font-sans antialiased overflow-x-hidden; }
+  ::selection { background: #62c68b; color: #07110d; }
+  :focus-visible { outline: 2px solid #d6a84b; outline-offset: 4px; }
 }
 
 @layer components {
-  .newsreader-display {
-    @apply font-serif italic tracking-tight;
-  }
-  
-  .clinical-label {
-    @apply font-sans uppercase tracking-[0.2em] text-[10px] font-bold opacity-60;
-  }
+  .newsreader-display { @apply font-serif tracking-[-0.035em]; }
+  .clinical-label { @apply font-sans uppercase tracking-[0.16em] text-[11px] font-bold; }
+  .rail-text { @apply hidden; }
+  .scrollbar-hide { scrollbar-width: none; }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .glass { background: rgb(12 25 19 / 0.82); border: 1px solid rgb(245 243 234 / 0.1); }
+  .glass-panel { background: linear-gradient(145deg, rgb(20 36 28 / .96), rgb(12 25 19 / .96)); border: 1px solid rgb(245 243 234 / .11); box-shadow: 0 18px 50px rgb(0 0 0 / .22); }
+  .text-glow, .text-glow-emerald { text-shadow: none; }
+  .mask-fade-bottom { mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%); }
+  .mask-fade-right { mask-image: linear-gradient(to right, black 0%, black 80%, transparent 100%); }
+  .hover-card-border { @apply transition-colors duration-200 hover:border-brand-emerald-900/45; }
+  .page-shell { @apply min-h-screen max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-24 lg:pt-20 pb-32; }
+}
 
-  .rail-text {
-    @apply hidden lg:[writing-mode:vertical-rl] lg:rotate-180 lg:uppercase lg:tracking-[0.4em] lg:text-[10px] lg:whitespace-nowrap lg:block;
+@media (min-width: 64rem) {
+  html { --sidebar-width: 16rem; }
+  html[data-sidebar="collapsed"] { --sidebar-width: 5rem; }
+  .app-main {
+    padding-left: var(--sidebar-width);
+    transition: padding-left 300ms ease-out;
   }
+}
 
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  /* Premium Glassmorphism (Dark Theme Default) */
-  .glass {
-    background: rgba(6, 31, 15, 0.4);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-  }
-
-  .glass-panel {
-    background: linear-gradient(145deg, rgba(16, 185, 129, 0.05) 0%, rgba(6, 31, 15, 0.4) 100%);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  }
-
-  .text-glow {
-    text-shadow: 0 0 25px rgba(234, 179, 8, 0.4);
-  }
-  
-  .text-glow-emerald {
-    text-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
-  }
-
-  .mask-fade-bottom {
-    mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
-  }
-
-  .mask-fade-right {
-    mask-image: linear-gradient(to right, black 0%, black 80%, transparent 100%);
-  }
-
-  .hover-card-border {
-    @apply transition-all duration-500 border-brand-primary/5 hover:border-brand-emerald-900/40;
-  }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
