@@ -1,0 +1,23 @@
+'use client';
+
+import { useMemo, useSyncExternalStore } from 'react';
+import { Bookmark, Check, NotebookPen, RotateCcw } from 'lucide-react';
+import type { LessonAssessment } from '@/lib/data/lessonAssessments';
+
+type LessonState = { completed?: boolean; bookmarked?: boolean; notes?: string; assessmentAnswer?: number };
+type LearningState = Record<string, LessonState>;
+const STORAGE_KEY = 'efifya-learning-state-v1';
+
+function readState(): LearningState {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}') as LearningState; } catch { return {}; }
+}
+
+export default function LearningWorkspace({lessonSlug,assessment}:{lessonSlug:string;assessment:LessonAssessment}) {
+  const raw=useSyncExternalStore((notify)=>{window.addEventListener('efifya-learning-state',notify);window.addEventListener('storage',notify);return()=>{window.removeEventListener('efifya-learning-state',notify);window.removeEventListener('storage',notify)}},()=>localStorage.getItem(STORAGE_KEY)??'{}',()=>'{}');
+  const all=useMemo(()=>{try{return JSON.parse(raw) as LearningState}catch{return {}}},[raw]);
+  const state=all[lessonSlug]??{};
+  const update=(next:LessonState)=>{ const merged={...state,...next}; const current=readState(); current[lessonSlug]=merged; localStorage.setItem(STORAGE_KEY,JSON.stringify(current)); window.dispatchEvent(new Event('efifya-learning-state')); };
+  const answered=state.assessmentAnswer!==undefined;
+  const correct=state.assessmentAnswer===assessment.correctIndex;
+  return <section id="learning-workspace" className="mt-14 scroll-mt-8 border-t border-brand-primary/10 pt-9" aria-labelledby="learning-workspace-title"><div className="mb-6 flex flex-wrap items-end justify-between gap-4"><div><p className="clinical-label text-brand-emerald-900">Your learning workspace</p><h2 id="learning-workspace-title" className="newsreader-display mt-3 text-3xl">Save, reflect and check mastery</h2></div><div className="flex gap-2"><button onClick={()=>update({bookmarked:!state.bookmarked})} aria-pressed={state.bookmarked} className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2 text-xs font-bold ${state.bookmarked?'border-brand-secondary bg-brand-secondary/[.08] text-brand-secondary':'border-brand-primary/10 text-brand-primary/50'}`}><Bookmark size={14}/>{state.bookmarked?'Bookmarked':'Bookmark'}</button><button onClick={()=>update({completed:!state.completed})} aria-pressed={state.completed} className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2 text-xs font-bold ${state.completed?'border-brand-emerald-900 bg-brand-emerald-900 text-brand-stone-50':'border-brand-primary/10 text-brand-primary/50'}`}><Check size={14}/>{state.completed?'Completed':'Mark complete'}</button></div></div><div className="grid gap-4 lg:grid-cols-2"><div className="rounded-2xl border border-brand-primary/10 bg-brand-stone-100 p-6"><p className="clinical-label flex items-center gap-2 text-brand-secondary"><NotebookPen size={14}/> Private notes</p><textarea value={state.notes??''} onChange={(event)=>update({notes:event.target.value})} placeholder="Write a reflection, question or source to revisit…" className="mt-4 min-h-48 w-full resize-y rounded-xl border border-brand-primary/10 bg-brand-primary/[.025] p-4 text-sm leading-6 outline-none focus:border-brand-secondary/40"/><p className="mt-2 text-[10px] text-brand-primary/35">Saved only on this device.</p></div><div className="rounded-2xl border border-brand-primary/10 bg-brand-stone-100 p-6"><p className="clinical-label text-brand-emerald-900">Mastery check</p><h3 className="mt-3 font-bold leading-6">{assessment.question}</h3><div className="mt-5 space-y-2">{assessment.options.map((option,index)=><button key={option} disabled={answered} onClick={()=>update({assessmentAnswer:index})} className={`w-full rounded-xl border p-3 text-left text-sm leading-5 ${answered&&index===assessment.correctIndex?'border-brand-emerald-900 bg-brand-emerald-900/[.07]':answered&&index===state.assessmentAnswer?'border-orange-300/40 bg-orange-300/[.05]':'border-brand-primary/10 hover:border-brand-primary/25'}`}>{String.fromCharCode(65+index)}. {option}</button>)}</div>{answered&&<div className={`mt-5 rounded-xl border p-4 text-sm leading-6 ${correct?'border-brand-emerald-900/20 bg-brand-emerald-900/[.05]':'border-orange-300/20 bg-orange-300/[.05]'}`}><strong>{correct?'Correct.':'Not quite.'}</strong> {assessment.rationale}<button onClick={()=>update({assessmentAnswer:undefined})} className="mt-3 flex items-center gap-1 text-xs font-bold text-brand-secondary"><RotateCcw size={12}/> Try again</button></div>}</div></div></section>;
+}

@@ -327,7 +327,7 @@ export default function StrainGrid() {
                     </div>
                     <div>
                       <h4 className="flex items-center gap-3 clinical-label text-brand-primary/40 mb-8">
-                        <Leaf size={14} /> Clinical Applications
+                        <Leaf size={14} /> Community-reported uses
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {selectedStrain.medical.map((m, i) => (
@@ -336,6 +336,7 @@ export default function StrainGrid() {
                           </span>
                         ))}
                       </div>
+                      <p className="mt-4 text-xs leading-5 text-brand-primary/40">These tags preserve community-reported reasons for choosing a cultivar. Treat them as experience-led starting points, then consider the measured profile, dose, route and your own response.</p>
                     </div>
                   </div>
                 </div>

@@ -102,7 +102,7 @@ export default function StrainDeepDive() {
                </Card>
                <Card className="border-brand-secondary/20 bg-brand-secondary/5 p-10">
                   <h3 className="newsreader-display text-3xl text-brand-secondary mb-6 flex items-center gap-4">
-                    <ShieldCheck /> Medical Application
+                    <ShieldCheck /> Community-reported wellness uses
                   </h3>
                   <div className="flex flex-wrap gap-3">
                     {strain.medical.map(m => <Badge key={m} variant="clinical">{m}</Badge>)}
@@ -138,7 +138,7 @@ export default function StrainDeepDive() {
              <Card className="border-brand-primary/10 p-10">
                 <h3 className="clinical-label text-brand-primary mb-8">Flavonoid Intelligence</h3>
                 <p className="text-xs text-brand-primary/50 font-medium mb-6 leading-relaxed italic italic">
-                  The &quot;hidden&quot; third pillar. These compounds provide the vibrant pigmentation and deep anti-inflammatory benefits.
+                  The &quot;hidden&quot; third pillar. These compounds shape pigmentation and are being studied for anti-inflammatory, antioxidant and whole-plant interactions.
                 </p>
                 <div className="space-y-4">
                    {strain.flavonoids && Array.isArray(strain.flavonoids) && strain.flavonoids.length > 0 ? (

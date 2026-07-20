@@ -7,8 +7,8 @@ import { Card } from '@/components/UI';
 
 const FEATURED_DOCS = [
   { 
-    title: 'The &quot;Colorado&quot; Warning: Chemical Realities', 
-    category: 'Safety', 
+    title: '“Colorado”: Name, Product Uncertainty & Emergency Signs',
+    category: 'Product awareness',
     time: '5 min read',
     icon: '⚠️',
     href: '/compendium#3-the-colorado-crisis-a-global-threat-with-local-names'
@@ -45,7 +45,7 @@ export default function UnlearnPage() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
             <div>
               <h2 className="newsreader-display text-5xl text-brand-primary">Featured Research</h2>
-              <p className="clinical-label mt-2 text-brand-primary/60">Verified Truths from the Efifya Compendium</p>
+              <p className="clinical-label mt-2 text-brand-primary/60">Cannabis knowledge with Nigerian context</p>
             </div>
             <a href="/compendium" className="text-brand-secondary font-bold text-sm uppercase tracking-widest border-b-2 border-brand-secondary pb-1 hover:text-brand-primary hover:border-brand-primary transition-all">
               View Full Compendium

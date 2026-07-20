@@ -1,126 +1,33 @@
-'use client';
+import Link from 'next/link';
+import { ArrowRight, Beaker, BookOpen, CircleAlert, FlaskConical, ShieldCheck } from 'lucide-react';
+import { EvidenceLadder, MoleculeField } from '@/components/KnowledgeVisuals';
+import { KNOWLEDGE_SOURCES } from '@/lib/data/knowledgeSources';
 
-import React from 'react';
-import InteractiveTerpeneMapper from '@/components/science/InteractiveTerpeneMapper';
-import InteractiveFlavonoidMapper from '@/components/science/InteractiveFlavonoidMapper';
-import InteractiveCannabinoidMapper from '@/components/science/InteractiveCannabinoidMapper';
-import DosageCalculator from '@/components/science/DosageCalculator';
-import SafetyChecker from '@/components/science/SafetyChecker';
-import { Card, SectionHeader } from '@/components/UI';
-import { motion } from 'motion/react';
+export const metadata = {
+  title: 'Cannabis Science | Efifya',
+  description: 'Cannabis chemistry, the endocannabinoid system, therapeutic research and the science of whole-plant interactions.',
+};
+
+const concepts = [
+  { name: 'THC', type: 'Cannabinoid', known: 'THC is psychoactive and can shape perception, mood, appetite, memory and symptom experience. Effects may be sought, therapeutic, neutral or uncomfortable depending on the person and context.', uncertain: 'THC percentage alone does not describe dose, the complete chemical profile or an individual response.', lesson: '/edu/courses/chemistry-and-the-body/cannabinoids-and-the-ecs' },
+  { name: 'CBD', type: 'Cannabinoid', known: 'CBD is pharmacologically active without usually producing the same THC-like psychoactive experience. Defined CBD medicines have strong evidence for some narrow indications.', uncertain: 'Retail and artisanal products can differ from studied medicines in formulation, dose and testing.', lesson: '/edu/courses/safety-and-health/medical-evidence' },
+  { name: 'Terpenes', type: 'Volatile compounds', known: 'Terpenes shape aroma, plant ecology and potentially parts of human response. Controlled human work shows that d-limonene can modify a specific acute THC effect.', uncertain: 'Aroma only describes part of a cultivar; it does not guarantee energising, relaxing or therapeutic effects by itself.', lesson: '/edu/courses/chemistry-and-the-body/terpenes-flavonoids-and-entourage' },
+  { name: 'Entourage effect', type: 'Compound interactions', known: 'Cannabinoids and other constituents can interact through receptors, metabolism and whole-system responses. Some combinations have direct human evidence.', uncertain: 'Which combinations matter clinically—and for whom—remains a product-, ratio-, route- and outcome-specific research question.', lesson: '/edu/courses/chemistry-and-the-body/terpenes-flavonoids-and-entourage' },
+];
+
+const reviewedScience = KNOWLEDGE_SOURCES.filter((source) => source.quality === 'peer reviewed' || source.quality === 'authoritative guidance').slice(0, 6);
 
 export default function SciencePage() {
-  return (
-    <main className="min-h-screen pt-40 pb-40 px-8 max-w-7xl mx-auto">
-      <SectionHeader 
-        badge="Clinical Protocols"
-        title="Botanical Science"
-        subtitle="Evidence-based research for a safer, more effective medicinal approach. Referencing the CRISP Study on Sickle Cell and Nano-emulsified Bioavailability."
-      />
+  return <main className="page-shell">
+    <header className="relative overflow-hidden rounded-[2rem] border border-brand-primary/10 bg-[radial-gradient(circle_at_78%_18%,rgba(214,168,75,.14),transparent_30%),linear-gradient(145deg,#14241c,#0c1913)] px-6 py-12 sm:px-10 lg:px-14 lg:py-16">
+      <div className="relative z-10 max-w-3xl"><p className="clinical-label flex items-center gap-2 text-brand-secondary"><FlaskConical size={14}/> Cannabis science</p><h1 className="newsreader-display mt-5 text-5xl leading-[.94] sm:text-7xl">Explore the chemistry.<br/><span className="text-brand-secondary">Understand the ensemble.</span></h1><p className="mt-7 max-w-2xl text-base leading-7 text-brand-primary/60 sm:text-lg">Learn how cannabinoids, terpenes, flavonoids, dose, route, the ECS and lived context come together to shape experience and therapeutic potential.</p><div className="mt-8 flex flex-wrap gap-3"><Link href="/edu/courses/chemistry-and-the-body" className="inline-flex items-center gap-2 rounded-xl bg-brand-secondary px-5 py-3 text-sm font-bold text-brand-stone-50">Begin the chemistry course <ArrowRight size={15}/></Link><Link href="/docs" className="inline-flex items-center gap-2 rounded-xl border border-brand-primary/15 px-5 py-3 text-sm font-bold">Inspect the evidence <BookOpen size={15}/></Link></div></div>
+      <MoleculeField className="pointer-events-none absolute bottom-0 right-0 w-[55%] text-brand-secondary opacity-30"/>
+    </header>
 
-      <div className="space-y-40 mt-20">
-        {/* Pillar 1: Cannabinoids */}
-        <section>
-          <div className="mb-16">
-            <h2 className="newsreader-display text-6xl text-brand-primary mb-6">Cannabinoid Intelligence</h2>
-            <p className="text-xl text-brand-primary/40 font-medium max-w-3xl italic">
-              The primary chemical compounds of the plant. Cannabinoids like THC and CBD interact with your body&apos;s 
-              endocannabinoid system to regulate mood, pain, and sleep.
-            </p>
-          </div>
-          <InteractiveCannabinoidMapper />
-        </section>
+    <section className="mt-20 grid gap-4 lg:grid-cols-[1.05fr_.95fr]" aria-labelledby="mechanism-heading"><article className="rounded-2xl border border-brand-primary/10 bg-brand-stone-100 p-7 sm:p-10"><p className="clinical-label text-brand-emerald-900">From mechanism to lived outcome</p><h2 id="mechanism-heading" className="newsreader-display mt-4 text-4xl">Mechanism, experience and clinical research answer different questions.</h2><p className="mt-5 text-sm leading-7 text-brand-primary/55">Laboratory work explains plausible pathways. People reveal which changes matter in real life. Controlled human research estimates what defined products tend to do. Efifya keeps all three in the evidence picture.</p><EvidenceLadder className="mt-9 max-w-xl text-brand-emerald-900"/></article><article className="rounded-2xl border border-brand-secondary/20 bg-brand-secondary/[.04] p-7 sm:p-10"><CircleAlert className="text-brand-secondary"/><p className="clinical-label mt-8 text-brand-secondary">Individual response</p><h2 className="newsreader-display mt-3 text-3xl">No universal experience from one number</h2><p className="mt-4 text-sm leading-7 text-brand-primary/55">Dose, route, ratio, the wider chemical profile, metabolism, prior experience and setting all matter. Personal tracking and cannabis-informed clinical or pharmacy support can make medication questions more useful.</p><Link href="/edu/courses/chemistry-and-the-body/dose-route-and-duration" className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-brand-secondary">Learn why dose and route vary <ArrowRight size={14}/></Link></article></section>
 
-        {/* Pillar 2: Terpenes */}
-        <section>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-32">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="newsreader-display text-5xl text-brand-primary mb-8">Terpene Intelligence</h2>
-              <p className="text-xl leading-relaxed text-brand-primary/60 mb-8 font-medium">
-                If flavonoids are the plant&apos;s color and immune system, <strong className="text-brand-secondary">terpenes are the steering wheel</strong>. 
-                They dictate exactly how a cannabinoid profile will affect your mind and body.
-              </p>
-              <Card className="bg-brand-secondary/5 border-brand-secondary/20 p-6 md:p-10">
-                <h4 className="clinical-label text-brand-secondary mb-4">The Steering Effect</h4>
-                <div className="space-y-6">
-                  <div className="flex gap-4">
-                    <div className="w-1.5 h-1.5 rounded-full bg-brand-secondary mt-2 shrink-0" />
-                    <p className="text-sm font-bold text-brand-primary/80">
-                      <span className="text-brand-secondary">The Brake:</span> Terpenes like Linalool or Myrcene can &quot;tame&quot; the heart-racing anxiety of high-THC strains.
-                    </p>
-                  </div>
-                  <div className="flex gap-4">
-                    <div className="w-1.5 h-1.5 rounded-full bg-brand-secondary mt-2 shrink-0" />
-                    <p className="text-sm font-bold text-brand-primary/80">
-                      <span className="text-brand-secondary">The Accelerator:</span> Terpenes like Limonene or Pinene can sharpen a high, making it more cerebral and focused.
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-            <div className="lg:col-span-1">
-              <InteractiveTerpeneMapper />
-            </div>
-          </div>
+    <section className="mt-24" aria-labelledby="concepts-heading"><div className="mb-8"><p className="clinical-label text-brand-secondary">Compound explorer</p><h2 id="concepts-heading" className="newsreader-display mt-3 text-4xl sm:text-5xl">What the evidence supports—and what comes next</h2></div><div className="grid gap-4 md:grid-cols-2">{concepts.map((concept)=><article key={concept.name} className="rounded-2xl border border-brand-primary/10 bg-brand-stone-100 p-6"><div className="flex items-center justify-between"><span className="rounded-full border border-brand-primary/10 px-3 py-1 text-[9px] font-bold uppercase tracking-wider text-brand-primary/40">{concept.type}</span><Beaker size={18} className="text-brand-secondary"/></div><h3 className="newsreader-display mt-7 text-4xl">{concept.name}</h3><div className="mt-5 space-y-4"><div className="rounded-xl border border-brand-emerald-900/15 bg-brand-emerald-900/[.04] p-4"><p className="text-[9px] font-bold uppercase tracking-wider text-brand-emerald-900">What evidence supports</p><p className="mt-2 text-sm leading-6 text-brand-primary/60">{concept.known}</p></div><div className="rounded-xl border border-brand-primary/10 p-4"><p className="text-[9px] font-bold uppercase tracking-wider text-brand-primary/35">Open research question</p><p className="mt-2 text-sm leading-6 text-brand-primary/50">{concept.uncertain}</p></div></div><Link href={concept.lesson} className="mt-6 inline-flex items-center gap-2 text-xs font-bold text-brand-secondary">Open full lesson <ArrowRight size={13}/></Link></article>)}</div></section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-             <Card className="p-6 md:p-10 border-brand-primary/10">
-                <h4 className="clinical-label text-brand-primary/40 mb-6 uppercase tracking-widest">01. Biological Shield</h4>
-                <p className="text-sm font-medium text-brand-primary/70 leading-relaxed italic italic">
-                  Produced in the trichomes, terpenes act as the plant&apos;s defense system—repelling herbivores, protecting against disease, and attracting pollinators.
-                </p>
-             </Card>
-             <Card className="p-6 md:p-10 border-brand-primary/10">
-                <h4 className="clinical-label text-brand-primary/40 mb-6 uppercase tracking-widest">02. Volatility Control</h4>
-                <p className="text-sm font-medium text-brand-primary/70 leading-relaxed italic italic">
-                  Terpenes are highly volatile. That skunky scent when you open a jar is the &quot;medicine&quot; escaping into the air. Preservation is critical.
-                </p>
-             </Card>
-             <Card className="p-6 md:p-10 bg-brand-primary border-transparent text-brand-stone-50">
-                <h4 className="clinical-label text-brand-stone-50/40 mb-6 uppercase tracking-widest">03. Thermal Preservation</h4>
-                <p className="text-sm font-bold leading-relaxed italic italic">
-                  Standard lighters destroy delicate terpenes. Dry herb vaporizers at 160°C–190°C are the gold standard for experiencing true therapeutic benefits.
-                </p>
-             </Card>
-          </div>
-        </section>
-
-        {/* Pillar 3: Flavonoids */}
-        <section>
-          <div className="mb-16">
-            <h2 className="newsreader-display text-6xl text-brand-primary mb-6">Flavonoid Intelligence</h2>
-            <p className="text-xl text-brand-primary/40 font-medium max-w-3xl italic">
-              The &quot;hidden&quot; third pillar of cannabis chemistry. Beyond smell and high, flavonoids provide the color, 
-              flavor, and deep-tissue therapeutic effects like the unique Cannflavins.
-            </p>
-          </div>
-          <InteractiveFlavonoidMapper />
-        </section>
-
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="newsreader-display text-4xl text-brand-primary mb-8 border-b border-brand-primary/5 pb-4">Prescription Safety</h2>
-            <SafetyChecker />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <h2 className="newsreader-display text-4xl text-brand-primary mb-8 border-b border-brand-primary/5 pb-4">Precision Dosing</h2>
-            <DosageCalculator />
-          </motion.div>
-        </section>
-      </div>
-    </main>
-  );
+    <section className="mt-24" aria-labelledby="sources-heading"><div className="mb-8"><p className="clinical-label text-brand-emerald-900">Reviewed evidence</p><h2 id="sources-heading" className="newsreader-display mt-3 text-4xl sm:text-5xl">Science with traceable limits</h2></div><div className="overflow-hidden rounded-2xl border border-brand-primary/10">{reviewedScience.map((source)=><a key={source.id} href={source.href} target={source.href.startsWith('http')?'_blank':undefined} rel="noreferrer" className="grid gap-3 border-b border-brand-primary/10 bg-brand-stone-100 p-5 last:border-0 hover:bg-brand-primary/[.025] sm:grid-cols-[1fr_auto] sm:items-center"><div><div className="mb-2 flex flex-wrap gap-2"><span className="clinical-label text-brand-secondary">{source.kind}</span><span className="text-[10px] text-brand-primary/30">{source.year}</span></div><h3 className="font-bold">{source.title}</h3><p className="mt-2 text-xs leading-5 text-brand-primary/45">{source.limitation}</p></div><ShieldCheck className="text-brand-emerald-900" size={18}/></a>)}</div></section>
+  </main>;
 }

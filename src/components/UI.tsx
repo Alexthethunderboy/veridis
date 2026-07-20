@@ -15,7 +15,7 @@ interface SidebarItemProps {
 
 export function SidebarItem({ name, href, icon, compact = false }: SidebarItemProps) {
   const pathname = usePathname();
-  const isActive = pathname === href;
+  const isActive = pathname === href || (href !== '/' && pathname.startsWith(`${href}/`));
 
   return (
     <Link href={href} title={compact ? name : undefined} className={`flex w-full items-center rounded-xl px-3 py-3 text-sm transition-colors ${compact ? 'justify-center' : ''} ${

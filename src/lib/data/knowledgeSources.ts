@@ -5,7 +5,9 @@ export type SourceKind =
   | 'systematic review'
   | 'consensus report'
   | 'clinical guidance'
+  | 'randomized trial'
   | 'observational study'
+  | 'qualitative study'
   | 'reference book'
   | 'expert profile'
   | 'expert media'
@@ -58,13 +60,22 @@ export interface ExtractedIdea {
   editorialUse: string;
 }
 
+export interface SourceReviewRecord {
+  sourceId: string;
+  reviewer: string;
+  reviewedAt: string;
+  nextReviewAt: string;
+  cadence: 'monthly' | 'quarterly' | 'biannual';
+  status: 'current' | 'review due';
+}
+
 export const KNOWLEDGE_CONTRIBUTORS: KnowledgeContributor[] = [
   {
     id: 'riley-kirk',
     name: 'Dr. Riley Kirk',
     credentials: 'PhD, pharmaceutical sciences',
     role: 'Natural-product scientist and science communicator',
-    contribution: 'Connects analytical chemistry, community questions and harm reduction; co-authored the CHS survey used in the safety curriculum.',
+    contribution: 'Connects analytical chemistry, community questions, lived experience and practical cannabis education; co-authored the CHS survey used in the health curriculum.',
     expertise: ['Natural products', 'Product chemistry', 'CHS', 'Science communication'],
     profileHref: 'https://reeferwellnessbook.com/pages/about-the-book-author',
     publicSelfDisclosure: {
@@ -133,6 +144,26 @@ const CORE_SOURCES: KnowledgeSource[] = [
   {
     id: 'entourage-2024', title: 'The Entourage Effect in Cannabis Medicinal Products: A Comprehensive Review', authors: 'Baron EP, Lucas P, Eades J, Hogue O, et al.', year: 2024, source: 'Pharmaceuticals', href: 'https://pubmed.ncbi.nlm.nih.gov/39598452/', kind: 'systematic review',
     verification: 'primary source verified', quality: 'peer reviewed', summary: 'Reviews evidence and uncertainty around interactions among cannabis constituents.', limitation: 'Mechanistic plausibility and preclinical results do not establish predictable clinical synergy in commercial products.', topics: ['Terpenes', 'Cannabinoids', 'Entourage effect'], lessonSlugs: ['terpenes-flavonoids-and-entourage'],
+  },
+  {
+    id: 'spindle-limonene-2024', title: 'Vaporized D-limonene selectively mitigates the acute anxiogenic effects of Δ9-tetrahydrocannabinol in healthy adults who intermittently use cannabis', authors: 'Spindle TR, Sholler DJ, Cone EJ, et al.', year: 2024, source: 'Drug and Alcohol Dependence', href: 'https://pubmed.ncbi.nlm.nih.gov/38498958/', kind: 'randomized trial',
+    verification: 'primary source verified', quality: 'peer reviewed', summary: 'A controlled human crossover study found that vaporized d-limonene reduced some acute anxiety effects of THC without broadly changing other measured THC effects.', limitation: 'A small study of isolated compounds in healthy adults cannot establish that citrus-smelling flower produces the same result or that all constituent interactions are beneficial.', topics: ['Terpenes', 'THC', 'Entourage effect', 'Human research'], lessonSlugs: ['terpenes-flavonoids-and-entourage'],
+  },
+  {
+    id: 'jeddi-2024', title: 'Cannabis for medical use versus opioids for chronic non-cancer pain: a systematic review and network meta-analysis of randomised clinical trials', authors: 'Jeddi HM, Busse JW, Sadeghirad B, et al.', year: 2024, source: 'BMJ Open', href: 'https://pubmed.ncbi.nlm.nih.gov/38171632/', kind: 'systematic review',
+    verification: 'primary source verified', quality: 'peer reviewed', summary: 'An indirect comparison found broadly similar small improvements for medical cannabis and opioids in chronic non-cancer pain, with fewer discontinuations due to adverse events for cannabis.', limitation: 'The review found no direct cannabis-versus-opioid trials and follow-up was short, so it cannot support a universal safety ranking across products or conditions.', topics: ['Chronic pain', 'Comparative effectiveness', 'Patient decisions'], lessonSlugs: ['medical-evidence'],
+  },
+  {
+    id: 'garcia-romeu-2022', title: 'Online survey of medicinal cannabis users: Qualitative analysis of patient-level data', authors: 'Garcia-Romeu A, Elmore JS, Mayhugh RE, et al.', year: 2022, source: 'Frontiers in Pharmacology', href: 'https://pubmed.ncbi.nlm.nih.gov/36147312/', kind: 'qualitative study',
+    verification: 'primary source verified', quality: 'peer reviewed', summary: 'Medicinal cannabis users described symptom relief, improved quality of life and reduced use of other medicines alongside side effects, cost, legal concerns and limited clinical support.', limitation: 'A self-selected online sample records lived experience but cannot estimate average treatment effects or prove that cannabis caused every reported change.', topics: ['Lived experience', 'Patient-reported benefit', 'Access'], lessonSlugs: ['medical-evidence', 'stigma-language-and-media'],
+  },
+  {
+    id: 'physician-knowledge-2025', title: 'International perspectives on physician knowledge, attitudes, and practices related to medical cannabis', authors: 'Syed SA, Singh J, Elkholy H, et al.', year: 2025, source: 'Frontiers in Public Health', href: 'https://pubmed.ncbi.nlm.nih.gov/40051509/', kind: 'observational study',
+    verification: 'primary source verified', quality: 'peer reviewed', summary: 'An international physician survey found substantial cannabis-specific knowledge gaps and wide variation in clinical practice.', limitation: 'The cross-sectional, self-selected sample was collected in 2016–2018 and does not justify claiming that every—or most—doctor lacks cannabis knowledge.', topics: ['Clinical education', 'ECS', 'Medical cannabis'], lessonSlugs: ['cannabinoids-and-the-ecs', 'medical-evidence', 'stigma-language-and-media'],
+  },
+  {
+    id: 'ren-2019-history', title: 'The origins of cannabis smoking: Chemical residue evidence from the first millennium BCE in the Pamirs', authors: 'Ren M, Tang Z, Wu X, et al.', year: 2019, source: 'Science Advances', href: 'https://doi.org/10.1126/sciadv.aaw1391', kind: 'observational study',
+    verification: 'primary source verified', quality: 'peer reviewed', summary: 'Chemical residues in funerary braziers provide direct evidence of cannabis being burned in ritual contexts about 2,500 years ago.', limitation: 'The site documents one ancient practice and cannot establish a single origin, continuous tradition or every earlier medicinal claim.', topics: ['History', 'Archaeology', 'Ritual use'], lessonSlugs: ['cannabis-across-cultures', 'cannabis-in-africa-and-nigeria'],
   },
   {
     id: 'cooper-potency-2025', title: 'High-Potency Cannabis Use and Health: A Systematic Review of Observational and Experimental Studies', authors: 'Lake S, Murray CH, Henry B, et al.; Cooper ZD', year: 2025, source: 'American Journal of Psychiatry', href: 'https://pubmed.ncbi.nlm.nih.gov/40134269/', kind: 'systematic review',
@@ -207,8 +238,24 @@ const MEDGRIOT_SOURCES: KnowledgeSource[] = MEDGRIOT_ESSAYS.map((essay) => ({
 
 export const KNOWLEDGE_SOURCES: KnowledgeSource[] = [...CORE_SOURCES, ...MEDGRIOT_SOURCES];
 
+const REVIEWED_AT = '2026-07-17';
+export const SOURCE_REVIEW_RECORDS: SourceReviewRecord[] = KNOWLEDGE_SOURCES.map((source) => {
+  const legal = source.kind === 'legal document';
+  const clinical = ['systematic review','consensus report','clinical guidance','randomized trial','observational study','qualitative study'].includes(source.kind);
+  return {
+    sourceId: source.id,
+    reviewer: 'Efifya editorial team',
+    reviewedAt: REVIEWED_AT,
+    nextReviewAt: legal ? '2026-08-17' : clinical ? '2026-10-17' : '2027-01-17',
+    cadence: legal ? 'monthly' : clinical ? 'quarterly' : 'biannual',
+    status: 'current',
+  };
+});
+
+export function getSourceReviewRecord(sourceId:string){return SOURCE_REVIEW_RECORDS.find((record)=>record.sourceId===sourceId)}
+
 export const CURRICULUM_CITATIONS: Citation[] = KNOWLEDGE_SOURCES
-  .filter((source) => ['nap-2024', 'solmi-2023', 'ahrq-2025', 'ditchfield-2014', 'kirk-chs-2026', 'acog-2025', 'entourage-2024', 'cooper-potency-2025', 'cooper-barriers-2021'].includes(source.id))
+  .filter((source) => ['nap-2024', 'solmi-2023', 'ahrq-2025', 'ditchfield-2014', 'kirk-chs-2026', 'acog-2025', 'entourage-2024', 'spindle-limonene-2024', 'jeddi-2024', 'garcia-romeu-2022', 'physician-knowledge-2025', 'ren-2019-history', 'cooper-potency-2025', 'cooper-barriers-2021'].includes(source.id))
   .map(({ id, title, authors, year, source, href, kind }) => ({ id, title, authors, year, source, href, kind }));
 
 export const EXTRACTED_IDEAS: ExtractedIdea[] = [
@@ -217,12 +264,16 @@ export const EXTRACTED_IDEAS: ExtractedIdea[] = [
     synthesis: 'Flower, extracts, purified cannabinoids and regulated medicines are not interchangeable exposures; formulation, dose and route must travel with every conclusion.', lessonSlugs: ['what-is-cannabis', 'how-to-read-cannabis-research', 'medical-evidence', 'dose-route-and-duration'], editorialUse: 'Core rule for rewriting broad health or safety claims.',
   },
   {
-    id: 'community-to-study', title: 'Lived experience can generate questions—not settle them', evidence: 'supported', sourceIds: ['kirk-chs-2026', 'nap-profile'],
-    synthesis: 'Community reports can expose overlooked patterns and improve survey design. The resulting observations still require bias checks, comparison groups and converging evidence.', lessonSlugs: ['how-to-read-cannabis-research', 'cannabinoid-hyperemesis-syndrome'], editorialUse: 'Keeps community knowledge visible without upgrading anecdote into causal proof.',
+    id: 'community-to-study', title: 'Lived experience is a foundation for better cannabis science', evidence: 'supported', sourceIds: ['garcia-romeu-2022', 'kirk-chs-2026', 'nap-profile'],
+    synthesis: 'People directly report what they felt, valued and changed. Community knowledge reveals overlooked outcomes and helps researchers design questions that matter, while comparison studies extend those observations to causal and population questions.', lessonSlugs: ['how-to-read-cannabis-research', 'medical-evidence', 'cannabinoid-hyperemesis-syndrome'], editorialUse: 'Treats personal response as real evidence while matching each study design to the question it can answer.',
   },
   {
     id: 'potency-as-exposure', title: 'Potency changes the exposure question', evidence: 'supported', sourceIds: ['cooper-potency-2025', 'solmi-2023'],
     synthesis: 'Higher THC concentration can change dose and risk, but product, frequency, behaviour and individual vulnerability remain part of the exposure.', lessonSlugs: ['dose-route-and-duration', 'dependence-tolerance-and-withdrawal', 'pregnancy-youth-and-vulnerability'], editorialUse: 'Adds a modern potency lens without implying a single threshold explains every outcome.',
+  },
+  {
+    id: 'entourage-as-programme', title: 'The entourage effect is a research programme, not one slogan', evidence: 'supported', sourceIds: ['entourage-2024', 'spindle-limonene-2024'],
+    synthesis: 'Cannabinoid, terpene and whole-extract interactions can occur through multiple mechanisms. Controlled human d-limonene research supplies a compound-specific proof of principle while the wider interaction map develops.', lessonSlugs: ['cannabinoids-and-the-ecs', 'terpenes-flavonoids-and-entourage', 'medical-evidence'], editorialUse: 'Adds entourage science wherever the app discusses chemistry, cultivar experience or therapeutic effects.',
   },
   {
     id: 'research-material-validity', title: 'A study is only as relevant as its material and methods', evidence: 'supported', sourceIds: ['cooper-barriers-2021', 'sri-profile'],

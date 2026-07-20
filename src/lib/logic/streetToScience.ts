@@ -10,43 +10,43 @@ export interface ScienceMapping {
 export const STREET_TO_SCIENCE_MAP: Record<string, ScienceMapping> = {
   "Loud": {
     term: "Loud",
-    chemicalReality: "High-Potency Cannabis Sativa/Hybrid",
-    primaryRisks: ["Anxiety", "Paranoia", "Increased Heart Rate"],
+    chemicalReality: "A market term often used for aromatic, THC-rich plant cannabis",
+    primaryRisks: ["Strong psychoactive effect", "Euphoria", "Sensory intensity"],
     warningLevel: "MEDIUM",
-    description: "Typically refers to high-THC imported or locally grown hydroponic cannabis. While natural, its extreme potency can trigger latent psychological issues.",
-    pidginSummary: "Na strong weed wey get plenty THC. E fit make your heart beat fast or make you fear unnecessarily if you no careful."
+    description: "Often refers to strongly aromatic flower perceived as potent. The name does not specify genetics, cultivation method or laboratory composition; people commonly seek its pronounced psychoactive and sensory experience.",
+    pidginSummary: "Na name people dey use for weed wey loud for nose and fit get strong psychoactive effect. The exact chemistry depend on the batch."
   },
   "Colorado": {
     term: "Colorado",
-    chemicalReality: "Synthetic Cannabinoids (AB-FUBINACA, JWH-018) sprayed on inert plant matter.",
+    chemicalReality: "An unverified Nigerian street label that may refer to different products",
     primaryRisks: ["Seizures", "Strokes", "Acute Psychosis", "Organ Failure", "Death"],
     warningLevel: "CRITICAL",
-    description: "Colorado is NOT cannabis. It is a dangerous cocktail of lab-made chemicals with up to 100x the binding affinity of THC, leading to fatal receptor 'overdrive'.",
-    pidginSummary: "Colorado no be weed at all! Na pure chemical poison wey dem cook for lab. E fit kill person, cause seizure, or damage brain. Avoid am totally!"
+    description: "Some products sold under this name have been reported as plant material treated with synthetic cannabinoid receptor agonists or other unknown compounds. The label alone cannot identify chemistry, but severe symptoms should be treated as a medical emergency.",
+    pidginSummary: "Colos name no be lab test. Some batch fit carry synthetic chemicals or other unknown things. If seizure, collapse, chest pain or serious confusion happen, find urgent help."
   },
   "Colos": {
     term: "Colos",
-    chemicalReality: "Synthetic Cannabinoids (See 'Colorado')",
+    chemicalReality: "A shortened form of the unverified street label “Colorado”",
     primaryRisks: ["Seizures", "Strokes", "Acute Psychosis", "Death"],
     warningLevel: "CRITICAL",
-    description: "Shortened street name for Colorado. Carries extreme neurotoxic risks as it is a synthetic chemical, not a plant resin.",
-    pidginSummary: "Na the same thing as Colorado. Chemical poison, no go near am."
+    description: "The name is commonly linked with unknown or treated plant material, but it does not identify one chemical. Product uncertainty and the person’s symptoms matter more than the nickname.",
+    pidginSummary: "Na short name for Colorado. The name alone no tell the chemical inside; serious symptoms need urgent help."
   },
   "California Loud": {
     term: "California Loud",
-    chemicalReality: "Ultra-Potent Synthetic Cannabinoid Variants",
-    primaryRisks: ["Brain Lesions", "Severe Skin Damage", "Organ Failure", "Cardiac Arrest"],
+    chemicalReality: "An unverified market label that may be used for unknown mixtures",
+    primaryRisks: ["Collapse", "Seizures", "Severe agitation", "Chest pain"],
     warningLevel: "CRITICAL",
-    description: "A newer, even more toxic marketing name for synthetic mixes. Often contains industrial chemicals that cause irreversible neurological and physical damage.",
-    pidginSummary: "This one worse pass Colorado. Dem dey use fine name deir deceive people, but na pure acid and chemical wey go destroy your skin and brain."
+    description: "The name can be marketing rather than provenance. Without testing, it cannot establish whether the material is plant cannabis, treated material or another mixture.",
+    pidginSummary: "Fine foreign name no prove wetin dey inside. If the product unknown and serious symptom start, treat am as emergency."
   },
   "SK": {
     term: "SK",
-    chemicalReality: "Skunk (High-THC Cannabis Indica/Hybrid)",
-    primaryRisks: ["Sedation", "Cognitive Impairment", "Short-term Memory Loss"],
+    chemicalReality: "Aromatic plant cannabis commonly described as Skunk",
+    primaryRisks: ["Deep relaxation", "Strong aroma", "Psychoactive body effect"],
     warningLevel: "LOW",
-    description: "Refers to high-potency cannabis strains. While natural plant material, its high THC content requires cautious medicinal use.",
-    pidginSummary: "Na strong weed wey get heavy smell. E dey make person weak and sleep well-well."
+    description: "Usually refers to pungent plant-cannabis lineages or products. People often report a strong, relaxing experience, but the street label does not provide a measured cannabinoid or terpene profile.",
+    pidginSummary: "Na weed wey get strong smell and many people dey describe am as relaxing. The exact profile still depend on the product."
   },
   "Arizona": {
     term: "Arizona",

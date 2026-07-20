@@ -89,7 +89,7 @@ export default function FlavonoidLegend() {
 
                   <div className="grid grid-cols-2 gap-6 w-full text-left border-t border-brand-primary/5 pt-8">
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-secondary mb-2 block">Primary Benefit</span>
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-secondary mb-2 block">Research context</span>
                       <p className="text-xs font-bold text-brand-primary leading-tight">{selected.benefits}</p>
                     </div>
                     <div>
@@ -105,6 +105,7 @@ export default function FlavonoidLegend() {
                       </div>
                     </div>
                   </div>
+                  <p className="mt-6 text-xs leading-5 text-brand-primary/40">Flavonoids are part of the plant’s chemical ensemble. Their anti-inflammatory, antioxidant and other pathways are active research areas, with human relevance depending on the compound, amount, route and interaction with the wider product.</p>
                 </div>
               </Card>
             </motion.div>

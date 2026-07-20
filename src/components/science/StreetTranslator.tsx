@@ -54,7 +54,7 @@ export default function StreetTranslator() {
               <p className="clinical-label opacity-70">{result.chemicalReality}</p>
             </div>
             <Badge variant={result.warningLevel === 'CRITICAL' ? 'warning' : 'clinical'}>
-              {result.warningLevel} RISK
+              {result.warningLevel === 'CRITICAL' ? 'URGENT CAUTION' : 'PLANT PROFILE'}
             </Badge>
           </div>
 
@@ -70,7 +70,7 @@ export default function StreetTranslator() {
           </div>
 
           <div className="mt-8 pt-6 border-t border-current/10">
-            <h4 className="clinical-label mb-4 opacity-50">Biological Risks</h4>
+            <h4 className="clinical-label mb-4 opacity-50">{result.warningLevel === 'CRITICAL' ? 'Possible emergency signs' : 'Commonly reported effects'}</h4>
             <div className="flex flex-wrap gap-2">
               {result.primaryRisks.map((risk, i) => (
                 <span key={i} className="px-3 py-1 bg-current/10 rounded-lg text-xs font-bold">{risk}</span>
@@ -80,7 +80,7 @@ export default function StreetTranslator() {
 
           {result.warningLevel === 'CRITICAL' && (
             <div className="mt-8 p-4 bg-red-900/80 border border-red-500/50 rounded-xl text-red-100 font-bold tracking-widest text-sm text-center animate-pulse uppercase">
-              ⚠️ NEUROTOXIC RISK DETECTED: DO NOT CONSUME
+              ⚠️ UNKNOWN SYNTHETIC PRODUCT: SEEK URGENT HELP FOR SEVERE SYMPTOMS
             </div>
           )}
         </div>
@@ -88,4 +88,3 @@ export default function StreetTranslator() {
     </Card>
   );
 }
-

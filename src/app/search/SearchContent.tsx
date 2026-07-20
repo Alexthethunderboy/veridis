@@ -141,6 +141,7 @@ export default function SearchContent() {
                 {matchedPages.map((page, i) => (
                   <Link key={i} href={page.path} className="group block h-full">
                     <Card interactive className="h-full p-8 border-brand-primary/10 bg-brand-primary/[0.02]">
+                      <Badge variant="neutral" className="mb-5">{page.category}</Badge>
                       <div className="flex justify-between items-start mb-4">
                         <h4 className="newsreader-display text-3xl text-brand-primary group-hover:text-brand-secondary transition-colors">{page.title}</h4>
                         <ArrowUpRight className="text-brand-primary/20 group-hover:text-brand-secondary transition-colors" size={20} />

@@ -3,8 +3,9 @@ import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 
 export const metadata: Metadata = {
-  title: "Efifya | Cannabis Knowledge for Nigeria",
-  description: "Evidence-aware cannabis education grounded in Nigerian context, public health and science.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
+  title: "Efifya | Cannabis Knowledge, Culture & Science",
+  description: "Evidence-aware cannabis knowledge rooted in Nigeria and connected to plant histories, cultures, science and policy worldwide.",
   icons: { icon: '/icon.svg', shortcut: '/icon.svg' },
 };
 

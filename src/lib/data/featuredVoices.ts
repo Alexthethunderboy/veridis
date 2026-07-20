@@ -1,7 +1,7 @@
 export const FEATURED_VOICES = [
   {
-    type: 'Researcher collection', name: 'Dr. Riley Kirk', title: 'Natural-product chemistry, community questions & harm reduction',
-    summary: 'Explore peer-reviewed CHS research, chemical diversity, product testing, smokability and accessible science communication—with source types kept distinct.',
+    type: 'Researcher collection', name: 'Dr. Riley Kirk', title: 'Natural-product chemistry, lived experience & community-led questions',
+    summary: 'Explore peer-reviewed research, chemical diversity, product testing, smokability and accessible cannabis science from a researcher who publicly brings lived experience to the work.',
     href: '/edu/courses/safety-and-health/cannabinoid-hyperemesis-syndrome', accent: 'emerald',
   },
   {
@@ -11,7 +11,7 @@ export const FEATURED_VOICES = [
   },
   {
     type: 'MedGriot · 10-part series', name: 'Kelechi', title: 'Cannabis in Nigeria: the complete essay series',
-    summary: 'Ten essays trace history, law, foreign pressure, farming, health, stigma, reform, harm reduction and a more evidence-led direction for Nigeria.',
+    summary: 'Ten essays trace history, law, foreign pressure, farming, health, stigma, practical guidance, reform and a more evidence-led direction for Nigeria.',
     href: 'https://themedgriot.substack.com/archive', accent: 'blue', external: true,
   },
 ];

@@ -91,7 +91,7 @@ export const CURRICULUM_ENRICHMENTS: Record<string, CurriculumEnrichmentUnit[]> 
       id: 'exposure-profile', title: 'Think in exposure profiles, not servings', lede: 'Dose includes amount, concentration, route, absorption, timing and repeated exposure.', evidence: 'supported', sourceIds: ['solmi-2023', 'cooper-potency-2025'],
       paragraphs: [
         'Inhalation can produce a rapid rise in blood concentration, while swallowed THC has delayed and variable absorption plus conversion to active 11-hydroxy-THC. A label stating milligrams does not describe the full curve: onset, peak, decline and residual impairment can differ across products and people. Repeated administration can overlap with earlier exposure.',
-        'Ziva Cooper and colleagues’ potency review reinforces why concentration belongs in the exposure definition. Higher THC concentration can make a large dose easier to receive, but concentration alone does not reveal inhaled volume, frequency, user titration or vulnerability. Research and harm-reduction language should avoid treating “high potency” as a complete exposure measurement.',
+        'Ziva Cooper and colleagues’ potency review reinforces why concentration belongs in the exposure definition. Higher THC concentration can make a large dose easier to receive, but concentration alone does not reveal inhaled volume, frequency, user titration or vulnerability. Cannabis education should avoid treating “high potency” as a complete exposure measurement.',
       ],
       activity: { label: 'Apply it', prompt: 'Compare a rapid-onset inhaled exposure and a delayed oral exposure on a timeline. Mark where premature repeat dosing and safety-sensitive activity become concerns.' },
     },
@@ -106,36 +106,36 @@ export const CURRICULUM_ENRICHMENTS: Record<string, CurriculumEnrichmentUnit[]> 
   ],
   'terpenes-flavonoids-and-entourage': [
     {
-      id: 'plant-function-human-claim', title: 'Separate plant function from human effect', lede: 'A compound can matter greatly to plant ecology without producing a clinically meaningful effect at human exposure levels.', evidence: 'established', sourceIds: ['entourage-2024', 'bioactive-podcast'],
+      id: 'plant-function-human-claim', title: 'Follow the plant’s chemical ensemble', lede: 'Terpenes and flavonoids begin with plant biology and may also contribute to human experience through compound-specific pathways.', evidence: 'supported', sourceIds: ['entourage-2024', 'spindle-limonene-2024', 'bioactive-podcast'],
       paragraphs: [
-        'Terpenes contribute to aroma and plant interactions; flavonoids contribute pigmentation and other plant functions. Detection in cannabis establishes presence, not a therapeutic dose. Human relevance depends on concentration, route, metabolism, target engagement and controlled outcomes. Evidence from an isolated compound at a high laboratory concentration cannot automatically be transferred to inhaling a complex flower.',
-        'Expert media can help learners understand chemical diversity and generate better questions. It is treated as interpretation: the claim becomes curriculum-grade only after its biological and clinical evidence is separately checked. This keeps curiosity without allowing sensory marketing to masquerade as prescribing.',
+        'Terpenes contribute to aroma and plant interactions; flavonoids contribute pigmentation and other functions. In people, relevance depends on concentration, route, metabolism, target engagement and the other compounds present. Aroma only describes one accessible layer of that chemistry.',
+        'Controlled human research now provides an important proof of principle: d-limonene changed part of the acute THC response under defined conditions. That result supports serious study of the ensemble while remaining specific to the compounds, doses and outcomes tested. Expert media and lived experience help identify the next combinations worth studying.',
       ],
-      activity: { label: 'Research lab', prompt: 'Choose a popular terpene claim and build an evidence chain from plant measurement to human outcome. Identify where the chain currently breaks.' },
+      activity: { label: 'Research lab', prompt: 'Choose a terpene claim and build an evidence chain from plant measurement to human outcome. Mark the links supported by human, animal, laboratory and lived-experience evidence.' },
     },
     {
-      id: 'interaction-hypotheses', title: 'Break “the entourage effect” into testable hypotheses', lede: 'The phrase can refer to several different interactions, each requiring its own experiment.', evidence: 'inconclusive', sourceIds: ['entourage-2024'],
+      id: 'interaction-hypotheses', title: 'Turn the entourage effect into testable science', lede: 'The plant’s compounds can interact through several mechanisms; naming the mechanism makes the evidence clearer.', evidence: 'supported', sourceIds: ['entourage-2024', 'spindle-limonene-2024'],
       paragraphs: [
-        'A cannabinoid-cannabinoid interaction is not the same as a cannabinoid-terpene interaction. Pharmacokinetic interaction changes absorption or metabolism; pharmacodynamic interaction changes response at a target or system. A whole extract differing from an isolate could reflect many constituents, not a special synergy. The comparator and outcome must be stated.',
-        'The responsible conclusion is neither “the entourage effect is proven” nor “plant combinations never matter.” Some interactions are plausible or supported for particular compounds and outcomes, while broad consumer predictions remain uncertain. Product-specific evidence is the appropriate unit of confidence.',
+        'A cannabinoid–cannabinoid interaction is not the same as a cannabinoid–terpene interaction. Pharmacokinetic interaction changes absorption or metabolism; pharmacodynamic interaction changes response at a receptor, circuit or whole system. A complex extract can also differ from an isolate through additive effects rather than strict synergy.',
+        'Evidence supports the broader fact that cannabis constituents can modify one another, while the map of clinically important combinations remains incomplete. The strongest claim names the compounds, ratio, route, comparator and outcome. This approach respects the entourage effect as a productive scientific framework without turning every cultivar description into a guarantee.',
       ],
       activity: { label: 'Apply it', prompt: 'Rewrite an entourage claim as a testable hypothesis naming compounds, ratio, dose, comparator, population and outcome.' },
     },
   ],
   'medical-evidence': [
     {
-      id: 'condition-product-matrix', title: 'Use a condition-by-product evidence matrix', lede: 'Medical evidence belongs to a defined intervention and outcome—not to cannabis as a single treatment.', evidence: 'established', sourceIds: ['solmi-2023', 'ahrq-2025'],
+      id: 'condition-product-matrix', title: 'Use a condition-by-product evidence matrix', lede: 'Specificity preserves positive findings and prevents one weak result from erasing the rest of cannabis medicine.', evidence: 'established', sourceIds: ['solmi-2023', 'ahrq-2025', 'jeddi-2024'],
       paragraphs: [
-        'A useful evidence table places the clinical condition on one axis and the studied product on the other. It then records comparator, follow-up, average benefit, adverse events and certainty. Evidence for a purified cannabinoid in a rare seizure disorder does not establish benefit from smoked flower for general wellness. Evidence for short-term symptom reduction does not establish disease modification or long-term safety.',
-        'The 2025 AHRQ living review illustrates this discipline for chronic pain: some cannabinoid products show small short-term improvements in some populations, with increased adverse events and important gaps. The correct teaching point is conditional and measurable, not a universal endorsement or dismissal.',
+        'A useful evidence table places the clinical condition on one axis and the studied product on the other. It records comparator, follow-up, symptom change, function, quality of life, unwanted effects and certainty. Evidence for a purified cannabinoid in a rare seizure disorder is strong evidence for that medicine and indication; it should not be diluted into a yes-or-no verdict on the entire plant.',
+        'For chronic pain, some cannabinoid products show small average short-term improvements. Indirect trial comparison suggests effects similar in size to opioids for several outcomes and fewer discontinuations due to adverse events with cannabis, while direct long-term comparisons remain a research need.',
       ],
       activity: { label: 'Decision practice', prompt: 'Build a six-column evidence row for one condition: product, population, comparator, benefit, harm and certainty. Leave a cell blank rather than inventing data.' },
     },
     {
-      id: 'patient-reported-benefit', title: 'Respect reported benefit while testing the explanation', lede: 'A person’s improvement is real as an experience even when its cause and generalizability remain uncertain.', evidence: 'supported', sourceIds: ['nap-profile', 'sri-profile', 'reefer-wellness'],
+      id: 'patient-reported-benefit', title: 'Treat lived experience as evidence of individual response', lede: 'A person’s report is the primary evidence for what they felt, valued and changed; other designs answer different questions.', evidence: 'supported', sourceIds: ['garcia-romeu-2022', 'nap-profile', 'sri-profile', 'reefer-wellness'],
       paragraphs: [
-        'Community and clinical observations can reveal outcomes that formal trials have neglected. They can also be influenced by expectation, natural symptom fluctuation, concurrent treatment, selection and product variability. A respectful evidence conversation asks what changed, how much, for how long, at what cost and what alternative explanations remain.',
-        'Sue Sisley’s research programme shows why patient reports can motivate trials while not replacing them. Riley Kirk and Miyabe Shields emphasise community questions and chemical complexity. Together these perspectives support a curriculum that listens first, then defines the exposure and tests the claim with appropriate methods.',
+        'Community and clinical observations reveal outcomes that formal trials may neglect: sleep quality, reduced reliance on another medicine, emotional ease, creativity, ritual meaning or the ability to participate in daily life. A respectful evidence conversation asks what changed, how much, for how long, with which product and whether the result was worth any trade-offs.',
+        'Qualitative research documents substantial perceived benefit alongside problems such as cost, side effects, legal pressure and lack of informed support. Sue Sisley’s programme shows how patient reports motivate trials; Riley Kirk and Miyabe Shields show how community questions and chemical complexity can shape better science. Listening is not a courtesy added after research—it helps determine what research should measure.',
       ],
       activity: { label: 'Research lab', prompt: 'Convert “cannabis helped my pain” into five neutral follow-up questions that could inform both care and research.' },
     },
@@ -171,7 +171,7 @@ export const CURRICULUM_ENRICHMENTS: Record<string, CurriculumEnrichmentUnit[]> 
       id: 'recovery-support', title: 'Teach cessation as care, not punishment', lede: 'When CHS is the correct diagnosis, sustained cessation is central, but stopping may expose the problems cannabis was being used to manage.', evidence: 'supported', sourceIds: ['kirk-chs-2026', 'medgriot-9'],
       paragraphs: [
         'Changing cultivar, route or THC percentage has not been established as a reliable way to prevent recurrence. Recovery planning should address withdrawal, sleep, pain, anxiety, appetite or trauma rather than issuing a command without support. Re-exposure followed by recurrence can strengthen diagnostic confidence, but intentionally testing that possibility is unsafe.',
-        'MedGriot’s harm-reduction emphasis on nonjudgmental community support becomes concrete here: identify trusted care, plan hydration and medical follow-up, remove access where possible and prepare for cravings or the return of underlying symptoms. Persistent vomiting and dehydration require medical assessment rather than a self-managed cessation plan alone.',
+        'MedGriot’s emphasis on nonjudgmental community support becomes concrete here: identify trusted care, plan hydration and medical follow-up, and prepare for the return of symptoms cannabis had been helping to manage. Persistent vomiting and dehydration require medical assessment rather than a self-managed plan alone.',
       ],
       activity: { label: 'Decision practice', prompt: 'Draft a compassionate discharge explanation that covers diagnostic uncertainty, urgent warning signs, cessation and support for the original reason for use.' },
     },
@@ -304,17 +304,17 @@ export const CURRICULUM_ENRICHMENTS: Record<string, CurriculumEnrichmentUnit[]> 
   ],
   'cannabis-across-cultures': [
     {
-      id: 'historical-evidence', title: 'Build historical claims from traceable evidence', lede: 'A repeated origin story can become familiar without becoming documented.', evidence: 'supported', sourceIds: ['medgriot-2', 'grow-bible-2001'],
+      id: 'historical-evidence', title: 'Build a many-thousand-year timeline from traceable evidence', lede: 'Cannabis history is ancient and extensive; archaeology helps anchor particular uses to particular places and times.', evidence: 'supported', sourceIds: ['ren-2019-history', 'medgriot-2', 'grow-bible-2001'],
       paragraphs: [
-        'Historical research distinguishes archaeological material, botanical remains, trade records, medical texts, colonial reports, newspapers and oral histories. Each source has preservation, translation and power biases. A colonial official’s description may reveal policy and prejudice as much as local practice.',
-        'The MedGriot arrival essay provides a Nigerian narrative and a map of claims to investigate. Efifya uses it to generate archival questions, then labels which parts are documented, disputed or still unknown. Traditional use can be historically important without serving as modern clinical trial evidence.',
+        'Historical research distinguishes archaeological material, botanical remains, chemical residues, trade records, medical texts, colonial reports, newspapers and oral histories. Direct residue evidence documents psychoactive cannabis use in the Pamirs about 2,500 years ago, while fibre, seed and medicinal histories reach across broader places and periods. Each source has preservation, translation and power limits.',
+        'The MedGriot arrival essay provides a Nigerian narrative and a map of claims to investigate. Efifya uses it to generate archival questions, then labels which parts are documented, disputed or still unknown. Colonial descriptions are read critically because they often reveal policy and prejudice as much as local practice.',
       ],
       activity: { label: 'Research lab', prompt: 'Choose one historical claim and create a source table with date, author, purpose, proximity to events, bias and corroborating evidence.' },
     },
     {
-      id: 'avoid-two-extremes', title: 'Avoid romanticising and dismissing traditional knowledge', lede: 'Respectful study neither treats tradition as automatic clinical proof nor erases it because it is not a randomized trial.', evidence: 'supported', sourceIds: ['medgriot-2', 'nap-profile'],
+      id: 'avoid-two-extremes', title: 'Treat traditional knowledge as knowledge', lede: 'Longstanding use preserves observation, practice and meaning; modern research can extend it without demanding that it first imitate a randomized trial.', evidence: 'supported', sourceIds: ['medgriot-2', 'nap-profile'],
       paragraphs: [
-        'Traditional practices can preserve observations, meanings and community institutions. They can suggest pharmacological questions and show how people understand health. They may also contain variable preparations, changing interpretations and risks. The appropriate method depends on whether the question is historical, cultural, chemical or clinical.',
+        'Traditional practices preserve observations, meanings and community institutions. They can identify preparations, patterns and outcomes that formal science later chooses to study. Variation between preparations does not make the knowledge worthless; it tells researchers what must be documented when asking a chemical or clinical question.',
         'Community-engaged pharmacognosy offers a bridge: document the practice accurately, involve knowledge holders, analyse materials and test defined hypotheses while protecting attribution and consent. This produces richer science without collapsing cultural value into laboratory validation alone.',
       ],
       activity: { label: 'Apply it', prompt: 'Write an ethical research plan for a traditional-use claim that includes community governance, material identification and limits on commercial extraction.' },
@@ -332,8 +332,8 @@ export const CURRICULUM_ENRICHMENTS: Record<string, CurriculumEnrichmentUnit[]> 
     {
       id: 'misinformation-audit', title: 'Audit both prohibition and promotion claims', lede: 'Evidence literacy must work symmetrically even when the conclusion aligns with our values.', evidence: 'established', sourceIds: ['solmi-2023', 'medgriot-6', 'medgriot-7'],
       paragraphs: [
-        'Warning claims should specify absolute risk, population, exposure and uncertainty. Benefit claims should identify product, comparator and outcome. Testimonials can communicate experience but cannot estimate average effects. A scientific citation is not sufficient if it studied a different compound, species, dose or endpoint.',
-        'The practical audit asks: who benefits from this framing, what source is linked, does the source support the headline, what important context is missing and what would change the conclusion? Applying the same questions to advocacy, government, industry and media builds credibility.',
+        'Warning claims should specify absolute risk, population, exposure and uncertainty. Benefit claims should identify product, comparator and outcome without treating the absence of a large trial as proof that people’s benefit is imaginary. Testimonials communicate experience; controlled studies estimate different things.',
+        'The practical audit asks: who benefits from this framing, what source is linked, does the source support the headline, and what political or commercial history shaped the evidence base? Government, medicine, academia and prohibition institutions deserve the same conflict and bias scrutiny applied to advocacy and industry.',
       ],
       activity: { label: 'Apply it', prompt: 'Score a fictional claim from 0–2 on product specificity, study fit, uncertainty, conflict disclosure and Nigerian relevance.' },
     },

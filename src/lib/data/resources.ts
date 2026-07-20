@@ -1,6 +1,6 @@
-import { KNOWLEDGE_SOURCES, type KnowledgeSource, type SourceKind } from './knowledgeSources';
+import { KNOWLEDGE_SOURCES, getSourceReviewRecord, type KnowledgeSource, type SourceKind } from './knowledgeSources';
 
-export type ResourceKind = 'Systematic review' | 'Observational study' | 'Consensus report' | 'Clinical guidance' | 'Book' | 'Expert profile' | 'Expert media' | 'Editorial essay' | 'Legal document' | 'Working report';
+export type ResourceKind = 'Systematic review' | 'Randomized trial' | 'Observational study' | 'Qualitative study' | 'Consensus report' | 'Clinical guidance' | 'Book' | 'Expert profile' | 'Expert media' | 'Editorial essay' | 'Legal document' | 'Working report';
 export type ResourceQuality = 'Peer reviewed' | 'Authoritative' | 'Expert interpretation' | 'Author perspective' | 'Historical reference' | 'Working report';
 
 export interface LibraryResource {
@@ -17,11 +17,16 @@ export interface LibraryResource {
   external: boolean;
   relatedCourse: string;
   verification: KnowledgeSource['verification'];
+  reviewer: string;
+  reviewedAt: string;
+  nextReviewAt: string;
 }
 
 const KIND_LABELS: Record<SourceKind, ResourceKind> = {
   'systematic review': 'Systematic review',
+  'randomized trial': 'Randomized trial',
   'observational study': 'Observational study',
+  'qualitative study': 'Qualitative study',
   'consensus report': 'Consensus report',
   'clinical guidance': 'Clinical guidance',
   'reference book': 'Book',
@@ -69,7 +74,9 @@ function lessonHref(source: KnowledgeSource) {
   return course ? `/edu/courses/${course}/${lesson}` : '/edu';
 }
 
-export const LIBRARY_RESOURCES: LibraryResource[] = KNOWLEDGE_SOURCES.map((source) => ({
+export const LIBRARY_RESOURCES: LibraryResource[] = KNOWLEDGE_SOURCES.map((source) => {
+  const review=getSourceReviewRecord(source.id)!;
+  return ({
   id: source.id,
   title: source.title,
   creators: source.authors,
@@ -83,16 +90,20 @@ export const LIBRARY_RESOURCES: LibraryResource[] = KNOWLEDGE_SOURCES.map((sourc
   external: source.href.startsWith('http'),
   relatedCourse: lessonHref(source),
   verification: source.verification,
-}));
+  reviewer: review.reviewer,
+  reviewedAt: review.reviewedAt,
+  nextReviewAt: review.nextReviewAt,
+  });
+});
 
-export const RESOURCE_FILTERS = ['All', 'Systematic review', 'Consensus report', 'Book', 'Expert profile', 'Editorial essay', 'Legal document'] as const;
+export const RESOURCE_FILTERS = ['All', 'Systematic review', 'Randomized trial', 'Observational study', 'Qualitative study', 'Consensus report', 'Book', 'Expert profile', 'Editorial essay', 'Legal document'] as const;
 
 function countKind(kind: ResourceKind) {
   return LIBRARY_RESOURCES.filter((resource) => resource.kind === kind).length;
 }
 
 export const LIBRARY_COLLECTIONS = [
-  { title: 'Health & clinical evidence', description: 'Peer-reviewed benefits, adverse effects, certainty and clinical limitations.', count: LIBRARY_RESOURCES.filter((resource) => resource.quality === 'Peer reviewed' || resource.kind === 'Clinical guidance').length, filter: 'Systematic review' },
+  { title: 'Health & clinical evidence', description: 'Therapeutic findings, controlled trials, lived experience and comparative care.', count: LIBRARY_RESOURCES.filter((resource) => resource.quality === 'Peer reviewed' || resource.kind === 'Clinical guidance').length, filter: 'Systematic review' },
   { title: 'Nigeria: essays, law & policy', description: 'Local authorship and legal sources kept distinct, dated and cross-checked.', count: countKind('Editorial essay') + countKind('Legal document'), filter: 'Editorial essay' },
   { title: 'Books & expert knowledge', description: 'Topic maps, researcher perspectives and historical references with visible limits.', count: countKind('Book') + countKind('Expert profile'), filter: 'Book' },
 ];

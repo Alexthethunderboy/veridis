@@ -2,30 +2,30 @@ export const EDUCATIONAL_CONTENT = {
   basics: [
     {
       title: "Indica vs Sativa",
-      content: "Cannabis genetics are broadly divided into two primary lineages based on climate: Sativa and Indica. Sativas thrive in tropical climates like West Africa, growing tall with wispier flowers. Indicas evolved in cooler, mountainous regions, developing shorter, bushier structures.",
-      pidgin: "Sativa na for heat, Indica na for cold. Our Naija own na pure Sativa—e dey grow tall and give head high.",
+      content: "Indica and sativa can describe parts of cannabis history, morphology and culture, but modern commercial labels do not reliably predict chemistry or experience. Measured cannabinoids, aromatic compounds, dose, route and personal response tell a fuller story.",
+      pidgin: "Indica and sativa fit describe plant history and shape, but name alone no fit tell you the full chemistry or how e go feel for you.",
     },
     {
       title: "Cannabinoids 101",
-      content: "Cannabinoids are the chemical compounds in cannabis. While THC is the most famous, others like CBD, THCV, and CBG play vital medicinal roles.",
-      pidgin: "No be only THC dey inside weed. CBD, THCV, and CBG all get work dem dey do for body.",
+      content: "Cannabinoids are one major family of cannabis compounds. THC, CBD, CBG, CBC, THCV and others have distinct, dose-dependent pharmacology and can also interact with one another and the wider plant profile.",
+      pidgin: "No be only THC dey inside weed. CBD, CBG, CBC, THCV and other compounds get different work, and dem fit interact together.",
     }
   ],
   science: [
     {
       title: "The Endocannabinoid System",
-      content: "The ECS is a complex cell-signaling system in the human body that regulates sleep, mood, appetite, and memory. Cannabinoids interact with ECS receptors (CB1 and CB2) to maintain balance.",
+      content: "The ECS is a widespread signalling network involving endocannabinoids, receptors and enzymes. It helps regulate pain signalling, stress, sleep, appetite, memory, immune activity and energy balance; plant cannabinoids can modulate this network in compound- and context-specific ways.",
     },
     {
-      title: "Terpenes: The Aroma Medicine",
-      content: "Terpenes are aromatic oils that color cannabis varieties with distinctive flavors like citrus, berry, mint, and pine. In Nigeria, Sandalwood and Lemongrass notes are common in landraces.",
+      title: "Terpenes & the Entourage Effect",
+      content: "Terpenes help create cannabis aromas such as citrus, berry, mint, sandalwood and pine. Aroma only describes part of the profile: controlled human research is beginning to show that specific terpenes can modify specific THC effects, while the wider entourage map remains an active field of study.",
     }
   ],
   methods: [
     {
       title: "Decarboxylation",
-      content: "To activate the medicinal properties of cannabis for edibles or oils, it must be heated. Bake at 240°F (115°C) for 40 minutes.",
-      pidgin: "You gats bake am first to 'wake up' the medicine before you use am cook.",
+      content: "Heat can decarboxylate acidic cannabinoids, but conversion depends on material, equipment, temperature and time. A universal home formula cannot establish final potency or safety.",
+      pidgin: "Heat fit change cannabinoid chemistry, but no single home rule fit tell you the final dose or safety.",
     },
     {
       title: "Solventless Extraction",
@@ -35,8 +35,8 @@ export const EDUCATIONAL_CONTENT = {
   danger: [
     {
       title: "The 'Colorado' Crisis",
-      content: "Colorado is NOT cannabis. It is a synthetic chemical sprayed on dried leaves. It is extremely dangerous and can cause seizures or organ failure.",
-      pidgin: "Colos na poison, no be weed. Dem cook am for lab with chemicals wey fit kill person.",
+      content: "The street name “Colorado” does not establish composition. Some products sold under the name may contain dangerous synthetic cannabinoids, high-potency cannabis, mixtures or contaminants.",
+      pidgin: "Name like Colos no be laboratory test. The content fit change, and some batches fit cause serious emergency.",
     }
   ],
   growing: [
@@ -47,13 +47,13 @@ export const EDUCATIONAL_CONTENT = {
     },
     {
       title: "Harvesting & Curing",
-      content: "Harvest when 70% of the pistils have turned amber. Curing should take 2-4 weeks in a cool, dark environment to preserve the 'Electric' THCV potency.",
+      content: "Stigma colour and calendar rules do not establish potency or microbial safety. Post-harvest claims require defined sampling, environmental measurements and chemical testing.",
     }
   ],
   medical_science: [
     {
-      title: "Sickle Cell Pain Protocol",
-      content: "The CRISP Study identifies CBG and CBD as critical inhibitors of heme-mediated inflammation. A 1:1 ratio of CBD:CBG is recommended for managing vaso-occlusive crisis pain.",
+      title: "Sickle-cell evidence boundary",
+      content: "Laboratory findings cannot establish a CBD:CBG treatment ratio for vaso-occlusive crisis. Acute sickle-cell pain requires evidence-based medical care; cannabinoid questions belong in qualified clinical research.",
     }
   ],
 
@@ -66,53 +66,53 @@ export const CANNABINOIDS = {
     formula: 'C21H30O2',
     color: '#d90429',
     role: 'Primary Psychoactive',
-    description: 'The most well-known cannabinoid, responsible for the intoxicating effects and a wide range of therapeutic benefits including pain relief and appetite stimulation.',
-    effects: ['Euphoric', 'Pain Relief', 'Appetite Boost']
+    description: 'The best-known psychoactive cannabinoid, studied across pain, nausea, appetite, sleep and other outcomes. Experience depends on product, dose, route, the wider chemical profile and the person.',
+    effects: ['Psychoactive', 'Euphoria or altered perception', 'Variable symptom relief']
   },
   cbd: {
     name: 'CBD',
     fullName: 'Cannabidiol',
     formula: 'C21H30O2',
     color: '#2b9348',
-    role: 'Non-Psychoactive Healing',
-    description: 'A non-intoxicating compound widely recognized for its anti-anxiety, anti-seizure, and anti-inflammatory properties.',
-    effects: ['Calming', 'Clear-headed', 'Anti-inflammatory']
+    role: 'Non-THC-like cannabinoid',
+    description: 'A pharmacologically active cannabinoid without the typical THC-like psychoactive experience. Defined CBD medicines have strong evidence for some indications, and research continues across others.',
+    effects: ['Not typically THC-like', 'Therapeutic research', 'Interaction potential']
   },
   cbg: {
     name: 'CBG',
     fullName: 'Cannabigerol',
     formula: 'C21H32O2',
     color: '#f9c74f',
-    role: 'The Mother Cannabinoid',
-    description: 'The chemical precursor to THC and CBD. It shows significant potential in treating glaucoma and inflammatory bowel disease.',
-    effects: ['Focus', 'Alertness', 'Gut Health']
+    role: 'Biosynthetic precursor',
+    description: 'CBGA is a precursor in cannabinoid biosynthesis. Human clinical evidence for CBG products remains limited.',
+    effects: ['Research interest', 'Limited human evidence', 'Product variability']
   },
   thcv: {
     name: 'THCV',
     fullName: 'Tetrahydrocannabivarin',
     formula: 'C19H26O2',
     color: '#48cae4',
-    role: 'The Sports Car of Cannabinoids',
-    description: 'A minor cannabinoid that provides a high-energy, functional experience. It is unique for its ability to suppress appetite.',
-    effects: ['Energetic', 'Focused', 'Satiety']
+    role: 'Minor cannabinoid',
+    description: 'A cannabinoid with dose-dependent pharmacology under active study. Marketing claims about energy or appetite exceed current clinical certainty.',
+    effects: ['Preliminary research', 'Dose-dependent activity', 'Uncertain consumer effects']
   },
   cbn: {
     name: 'CBN',
     fullName: 'Cannabinol',
     formula: 'C21H26O2',
     color: '#3c096c',
-    role: 'The Sleep Aid',
-    description: 'Formed as THC ages, CBN is known for its potent sedative effects, making it an excellent natural sleep aid.',
-    effects: ['Sedative', 'Sleepy', 'Relaxed']
+    role: 'THC oxidation product',
+    description: 'A cannabinoid that can form as THC oxidises. Evidence does not support treating CBN as a proven standalone sleep medicine.',
+    effects: ['Limited human evidence', 'Often marketed for sleep', 'Clinical effect uncertain']
   },
   cbc: {
     name: 'CBC',
     fullName: 'Cannabichromene',
     formula: 'C21H30O2',
     color: '#f15bb5',
-    role: 'The Mood Elevator',
-    description: 'A non-psychoactive cannabinoid that works synergistically with others to improve mood and reduce depression.',
-    effects: ['Mood Lifting', 'Synergistic', 'Healing']
+    role: 'Minor cannabinoid',
+    description: 'A cannabinoid under laboratory and early clinical study for several pathways, including possible roles within multi-compound cannabis effects.',
+    effects: ['Preclinical research', 'Interaction hypotheses', 'Emerging human evidence']
   }
 };
 
@@ -126,7 +126,7 @@ export const TERPENES = {
     flavors: ['Earthy', 'Cloves', 'Herbal'],
     effects: ['Sedative', 'Muscle-relaxing', 'Couch-lock'],
     color: '#3d5a80', 
-    description: 'The most common terpene in modern cannabis. Known for increasing blood-brain barrier permeability, allowing cannabinoids to take effect faster.',
+    description: 'A common cannabis volatile with an earthy aroma, long associated by consumers with body ease and relaxation. Its specific contribution within whole cannabis remains an active research question.',
     foundIn: ['Mangoes', 'Hops', 'Lemongrass']
   },
   caryophyllene: { 
@@ -138,7 +138,7 @@ export const TERPENES = {
     flavors: ['Spicy', 'Pepper', 'Woody'],
     effects: ['Calm', 'Stress Relief', 'Physical Ease'],
     color: '#9c6644', 
-    description: 'The unique "dietary cannabinoid." It is the only terpene known to bind directly to CB2 receptors to provide potent anti-inflammatory effects.',
+    description: 'A peppery sesquiterpene that can engage CB2-related pathways and is studied for anti-inflammatory and analgesic potential. Human effects depend on exposure and the wider product.',
     foundIn: ['Black Pepper', 'Cinnamon', 'Cloves']
   },
   limonene: { 
@@ -150,7 +150,7 @@ export const TERPENES = {
     flavors: ['Citrus', 'Lemon Zest', 'Tart'],
     effects: ['Uplifting', 'Anti-anxiety', 'Creative'],
     color: '#fee440', 
-    description: 'A powerful mood elevator. Clinical potential includes anti-fungal properties and improving absorption of other topical compounds.',
+    description: 'A citrus-scented terpene studied across laboratory and human research. In a controlled study, vaporized d-limonene reduced part of the acute anxiety response to THC under defined conditions.',
     foundIn: ['Lemon Rinds', 'Peppermint', 'Rosemary']
   },
   pinene: { 
@@ -162,7 +162,7 @@ export const TERPENES = {
     flavors: ['Pine', 'Cedar', 'Refreshing'],
     effects: ['Focused', 'Alert', 'Bronchodilator'],
     color: '#007f5f', 
-    description: 'Acts as the "memory guard." Helps counteract short-term memory loss associated with THC and acts as a natural bronchodilator.',
+    description: 'A pine-scented terpene. Claims that cannabis pinene prevents THC-related memory effects or acts as a clinical bronchodilator remain unproven.',
     foundIn: ['Pine Needles', 'Basil', 'Parsley']
   },
   terpinolene: { 
@@ -174,7 +174,7 @@ export const TERPENES = {
     flavors: ['Floral', 'Piney', 'Apples'],
     effects: ['Cerebral', 'Sensory', 'Balanced'],
     color: '#7209b7', 
-    description: 'A complex terpene providing a "multidimensional" aroma. Found in many Sativas, it offers a soaring cerebral experience.',
+    description: 'A volatile compound with floral, pine and fruit notes, commonly associated with bright or cerebral experiences. Its contribution is best read alongside the full chemical profile and personal response.',
     foundIn: ['Lilacs', 'Nutmeg', 'Cumin']
   },
   linalool: { 
@@ -186,7 +186,7 @@ export const TERPENES = {
     flavors: ['Lavender', 'Floral', 'Sweet'],
     effects: ['Calming', 'Insomnia Relief', 'Anti-anxiety'],
     color: '#be95c4', 
-    description: 'The "Zen Master" of terpenes. Identifiable by its soft floral scent, it is deeply calming and used for insomnia and severe anxiety.',
+    description: 'A floral terpene present in lavender and other plants, with calming and anticonvulsant pathways under study. Cannabis-specific human outcomes remain an important research lane.',
     foundIn: ['Lavender', 'Birch Bark', 'Coriander']
   },
   humulene: { 
@@ -198,7 +198,7 @@ export const TERPENES = {
     flavors: ['Hops', 'Earthy', 'Bitter'],
     effects: ['Focused', 'Less Hungry', 'Light'],
     color: '#606c38', 
-    description: 'Also found in Hops, this terpene is unique for its ability to suppress appetite, unlike the typical "munchies" associated with THC.'
+    description: 'A terpene also found in hops. Appetite-suppression claims are largely preclinical and should not be presented as a predictable consumer effect.'
   },
   ocimene: { 
     name: 'Ocimene', 
@@ -209,7 +209,7 @@ export const TERPENES = {
     flavors: ['Sweet', 'Herbal', 'Woody'],
     effects: ['Uplifting', 'Clear', 'Active'],
     color: '#55a630', 
-    description: 'A sweet, delicate terpene that acts as a natural defense mechanism for plants. It offers bright, uplifting effects.'
+    description: 'A sweet, herbaceous plant volatile involved in ecological interactions and commonly associated with uplifting, clear experiences. Controlled cannabis-specific research is still developing.'
   },
   bisabolol: {
     name: 'Bisabolol',
@@ -220,7 +220,7 @@ export const TERPENES = {
     flavors: ['Chamomile', 'Floral', 'Honey'],
     effects: ['Soothing', 'Calm', 'Gentle'],
     color: '#ffcad4',
-    description: 'Commonly found in Chamomile, Bisabolol is prized for its gentle, soothing properties and pleasant floral scent.'
+    description: 'A floral compound also found in chamomile and studied in topical and laboratory contexts; product-level clinical effects require evidence.'
   },
   geraniol: {
     name: 'Geraniol',
@@ -231,7 +231,7 @@ export const TERPENES = {
     flavors: ['Rose', 'Peach', 'Sweet'],
     effects: ['Relaxed', 'Mellow', 'Sensory'],
     color: '#d00000',
-    description: 'Found in Roses and Geraniums, this terpene has a high boiling point and offers a rich, seductive floral aroma.'
+    description: 'A rose-scented terpene found across many plants. Its presence describes chemistry and aroma, not a medical indication.'
   },
   camphene: {
     name: 'Camphene',
@@ -242,7 +242,7 @@ export const TERPENES = {
     flavors: ['Woody', 'Musky', 'Pine'],
     effects: ['Grounded', 'Calm', 'Stable'],
     color: '#adb5bd',
-    description: 'A minor terpene with a powerful musky scent, often found in strains that have a deep, "forest floor" aromatic profile.'
+    description: 'A musky plant volatile. Reported cardiovascular interest is preclinical and not a treatment claim.'
   },
   valencene: {
     name: 'Valencene',
@@ -253,7 +253,7 @@ export const TERPENES = {
     flavors: ['Orange', 'Tangy', 'Sweet'],
     effects: ['Bubbly', 'Happy', 'Uplifting'],
     color: '#ff9100',
-    description: 'Named after Valencia oranges, this terpene provides a bright, citrusy punch and is excellent for boosting mood and focus.'
+    description: 'A citrus-scented terpene named for Valencia oranges. Mood and focus effects are not reliably predicted by its presence in cannabis.'
   }
 };
 
@@ -261,55 +261,55 @@ export const FLAVONOIDS = {
   cannflavin_a_b: {
     name: 'Cannflavin A & B',
     formula: 'C21H20O6',
-    role: 'Primary Anti-inflammatory',
-    benefits: '30x more effective than aspirin',
+    role: 'Cannabis-specific flavonoids',
+    benefits: 'Anti-inflammatory pathways under study',
     color: '#ff0054',
-    description: 'Unique to cannabis, these flavonoids inhibit pro-inflammatory prostaglandins (PGE-2) without gastric side effects.',
+    description: 'Cannabis-associated flavonoids studied for effects on prostaglandin and inflammatory pathways. Their distinctive chemistry makes them promising research targets.',
     foundIn: ['Cannabis Sativa']
   },
   cannflavin_c: {
     name: 'Cannflavin C',
     formula: 'C21H20O7',
-    role: 'Antioxidant/Antiparasitic',
-    benefits: 'Cellular protection and defense',
+    role: 'Cannabis-specific flavonoid',
+    benefits: 'Antioxidant and antiparasitic research',
     color: '#9e0059',
-    description: 'Often found in hemp varieties, Cannflavin C shows significant potential for neutralizing free radicals.',
+    description: 'A cannflavin found in some cannabis varieties and studied in antioxidant and antiparasitic laboratory models.',
     foundIn: ['Cannabis Sativa', 'Hemp']
   },
   apigenin: {
     name: 'Apigenin',
     formula: 'C15H10O5',
-    role: 'Anxiolytic & Sedative',
-    benefits: 'Muscle relaxation and sleep aid',
+    role: 'Flavonoid research target',
+    benefits: 'Calming and sleep-related pathways',
     color: '#ffbd00',
-    description: 'Interacts with GABA receptors to provide calming effects similar to chamomile tea.',
+    description: 'A flavonoid found in chamomile and cannabis that interacts with several signalling pathways studied in relation to calm, sleep and inflammation.',
     foundIn: ['Chamomile', 'Parsley', 'Celery']
   },
   quercetin: {
     name: 'Quercetin',
     formula: 'C15H10O7',
-    role: 'Antiviral & Cardiovascular',
-    benefits: 'Neutralizes free radicals',
+    role: 'Widely studied flavonoid',
+    benefits: 'Antioxidant and cardiovascular research',
     color: '#f72585',
-    description: 'A powerful antioxidant that supports heart health and immune system resilience.',
+    description: 'A widely distributed plant flavonoid studied for antioxidant, cardiovascular and immune-related pathways.',
     foundIn: ['Kale', 'Berries', 'Green Tea']
   },
   kaempferol: {
     name: 'Kaempferol',
     formula: 'C15H10O6',
-    role: 'Neuroprotective',
-    benefits: 'Slows neurodegeneration',
+    role: 'Widely studied flavonoid',
+    benefits: 'Neuroprotective pathways under study',
     color: '#4cc9f0',
-    description: 'A potent anti-inflammatory flavonoid that protects neurons and supports cognitive health.',
+    description: 'A plant flavonoid studied in inflammation, neuronal stress and metabolic models, including possible neuroprotective pathways.',
     foundIn: ['Broccoli', 'Kale', 'Spinach']
   },
   luteolin: {
     name: 'Luteolin',
     formula: 'C15H10O6',
-    role: 'Brain Fog Reducer',
-    benefits: 'Heart-protective & Clarity',
+    role: 'Widely studied flavonoid',
+    benefits: 'Inflammation and cognition research',
     color: '#4361ee',
-    description: 'Known for its ability to reduce neuro-inflammation and improve mental clarity and focus.',
+    description: 'A plant flavonoid studied for inflammatory, cardiovascular and nervous-system pathways, including cognition-related questions.',
     foundIn: ['Peppers', 'Celery', 'Thyme']
   }
 };
@@ -540,8 +540,8 @@ export const DOCS_RESOURCES = {
     { year: 'PILOT', title: 'Alternative Development Pilot', summary: 'A paradigm shift in Ondo State transitioning farmers from illicit markets to legal cash crops like Artemisia annua.' }
   ],
   technical: [
-    { title: 'CRISP Study', summary: 'Source of truth for cannabis and Sickle Cell Disease pain protocols (Mount Sinai).' },
-    { title: 'Authenticity Audit', summary: 'Verified that true Nigerian Landrace seeds maintain 70% wild genetic markers.' }
+    { title: 'Sickle-cell research question', summary: 'Laboratory or observational cannabis findings do not establish a treatment protocol for vaso-occlusive crisis.' },
+    { title: 'Authenticity research question', summary: 'Claims about Nigerian landrace genetic percentages require a traceable dataset, sampling method and peer-reviewed analysis.' }
   ],
   files: [
     { name: 'Cannabis Grow Bible', type: 'PDF', size: '9.4 MB' },

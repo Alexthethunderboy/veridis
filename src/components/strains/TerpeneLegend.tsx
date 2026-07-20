@@ -86,7 +86,7 @@ export default function TerpeneLegend() {
 
                   <div className="grid grid-cols-2 gap-6 w-full text-left border-t border-brand-primary/5 pt-8">
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-secondary mb-2 block">Primary Effects</span>
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-secondary mb-2 block">Reported associations</span>
                       <div className="flex flex-wrap gap-1.5">
                         {selected.effects.map(e => (
                           <span key={e} className="text-[10px] font-bold px-2 py-0.5 bg-brand-primary/5 rounded border border-brand-primary/10 text-brand-primary/70">
@@ -96,7 +96,7 @@ export default function TerpeneLegend() {
                       </div>
                     </div>
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-secondary mb-2 block">Medicinal Benefits</span>
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-secondary mb-2 block">Research questions</span>
                       <p className="text-xs font-bold text-brand-primary leading-tight">{selected.benefits}</p>
                     </div>
                     <div>
@@ -108,6 +108,7 @@ export default function TerpeneLegend() {
                       <p className="text-[10px] md:text-xs font-mono font-bold text-brand-primary/60">{selected.boilingPoint}</p>
                     </div>
                   </div>
+                  <p className="mt-6 text-xs leading-5 text-brand-primary/40">Aroma only describes one layer of the cultivar. Cannabinoids, the complete volatile profile, dose, setting and individual biology also shape the experience; controlled human research is beginning to test specific terpene–cannabinoid interactions.</p>
                 </div>
               </Card>
             </motion.div>

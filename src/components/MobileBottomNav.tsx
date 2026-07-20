@@ -3,15 +3,15 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookOpen, FileText, Leaf, LogOut, Menu, Microscope, Scale, X } from 'lucide-react';
+import { BookOpen, FileText, Globe2, Leaf, LogOut, Menu, Microscope, Scale, X } from 'lucide-react';
 import { EfifyaLogo, EfifyaMark } from './BrandLogo';
 import { useQuickExit } from '@/hooks/useQuickExit';
 
 const mainItems = [
   { name: 'Home', href: '/', icon: EfifyaMark },
   { name: 'Learn', href: '/edu', icon: BookOpen },
+  { name: 'World', href: '/world', icon: Globe2 },
   { name: 'Strains', href: '/strains', icon: Leaf },
-  { name: 'Science', href: '/science', icon: Microscope },
 ];
 
 export default function MobileBottomNav() {
@@ -34,8 +34,9 @@ export default function MobileBottomNav() {
 
     {open && <div className="fixed inset-0 z-40 bg-brand-stone-50/75 backdrop-blur-sm lg:hidden" onClick={() => setOpen(false)} aria-hidden="true"/>}
     <section className={`fixed inset-x-3 bottom-24 z-50 origin-bottom rounded-3xl border border-brand-primary/15 bg-brand-stone-100 p-4 shadow-2xl transition duration-200 lg:hidden ${open ? 'scale-100 opacity-100' : 'pointer-events-none scale-95 opacity-0'}`} aria-label="More navigation" aria-hidden={!open}>
-      <div className="mb-3 px-2"><p className="clinical-label text-brand-primary/35">More from Efifya</p><p className="mt-1 text-xs text-brand-primary/45">Explore policy, sources and safety tools.</p></div>
+      <div className="mb-3 px-2"><p className="clinical-label text-brand-primary/35">More from Efifya</p><p className="mt-1 text-xs text-brand-primary/45">Explore policy, sources and practical tools.</p></div>
       <div className="grid grid-cols-2 gap-2">
+        <MobileMenuLink href="/science" icon={<Microscope size={19}/>} label="Science" onNavigate={() => setOpen(false)}/>
         <MobileMenuLink href="/law" icon={<Scale size={19}/>} label="Policy & law" onNavigate={() => setOpen(false)}/>
         <MobileMenuLink href="/docs" icon={<FileText size={19}/>} label="Resources" onNavigate={() => setOpen(false)}/>
       </div>
